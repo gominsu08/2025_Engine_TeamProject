@@ -15,7 +15,7 @@ Material:
   - _MK_ARTISTIC_ANIMATION_STUTTER
   - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
   - _MK_LIGHT_CEL
-  - _MK_OUTLINE_HULL_ORIGIN
+  - _MK_OUTLINE_HULL_CLIP
   - _MK_RECEIVE_SHADOWS
   - _MK_RIM_DEFAULT
   - _MK_SPECULAR_ISOTROPIC
@@ -192,7 +192,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DiffuseSmoothness: 0.187
+    - _DiffuseSmoothness: 0.2
     - _DiffuseThresholdOffset: 0.25
     - _Dissolve: 0
     - _DissolveAmount: 0.5
@@ -225,12 +225,12 @@ Material:
     - _NormalMapIntensity: 1
     - _OcclusionStrength: 1
     - _OptionsTab: 1
-    - _Outline: 2
+    - _Outline: 3
     - _OutlineData: 0
     - _OutlineFadeMax: 2
     - _OutlineFadeMin: 0.25
     - _OutlineNoise: 0
-    - _OutlineSize: 30
+    - _OutlineSize: 100
     - _OutlineTab: 1
     - _Parallax: 0.02
     - _QueueOffset: 0
