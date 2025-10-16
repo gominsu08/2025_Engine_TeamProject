@@ -1,66 +1,43 @@
 using DG.Tweening;
+using GMS.Code.Core;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Experimental.AI;
 
 public class TimeSystem : MonoBehaviour
 {
-    [SerializeField] private int oneDayTime;
-    [SerializeField] private List<TimeEventData> timeEventDataList;
+    [SerializeField] private float oneDayTime = 300f;
+    [SerializeField] private float deliveryTime = 112.5f;
+    [SerializeField] private Transform transformParent;
 
-    private int _currentTime;
-    private float _rotationValue;
-    private Vector3 _rotationDir;
-    private WaitForSeconds wait = new WaitForSeconds(1f);
-    private int CurrentTime
+    private bool _isOneDelivery;
+    private float _startTime;
+    private TimeEvent _onTimeEvent;
+
+    private SawtoothSystem sawtoothSystem;
+
+    private void Start()
     {
-        get
+        _startTime = Time.time;
+        sawtoothSystem = GetComponent<SawtoothSystem>();
+        sawtoothSystem.StartSawtooth(oneDayTime, true, transformParent);
+    }
+
+    private void Update()
+    {
+        if (Time.time - _startTime > deliveryTime && _isOneDelivery == false)
         {
-            return _currentTime;
+            Bus<TimeEvent>.Raise(_onTimeEvent);
+            _isOneDelivery = true;
         }
-        set
+        else if(Time.time - _startTime > oneDayTime)
         {
-            _currentTime = value;
-            _currentTime %= oneDayTime;
+            _startTime = Time.time;
+            _isOneDelivery = false;
         }
     }
-
-    private void Awake()
-    {
-        _rotationDir = transform.eulerAngles;
-        _rotationValue = 360f / oneDayTime;
-        StartCoroutine(SetTime());
-    }
-
-    public IEnumerator SetTime()
-    {
-        CurrentTime++;
-
-        _rotationDir.z += _rotationValue;
-
-        transform.DORotate(_rotationDir, 1f);
-
-        foreach (TimeEventData data in timeEventDataList)
-            data.IsInTime(CurrentTime);
-
-        yield return wait;
-        StartCoroutine(SetTime());
-    }
-
 }
-
-[Serializable]
-public struct TimeEventData
+public struct TimeEvent : IEvent
 {
-    public int EventTime;
-    public UnityEvent OnTimeEvent;
 
-    public void IsInTime(int time)
-    {
-        if (time == EventTime)
-            OnTimeEvent?.Invoke();
-    }
 }
