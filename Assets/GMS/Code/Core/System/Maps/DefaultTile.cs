@@ -1,84 +1,70 @@
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace GMS.Code.Core.System.Maps
 {
-    public class DefaultTile : MonoBehaviour, IPointerClickHandler
+    public class DefaultTile : MonoBehaviour, IClickable
     {
         public DefaultTile tilePrefab;
-        public GhostTile upTile, downTile, leftTile, rightTile;
-        public bool isUpTile, isDownTile, isLeftTile, isRightTile;
+        public List<GhostTile> ghostTiles = new List<GhostTile>();
         public bool isClick = false;
 
-        public void OnPointerClick(PointerEventData eventData)
+        private TileInformation _tileInfo;
+
+        public void OnClick()
         {
             if (isClick)
             {
-                upTile.gameObject.SetActive(false);
-                downTile.gameObject.SetActive(false);
-                leftTile.gameObject.SetActive(false);
-                rightTile.gameObject.SetActive(false);
+                ClickCancel();
+                return;
+            }
+        }
+
+        public void SetActiveGhost(bool isActive)
+        {
+            if (isActive)
+            {
+                if (_tileInfo.isDownTile)
+                    GetGhostHasDirection(Direction.Down).Enable();
+                if (_tileInfo.isUpTile)
+                    GetGhostHasDirection(Direction.Up).Enable();
+                if(_tileInfo.isLeftTile)
+                    GetGhostHasDirection(Direction.Left).Enable();
+                if(_tileInfo.isRightTile)
+                    GetGhostHasDirection(Direction.Right).Enable();
             }
             else
             {
-                ActiveFalse();
+                foreach(GhostTile ghostTile in ghostTiles)
+                {
+                    ghostTile.Disable();
+                }
             }
-
-            isClick = !isClick;
         }
 
-        private void ActiveFalse()
+        private void ClickCancel()
         {
-            if (!isUpTile)
-                upTile.gameObject.SetActive(true);
-            if (!isDownTile)
-                downTile.gameObject.SetActive(true);
-            if (!isLeftTile)
-                leftTile.gameObject.SetActive(true);
-            if (!isRightTile)
-                rightTile.gameObject.SetActive(true);
+            isClick = false;
         }
 
-        public void Awake()
+        public GhostTile GetGhostHasDirection(Direction dir)
         {
-            upTile.OnClick += GhostSet;
-            downTile.OnClick += GhostSet;
-            leftTile.OnClick += GhostSet;
-            rightTile.OnClick += GhostSet;
+            GhostTile result = null;
 
-        }
-
-        public void GhostSet(Direction dir)
-        {
-            switch (dir)
+            foreach(GhostTile ghost in ghostTiles)
             {
-                case Direction.Right:
-                    isRightTile = true;
-                    rightTile.gameObject.SetActive(false);
-                    DefaultTile tile_right = Instantiate(tilePrefab, rightTile.transform.position, Quaternion.identity);
-                    tile_right.isLeftTile = true;
-                    break;
-                case Direction.Left:
-                    isLeftTile = true;
-                    leftTile.gameObject.SetActive(false);
-                    DefaultTile tile_left = Instantiate(tilePrefab, leftTile.transform.position, Quaternion.identity);
-                    tile_left.isRightTile = true;
-                    break;
-                case Direction.Up:
-                    isUpTile = true;
-                    upTile.gameObject.SetActive(false);
-                    DefaultTile tile_up = Instantiate(tilePrefab, upTile.transform.position, Quaternion.identity);
-                    tile_up.isDownTile = true;
-                    break;
-                case Direction.Down:
-                    isDownTile = true;
-                    downTile.gameObject.SetActive(false);
-                    DefaultTile tile_down = Instantiate(tilePrefab, downTile.transform.position, Quaternion.identity);
-                    tile_down.isUpTile = true;
-                    break;
-                default:
-                    break;
+                if(ghost.Direction == dir)
+                {
+                    result = ghost;
+                }
             }
+
+            return result;
         }
+
+        
     }
 }

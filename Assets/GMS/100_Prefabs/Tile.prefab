@@ -29,8 +29,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 892094919868107913}
   - {fileID: 7644517407054600611}
@@ -73,14 +73,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 7329143214918789443}
-  upTile: {fileID: 4694908156717536442}
-  downTile: {fileID: 5368175877230743514}
-  leftTile: {fileID: 3458762245905523438}
-  rightTile: {fileID: 7114482403744475875}
-  isUpTile: 0
-  isDownTile: 0
-  isLeftTile: 0
-  isRightTile: 0
+  ghostTiles:
+  - {fileID: 4694908156717536442}
+  - {fileID: 7114482403744475875}
+  - {fileID: 3458762245905523438}
+  - {fileID: 5368175877230743514}
   isClick: 0
 --- !u!54 &4520504779272776199
 Rigidbody:

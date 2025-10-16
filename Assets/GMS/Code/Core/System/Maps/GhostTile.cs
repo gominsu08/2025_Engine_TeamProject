@@ -10,14 +10,25 @@ namespace GMS.Code.Core.System.Maps
         Left, Up, Down
     }
 
-    public class GhostTile : MonoBehaviour, IPointerClickHandler
+    public class GhostTile : MonoBehaviour, IClickable
     {
-        public Action<Direction> OnClick;
+        public Action<Direction> OnClickEvent;
         public Direction Direction;
 
-        public void OnPointerClick(PointerEventData eventData)
+        public void Enable()
         {
-            OnClick?.Invoke(Direction);
+            gameObject.SetActive(true);
+        }
+
+        public void OnClick()
+        {
+            OnClickEvent?.Invoke(Direction);
+            gameObject.SetActive(false);
+        }
+
+        public void Disable()
+        {
+            gameObject.SetActive(false);
         }
     }
 }
