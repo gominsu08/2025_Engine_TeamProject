@@ -1,62 +1,88 @@
-using NUnit.Framework;
-using System;
+using GMS.Code.Core.Events;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace GMS.Code.Core.System.Maps
 {
     public class DefaultTile : MonoBehaviour, IClickable
     {
-        public DefaultTile tilePrefab;
-        public List<GhostTile> ghostTiles = new List<GhostTile>();
-        public bool isClick = false;
+        [SerializeField] private DefaultTile tilePrefab;
+        [SerializeField] private List<GhostTile> ghostTiles = new List<GhostTile>();
+        private bool _isSelect = false;
 
-        private TileInformation _tileInfo;
+        public TileInformation TileInfo { get; private set; }
+
+        public void Init(TileInformation myInfo)
+        {
+            TileInfo = myInfo;
+            Bus<TileSelectEvent>.OnEvent += HandleTileSelect;
+        }
+
+        private void OnDestroy()
+        {
+            Bus<TileSelectEvent>.OnEvent -= HandleTileSelect;
+        }
+
+        private void HandleTileSelect(TileSelectEvent evt)
+        {
+            if (TileInfo.x == evt.tileInfo.x && TileInfo.z == evt.tileInfo.z) return;
+            SelectCancel();
+        }
 
         public void OnClick()
         {
-            if (isClick)
+            if (_isSelect)
             {
-                ClickCancel();
+                SelectCancel();
                 return;
             }
+
+            Bus<TileSelectEvent>.Raise(new TileSelectEvent(TileInfo));
+            EnableAllGhost();
         }
 
-        public void SetActiveGhost(bool isActive)
+        public void EnableAllGhost()
         {
-            if (isActive)
+            if (TileInfo.isDownTile)
+                GetGhostHasDirection(Direction.Down).Enable(TileInfo);
+            if (TileInfo.isUpTile)
+                GetGhostHasDirection(Direction.Up).Enable(TileInfo);
+            if (TileInfo.isLeftTile)
+                GetGhostHasDirection(Direction.Left).Enable(TileInfo);
+            if (TileInfo.isRightTile)
+                GetGhostHasDirection(Direction.Right).Enable(TileInfo);
+
+            Bus<TileBuyEvent>.OnEvent += HandleBuyTileEvent;
+        }
+
+        private void HandleBuyTileEvent(TileBuyEvent evt)
+        {
+            if (TileInfo.x == evt.x && TileInfo.z == evt.z) return;
+            SelectCancel();
+            Bus<TileBuyEvent>.OnEvent -= HandleBuyTileEvent;
+        }
+
+        public void DisableAllGhost()
+        {
+            foreach (GhostTile ghostTile in ghostTiles)
             {
-                if (_tileInfo.isDownTile)
-                    GetGhostHasDirection(Direction.Down).Enable();
-                if (_tileInfo.isUpTile)
-                    GetGhostHasDirection(Direction.Up).Enable();
-                if(_tileInfo.isLeftTile)
-                    GetGhostHasDirection(Direction.Left).Enable();
-                if(_tileInfo.isRightTile)
-                    GetGhostHasDirection(Direction.Right).Enable();
-            }
-            else
-            {
-                foreach(GhostTile ghostTile in ghostTiles)
-                {
-                    ghostTile.Disable();
-                }
+                ghostTile.Disable();
             }
         }
 
-        private void ClickCancel()
+        private void SelectCancel()
         {
-            isClick = false;
+            _isSelect = false;
+            DisableAllGhost();
         }
 
         public GhostTile GetGhostHasDirection(Direction dir)
         {
             GhostTile result = null;
 
-            foreach(GhostTile ghost in ghostTiles)
+            foreach (GhostTile ghost in ghostTiles)
             {
-                if(ghost.Direction == dir)
+                if (ghost.direction == dir)
                 {
                     result = ghost;
                 }
@@ -65,6 +91,6 @@ namespace GMS.Code.Core.System.Maps
             return result;
         }
 
-        
+
     }
 }

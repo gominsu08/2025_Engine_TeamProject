@@ -13,6 +13,7 @@ namespace GMS.Code.Core
         public Vector2 MousePosition { get; private set; }
 
         private Controls controls;
+
         private void OnEnable()
         {
             if (controls == null)

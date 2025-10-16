@@ -1,4 +1,3 @@
-using MK.Toon;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,7 +52,19 @@ namespace GMS.Code.Core.System.Maps
         public List<TileInformation> tiles = new List<TileInformation>();
         [SerializeField] private DefaultTile TilePrefab;
 
+        private void Awake()
+        {
+            AddTile(0, 0);
+        }
+
         public void AddTile(int x, int z)
+        {
+            TileInformation result = CreateTileInfo(x, z);
+            CreateTile(result);
+            tiles.Add(result);
+        }
+
+        private TileInformation CreateTileInfo(int x, int z)
         {
             Vector2 right = new Vector2(x + 1, z);
             Vector2 left = new Vector2(x - 1, z);
@@ -70,7 +81,7 @@ namespace GMS.Code.Core.System.Maps
                     tile.isLeftTile = true;
                 }
 
-                if(left.x == tile.x && left.y == tile.z)
+                if (left.x == tile.x && left.y == tile.z)
                 {
                     leftTile = true;
                     tile.isRightTile = true;
@@ -88,19 +99,25 @@ namespace GMS.Code.Core.System.Maps
                     tile.isUpTile = true;
                 }
             }
-            TileInformation result = new TileInformation(x,z);
+            TileInformation result = new TileInformation(x, z);
             result.isRightTile = rightTile;
             result.isLeftTile = leftTile;
             result.isUpTile = upTile;
             result.isDownTile = downTile;
-            tiles.Add(result);
-
-            
+            return result;
         }
 
-        public TileInformation GetTileInfo(int x , int z)
+        private void CreateTile(TileInformation tileInfo)
         {
-            TileInformation result = new TileInformation(0,0);
+            DefaultTile tile = Instantiate(TilePrefab, new Vector3(tileInfo.x, 0, tileInfo.z), Quaternion.identity);
+            tile.name = $"Tile {tileInfo.x} {tileInfo.z}";
+            tile.transform.parent = transform;
+            tile.Init(tileInfo);
+        }
+
+        public TileInformation GetTileInfo(int x, int z)
+        {
+            TileInformation result = new TileInformation(0, 0);
 
             foreach (TileInformation tile in tiles)
             {

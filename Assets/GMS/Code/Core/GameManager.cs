@@ -1,5 +1,4 @@
 using GMS.Code.Core.System.Maps;
-using System;
 using UnityEngine;
 
 namespace GMS.Code.Core
@@ -13,12 +12,18 @@ namespace GMS.Code.Core
             mouseInputSO.OnClickAction += HandleMouseClickEvent;
         }
 
+        public void OnDestroy()
+        {
+            mouseInputSO.OnClickAction -= HandleMouseClickEvent;
+        }
+
         private void HandleMouseClickEvent()
         {
+
             RaycastHit hit = mouseInputSO.GetHitObject();
             if (hit.collider == null || hit.collider.gameObject == null) return;
 
-            if(hit.collider.gameObject.TryGetComponent<IClickable>(out IClickable clickable))
+            if (hit.collider.gameObject.TryGetComponent<IClickable>(out IClickable clickable))
             {
                 clickable.OnClick();
             }
