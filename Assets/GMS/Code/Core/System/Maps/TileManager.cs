@@ -1,3 +1,5 @@
+using GMS.Code.Core.Events;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,12 +51,20 @@ namespace GMS.Code.Core.System.Maps
 
     public class TileManager : MonoBehaviour
     {
+
         public List<TileInformation> tiles = new List<TileInformation>();
         [SerializeField] private DefaultTile TilePrefab;
+        private int _tileCount = 0;  
 
         private void Awake()
         {
             AddTile(0, 0);
+            Bus<TileBuyEvent>.OnEvent += HandleBuyTileEvent;
+        }
+
+        private void HandleBuyTileEvent(TileBuyEvent evt)
+        {
+            AddTile(evt.x, evt.z);
         }
 
         public void AddTile(int x, int z)
@@ -113,6 +123,7 @@ namespace GMS.Code.Core.System.Maps
             tile.name = $"Tile {tileInfo.x} {tileInfo.z}";
             tile.transform.parent = transform;
             tile.Init(tileInfo);
+            _tileCount++;
         }
 
         public TileInformation GetTileInfo(int x, int z)

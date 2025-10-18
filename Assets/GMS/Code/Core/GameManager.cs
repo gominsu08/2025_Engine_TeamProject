@@ -19,7 +19,6 @@ namespace GMS.Code.Core
 
         private void HandleMouseClickEvent()
         {
-
             RaycastHit hit = mouseInputSO.GetHitObject();
             if (hit.collider == null || hit.collider.gameObject == null) return;
 

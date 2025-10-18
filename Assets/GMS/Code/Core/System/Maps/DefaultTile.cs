@@ -37,19 +37,20 @@ namespace GMS.Code.Core.System.Maps
                 return;
             }
 
+            _isSelect = true;
             Bus<TileSelectEvent>.Raise(new TileSelectEvent(TileInfo));
             EnableAllGhost();
         }
 
         public void EnableAllGhost()
         {
-            if (TileInfo.isDownTile)
+            if (!TileInfo.isDownTile)
                 GetGhostHasDirection(Direction.Down).Enable(TileInfo);
-            if (TileInfo.isUpTile)
+            if (!TileInfo.isUpTile)
                 GetGhostHasDirection(Direction.Up).Enable(TileInfo);
-            if (TileInfo.isLeftTile)
+            if (!TileInfo.isLeftTile)
                 GetGhostHasDirection(Direction.Left).Enable(TileInfo);
-            if (TileInfo.isRightTile)
+            if (!TileInfo.isRightTile)
                 GetGhostHasDirection(Direction.Right).Enable(TileInfo);
 
             Bus<TileBuyEvent>.OnEvent += HandleBuyTileEvent;
