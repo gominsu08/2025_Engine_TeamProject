@@ -23,4 +23,10 @@ namespace GMS.Code.UI
         public void EnableForUI(T1 t1 , T2 t2);
         public void DisableUI();
     }
+
+    public interface IUIElement<T1, T2, T3>
+    {
+        public void EnableForUI(T1 t1, T2 t2, T3 t3);
+        public void DisableUI();
+    }
 }

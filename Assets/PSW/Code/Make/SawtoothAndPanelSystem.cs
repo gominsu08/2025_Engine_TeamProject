@@ -1,6 +1,7 @@
 using GMS.Code.Core;
 using GMS.Code.Core.Events;
 using GMS.Code.Core.System.Machine;
+using GMS.Code.UI;
 using GMS.Code.UI.MainPanel;
 using PSW.Code.Sawtooth;
 using System;
@@ -26,6 +27,7 @@ namespace PSW.Code.Make
 
         [Header("Panels")]
         [SerializeField] private ResourceMiningPanel miningPanel;
+        [SerializeField] private ToolBarUI toolBarUI;
 
         [Header("Sawtooth")]
         [SerializeField] private float rotationTime;
@@ -35,7 +37,7 @@ namespace PSW.Code.Make
 
         private void Awake()
         {
-            miningPanel.Init(machineManager);
+            miningPanel.Init(machineManager, toolBarUI);
             Bus<TileSelectEvent>.OnEvent += HandleTileSelectEvent;
         }
 
@@ -54,6 +56,7 @@ namespace PSW.Code.Make
             else
             {
                 miningPanel.EnableForUI(evt.tileInfo.item, evt.tileInfo);
+                SawtoothButtonClick();
             }
         }
 
@@ -70,7 +73,7 @@ namespace PSW.Code.Make
 
         public void DisableAllUI()
         {
-            if (!_isLeft)
+            if (_isLeft)
                 miningPanel.DisableUI();
         }
     }
