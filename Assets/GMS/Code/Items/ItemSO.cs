@@ -9,7 +9,16 @@ namespace GMS.Code.Items
         public Sprite icon;
         public bool isStackable = true;
         public int maxStack = 99;
+        public ItemType itemType;
 
+    }
+
+    public enum ItemType
+    {
+        Tree,
+        Mineral,
+        Soil,
+        Fuel
     }
 
 }
