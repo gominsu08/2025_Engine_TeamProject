@@ -1,4 +1,5 @@
 using GMS.Code.Core.Events;
+using PSW.Code.Container;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,19 +7,31 @@ namespace GMS.Code.Core.System.Maps
 {
     public class DefaultTile : MonoBehaviour, IClickable
     {
+        public TileInformation TileInfo { get; private set; }
+        
+        private bool _isSelect = false;
+        private TileManager _tileManager;
+        private ResourceContainer _resourceContainer;
+
         [SerializeField] private DefaultTile tilePrefab;
         [SerializeField] private List<GhostTile> ghostTiles = new List<GhostTile>();
-        private bool _isSelect = false;
 
-        public TileInformation TileInfo { get; private set; }
-
-        public void Init(TileInformation myInfo)
+        public virtual void Init(TileInformation myInfo, ResourceContainer resourceContainer, TileManager tileManager)
         {
             TileInfo = myInfo;
+            _resourceContainer = resourceContainer;
+            _tileManager = tileManager;
+
             Bus<TileSelectEvent>.OnEvent += HandleTileSelect;
+
+            foreach (GhostTile ghost in ghostTiles)
+            {
+                ghost.Init(_resourceContainer,_tileManager,TileInfo);
+            }
+
         }
 
-        private void OnDestroy()
+        public virtual void OnDestroy()
         {
             Bus<TileSelectEvent>.OnEvent -= HandleTileSelect;
         }
@@ -29,7 +42,7 @@ namespace GMS.Code.Core.System.Maps
             SelectCancel();
         }
 
-        public void OnClick()
+        public virtual void OnClick()
         {
             if (_isSelect)
             {
@@ -41,17 +54,22 @@ namespace GMS.Code.Core.System.Maps
             Bus<TileSelectEvent>.Raise(new TileSelectEvent(TileInfo));
             EnableAllGhost();
         }
+        public virtual void SelectCancel()
+        {
+            _isSelect = false;
+            DisableAllGhost();
+        }
 
         public void EnableAllGhost()
         {
             if (!TileInfo.isDownTile)
-                GetGhostHasDirection(Direction.Down).Enable(TileInfo);
+                GetGhostHasDirection(Direction.Down).Enable();
             if (!TileInfo.isUpTile)
-                GetGhostHasDirection(Direction.Up).Enable(TileInfo);
+                GetGhostHasDirection(Direction.Up).Enable();
             if (!TileInfo.isLeftTile)
-                GetGhostHasDirection(Direction.Left).Enable(TileInfo);
+                GetGhostHasDirection(Direction.Left).Enable();
             if (!TileInfo.isRightTile)
-                GetGhostHasDirection(Direction.Right).Enable(TileInfo);
+                GetGhostHasDirection(Direction.Right).Enable();
 
             Bus<TileBuyEvent>.OnEvent += HandleBuyTileEvent;
         }
@@ -63,7 +81,7 @@ namespace GMS.Code.Core.System.Maps
             Bus<TileBuyEvent>.OnEvent -= HandleBuyTileEvent;
         }
 
-        public void DisableAllGhost()
+        public virtual void DisableAllGhost()
         {
             foreach (GhostTile ghostTile in ghostTiles)
             {
@@ -71,11 +89,6 @@ namespace GMS.Code.Core.System.Maps
             }
         }
 
-        private void SelectCancel()
-        {
-            _isSelect = false;
-            DisableAllGhost();
-        }
 
         public GhostTile GetGhostHasDirection(Direction dir)
         {

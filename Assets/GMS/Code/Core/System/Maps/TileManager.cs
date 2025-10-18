@@ -1,5 +1,6 @@
 using GMS.Code.Core.Events;
-using System;
+using GMS.Code.Items;
+using PSW.Code.Container;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace GMS.Code.Core.System.Maps
     {
         public int x, z;
         public bool isUpTile, isDownTile, isLeftTile, isRightTile;
+        public ItemSO item;
 
         public List<Direction> GetAdjacentTiles()
         {
@@ -51,14 +53,25 @@ namespace GMS.Code.Core.System.Maps
 
     public class TileManager : MonoBehaviour
     {
+        public int TileBuyPrice => 1000 + ((_tileCount - initialTileCount) * 200);
 
-        public List<TileInformation> tiles = new List<TileInformation>();
         [SerializeField] private DefaultTile TilePrefab;
-        private int _tileCount = 0;  
+        [SerializeField] private ResourceContainer resourceContainer;
+        [SerializeField] private int initialTileCount = 9;
+        private List<TileInformation> tiles = new List<TileInformation>();
+        private int _tileCount = 0;
 
         private void Awake()
         {
             AddTile(0, 0);
+            AddTile(0, 1);
+            AddTile(1, 0);
+            AddTile(-1, 0);
+            AddTile(0, -1);
+            AddTile(-1, -1);
+            AddTile(-1, 1);
+            AddTile(1, -1);
+            AddTile(1, 1);
             Bus<TileBuyEvent>.OnEvent += HandleBuyTileEvent;
         }
 
@@ -120,9 +133,11 @@ namespace GMS.Code.Core.System.Maps
         private void CreateTile(TileInformation tileInfo)
         {
             DefaultTile tile = Instantiate(TilePrefab, new Vector3(tileInfo.x, 0, tileInfo.z), Quaternion.identity);
+            if(tile is ResourceTile resourceTile)
+                tileInfo.item = resourceTile.GetResourceItem();
             tile.name = $"Tile {tileInfo.x} {tileInfo.z}";
             tile.transform.parent = transform;
-            tile.Init(tileInfo);
+            tile.Init(tileInfo, resourceContainer, this);
             _tileCount++;
         }
 
