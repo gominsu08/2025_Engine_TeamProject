@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 59e244039353e164bac7eb956ebabba5
+guid: b4eac071147927444bfc0d807261d5e7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 500
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,23 +110,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sawtooth1-removebg-preview_Nero_AI_Image_Denoiser_0
+      name: Panel-min_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 124
-        width: 400
-        height: 400
+        x: 55
+        y: 83
+        width: 297
+        height: 439
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 44, y: 48, z: 44, w: 48}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc90a920cee6e814ebd8021d247d209f
-      internalID: -1566680652
+      spriteID: e332f41cc54f64441ac06be2af7b2877
+      internalID: 613829645
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 479bda9637e85104084fad1c75c8af01
+    spriteID: 435f81f83bc8b414a953bdf2a6b557f5
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Sawtooth1-removebg-preview_Nero_AI_Image_Denoiser_0: -1566680652
+      Panel-min_0: 613829645
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

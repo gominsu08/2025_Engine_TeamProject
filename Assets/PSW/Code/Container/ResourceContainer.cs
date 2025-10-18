@@ -1,44 +1,61 @@
+using GMS.Code.Core;
 using GMS.Code.Items;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PSW.Code.Container
 {
     public class ResourceContainer : MonoBehaviour
     {
         [SerializeField] private int maxCoin = 999999;
+
+        private ChangeCoin _changeCoin;
+        private ChangeItem _changeItem;
+
         private Dictionary<ItemSO, int> _resourceCountDic = new Dictionary<ItemSO, int>();
         private int _coin = 0;
 
-        public void PlusItem(ItemSO keyItem, int plusCount)
+        private void SetItem(ItemSO keyItem, int count)
         {
             if (_resourceCountDic.TryGetValue(keyItem, out int countValue))
             {
-                countValue += plusCount;
+                countValue += count;
                 _resourceCountDic[keyItem] = countValue;
+
+                _changeItem.KeyItem = keyItem;
+                _changeItem.Count = countValue;
+                Bus<ChangeItem>.Raise(_changeItem);
+
                 return;
             }
 
-            _resourceCountDic.Add(keyItem, plusCount);
+            _resourceCountDic.Add(keyItem, count);
+            _changeItem.KeyItem = keyItem;
+            _changeItem.Count = count;
+            Bus<ChangeItem>.Raise(_changeItem);
+        }
+        public void PlusItem(ItemSO keyItem, int plusCount)
+        {
+            SetItem(keyItem, plusCount);
         }
         public void MinusItem(ItemSO keyItem, int minusCount)
         {
-            if (_resourceCountDic.TryGetValue(keyItem, out int countValue))
-            {
-                countValue -= minusCount;
-                _resourceCountDic[keyItem] = countValue;
-                return;
-            }
-
-            _resourceCountDic.Add(keyItem, minusCount);
+            SetItem(keyItem, -minusCount);
+        }
+        private void SetCoin(int coin)
+        {
+            _coin = Mathf.Clamp(_coin + coin, 0, maxCoin);
+            _changeCoin.coin = _coin;
+            Bus<ChangeCoin>.Raise(_changeCoin);
         }
         public void PlusCoin(int plusCoin)
         {
-            _coin = Mathf.Clamp(_coin + plusCoin, 0, maxCoin);
+            SetCoin(plusCoin);
         }
         public void MinusCoin(int minusCoin)
         {
-            _coin = Mathf.Clamp(_coin - minusCoin, 0, maxCoin);
+            SetCoin(-minusCoin);
         }
         public bool IsTargetCountItem(ItemSO keyItem, int targetCount)
         {
@@ -64,4 +81,12 @@ namespace PSW.Code.Container
             return _coin;
         }
     }
+
+    public struct ChangeCoin : IEvent { public int coin; }
+    public struct ChangeItem : IEvent 
+    {
+        public ItemSO KeyItem;
+        public int Count;
+    }
+
 }
