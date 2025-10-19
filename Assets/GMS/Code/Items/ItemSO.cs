@@ -1,3 +1,5 @@
+using GMS.Code.Core.System.Machine;
+using GMS.Code.UI.MainPanel;
 using UnityEngine;
 
 namespace GMS.Code.Items
@@ -9,8 +11,10 @@ namespace GMS.Code.Items
         public Sprite icon;
         public bool isStackable = true;
         public int maxStack = 99;
+        public int sellMoney;
         public ItemType itemType;
-
+        public MachineType machineType;
+        public Tier tier;
     }
 
     public enum ItemType
@@ -18,7 +22,8 @@ namespace GMS.Code.Items
         Tree,
         Mineral,
         Soil,
-        Fuel
+        Fuel,
+        Process
     }
 
 }
