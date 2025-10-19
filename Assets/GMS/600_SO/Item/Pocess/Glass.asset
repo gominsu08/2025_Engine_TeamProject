@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68090b78dab43e34fa43c0c846846b8f, type: 3}
+  m_Name: Glass
+  m_EditorClassIdentifier: 
+  itemName: "\uC720\uB9AC"
+  icon: {fileID: 21300000, guid: d1e047d3aebfb0746bc2674ef610a75a, type: 3}
+  isStackable: 1
+  maxStack: 99
+  sellMoney: 5000
+  itemType: 4
+  machineType: 1
+  tier: 2

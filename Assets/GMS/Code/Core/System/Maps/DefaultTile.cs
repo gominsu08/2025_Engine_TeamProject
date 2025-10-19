@@ -1,4 +1,5 @@
 using GMS.Code.Core.Events;
+using GMS.Code.Utill;
 using PSW.Code.Container;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,6 @@ namespace GMS.Code.Core.System.Maps
         private TileManager _tileManager;
         private ResourceContainer _resourceContainer;
 
-        [SerializeField] private DefaultTile tilePrefab;
         [SerializeField] private List<GhostTile> ghostTiles = new List<GhostTile>();
 
         public virtual void Init(TileInformation myInfo, ResourceContainer resourceContainer, TileManager tileManager)
@@ -38,15 +38,15 @@ namespace GMS.Code.Core.System.Maps
 
         private void HandleTileSelect(TileSelectEvent evt)
         {
-            if (TileInfo.x == evt.tileInfo.x && TileInfo.z == evt.tileInfo.z) return;
-            SelectCancel();
+            if (TileUtill.IsSame(TileInfo,evt.tileInfo) || !_isSelect) return;
+            UnSelect();
         }
 
         public virtual void OnClick()
         {
             if (_isSelect)
             {
-                SelectCancel();
+                UnSelect();
                 return;
             }
 
@@ -54,9 +54,10 @@ namespace GMS.Code.Core.System.Maps
             Bus<TileSelectEvent>.Raise(new TileSelectEvent(TileInfo));
             EnableAllGhost();
         }
-        public virtual void SelectCancel()
+        public virtual void UnSelect()
         {
             _isSelect = false;
+            Bus<TileUnSelectEvent>.Raise(new TileUnSelectEvent(TileInfo));
             DisableAllGhost();
         }
 
@@ -77,7 +78,9 @@ namespace GMS.Code.Core.System.Maps
         private void HandleBuyTileEvent(TileBuyEvent evt)
         {
             if (TileInfo.x == evt.x && TileInfo.z == evt.z) return;
-            SelectCancel();
+            _isSelect = false;
+            Bus<TileUnSelectEvent>.Raise(new TileUnSelectEvent(TileInfo,true));
+            DisableAllGhost();
             Bus<TileBuyEvent>.OnEvent -= HandleBuyTileEvent;
         }
 

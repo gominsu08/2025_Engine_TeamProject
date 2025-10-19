@@ -18,6 +18,7 @@ namespace PSW.Code.Make
         private float _currentMoveValue;
         private bool _isPopUp;
         private bool _isStopMove = true;
+        private UnityAction _callback;
 
         private int _moveCount = 0;
 
@@ -27,11 +28,12 @@ namespace PSW.Code.Make
             _upValue = transform.localPosition.y;
         }
 
-        public void StartPopPanel()
+        public void StartPopPanel(UnityAction callback = null)
         {
             StopAllCoroutines();
             _isPopUp = !_isPopUp;
             _isStopMove = true;
+            _callback = callback;
             StartCoroutine(SetPopMove());
         }
 
@@ -59,6 +61,7 @@ namespace PSW.Code.Make
             else
             {
                 OnStopPanelMoveEvent?.Invoke();
+                _callback?.Invoke();
                 _isStopMove = true;
             }
         }

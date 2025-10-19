@@ -1,6 +1,7 @@
 using GMS.Code.Core.Events;
 using GMS.Code.Items;
 using PSW.Code.Container;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,7 +56,7 @@ namespace GMS.Code.Core.System.Maps
     {
         public int TileBuyPrice => 1000 + ((_tileCount - initialTileCount) * 200);
 
-        [SerializeField] private DefaultTile TilePrefab;
+        [SerializeField] private List<DefaultTile> TilePrefabs;
         [SerializeField] private ResourceContainer resourceContainer;
         [SerializeField] private int initialTileCount = 9;
         private List<TileInformation> tiles = new List<TileInformation>();
@@ -132,13 +133,18 @@ namespace GMS.Code.Core.System.Maps
 
         private void CreateTile(TileInformation tileInfo)
         {
-            DefaultTile tile = Instantiate(TilePrefab, new Vector3(tileInfo.x, 0, tileInfo.z), Quaternion.identity);
+            DefaultTile tile = Instantiate(GetTilePrefab(), new Vector3(tileInfo.x, 0, tileInfo.z), Quaternion.identity);
             if(tile is ResourceTile resourceTile)
                 tileInfo.item = resourceTile.GetResourceItem();
             tile.name = $"Tile {tileInfo.x} {tileInfo.z}";
             tile.transform.parent = transform;
             tile.Init(tileInfo, resourceContainer, this);
             _tileCount++;
+        }
+
+        private DefaultTile GetTilePrefab()
+        {
+            return TilePrefabs[UnityEngine.Random.Range(0,TilePrefabs.Count)];
         }
 
         public TileInformation GetTileInfo(int x, int z)

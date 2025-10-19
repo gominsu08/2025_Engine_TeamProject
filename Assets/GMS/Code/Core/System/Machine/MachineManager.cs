@@ -1,4 +1,6 @@
-﻿using GMS.Code.Core.System.Maps;
+﻿using GMS.Code.Core.Events;
+using GMS.Code.Core.System.Maps;
+using System;
 using UnityEngine;
 
 namespace GMS.Code.Core.System.Machine
@@ -15,15 +17,34 @@ namespace GMS.Code.Core.System.Machine
 
     public class MachineManager : MonoBehaviour
     {
+        public void Awake()
+        {
+            Bus<MachineBuildingEvent>.OnEvent += HandleBuildingMachine;
+        }
+
+        public void OnDestroy()
+        {
+            Bus<MachineBuildingEvent>.OnEvent -= HandleBuildingMachine;
+        }
+
+        private void HandleBuildingMachine(MachineBuildingEvent evt)
+        {
+            //
+        }
 
         public MachineType IsMachineType(TileInformation tileInfo)
         {
-            return MachineType.MiningMachine;
+            return MachineType.None;
         }
 
-        public int GetMiningTime(TileInformation tileInfo)
+        public float GetMiningTime(TileInformation tileInfo)
         {
-            return 1;
+            return 5f;
+        }
+
+        internal float GetCurrentMiningTime(TileInformation tileInfo)
+        {
+            return 2.5f;
         }
     }
 }

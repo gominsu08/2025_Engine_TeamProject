@@ -9,10 +9,10 @@ using UnityEngine.UI;
 
 namespace GMS.Code.UI.MainPanel
 {
-    public class ButtonUI : MonoBehaviour, IUIElement<ToolBarUI, ToolBarUIData, Action>, IPointerEnterHandler, IPointerExitHandler
+    public class ButtonUI : MonoBehaviour, IUIElement< ToolBarUIData, Action>, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] protected Button button;
-        private RectTransform myRect => transform as RectTransform;
+        private RectTransform MyRect => transform as RectTransform;
         private ToolBarUI _toolBarUI;
         private ToolBarUIData _toolBarUIData;
 
@@ -20,22 +20,34 @@ namespace GMS.Code.UI.MainPanel
         {
             button.enabled = false;
             button.onClick.RemoveAllListeners();
+            if(_toolBarUI != null)
             _toolBarUI.DisableUI();
             gameObject.SetActive(false);
         }
 
-        public virtual void EnableForUI(ToolBarUI toolBarUI, ToolBarUIData toolBarUIData, Action callback)
+        public void Init(ToolBarUI toolBarUI)
+        {
+            _toolBarUI = toolBarUI;
+        }
+
+        public virtual void EnableForUI( ToolBarUIData toolBarUIData, Action callback)
         {
             button.enabled = true;
             button.onClick.AddListener(() => callback?.Invoke());
-            _toolBarUI = toolBarUI;
             _toolBarUIData = toolBarUIData;
             gameObject.SetActive(true);
         }
 
+        public void SetVisualDisable()
+        {
+            button.enabled = false;
+            button.onClick.RemoveAllListeners();
+        }
+
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Vector2 position = new Vector2(myRect.position.x - myRect.sizeDelta.x, myRect.position.y + myRect.sizeDelta.y);
+            if (button.enabled == false) return;
+            Vector2 position = new Vector2(MyRect.position.x - MyRect.sizeDelta.x/2, MyRect.position.y + MyRect.sizeDelta.y/2);
 
             _toolBarUI.EnableForUI(position, _toolBarUIData);
         }
