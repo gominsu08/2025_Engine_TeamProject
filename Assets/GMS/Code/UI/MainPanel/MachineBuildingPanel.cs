@@ -64,8 +64,15 @@ namespace GMS.Code.UI.MainPanel
                     isFail = true;
                 }
             }
+
             if (isFail == false)
+            {
+                foreach (ItemAndValuePair item in list)
+                {
+                    _container.MinusItem(item.itemSO, item.value);
+                }
                 Bus<MachineBuildingEvent>.Raise(new MachineBuildingEvent(tier, machineType, _targetTileInfo));
+            }
             else if(isFail)
             {
                 //실패
