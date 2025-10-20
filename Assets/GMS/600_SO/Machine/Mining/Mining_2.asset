@@ -26,4 +26,9 @@ MonoBehaviour:
     value: 30
   - itemSO: {fileID: 11400000, guid: 84e59f83721736b44953d44f63ec8124, type: 2}
     value: 20
+  tierAndValuePairs:
+  - tier: 1
+    value: 60
+  - tier: 2
+    value: 36
   isMoney: 0

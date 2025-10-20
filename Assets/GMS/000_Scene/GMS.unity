@@ -6810,6 +6810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6098ef784b71343b91ff7e8fb684a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _container: {fileID: 201410289}
   machineSOs:
   - {fileID: 11400000, guid: bcee537bd043b8c44add3c0475986280, type: 2}
   - {fileID: 11400000, guid: 6e43b77d62c00ea4a92b50fc57dd407a, type: 2}

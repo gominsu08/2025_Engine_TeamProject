@@ -72,6 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d92c1ed5a66016643852a0f5bee29ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 8418206108874348494}
   ghostTiles:
   - {fileID: 6408379867581665042}
   - {fileID: 4701103162852255140}
@@ -115,6 +116,7 @@ GameObject:
   - component: {fileID: 892094919868107913}
   - component: {fileID: 7522085905511118898}
   - component: {fileID: 8740732464776643961}
+  - component: {fileID: 8418206108874348494}
   m_Layer: 0
   m_Name: default
   m_TagString: Untagged
@@ -191,6 +193,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8418206108874348494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5271654196040451662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fddc07d3ec84e240b4239b7fe9a7e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileRenderer: {fileID: 8740732464776643961}
+  defaultUpTileMat: {fileID: 2100000, guid: f9d850063c993264698f21e286e9f48d, type: 2}
+  defaultdownTileMat: {fileID: 2100000, guid: db73d01a4cabe984f838042ab1766dfd, type: 2}
+  selectUpTileMat: {fileID: 2100000, guid: afa26ad2e7381ce4cb487e605dd2c70a, type: 2}
+  selectDownTileMat: {fileID: 2100000, guid: ade20335242a01d40983dfcc5886d062, type: 2}
 --- !u!1001 &724508593123852221
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,6 +13,13 @@ namespace GMS.Code.Core.System.Machines
         public int value;
     }
 
+    [Serializable]
+    public class TierAndValuePair
+    {
+        public Tier tier;
+        public int value;
+    }
+
     [CreateAssetMenu(fileName = "MachineData", menuName = "SO/GMS/System/Machine/MachineData")]
     public class MachineSO : ScriptableObject
     {
@@ -22,9 +29,23 @@ namespace GMS.Code.Core.System.Machines
         public Sprite machineIcon;
         public Machine machinePrefab;
         public List<ItemAndValuePair> itemList = new List<ItemAndValuePair>();
+        public List<TierAndValuePair> tierAndValuePairs = new List<TierAndValuePair>();
         public bool isMoney;
         private int money = 1700;
         public string Description { get; private set; }
+
+
+        public int GetTierToValue(Tier tier)
+        {
+            int value = 0;
+            foreach (var pair in tierAndValuePairs)
+            {
+                if (pair.tier == tier)
+                    value = pair.value;
+            }
+
+            return value;
+        }
 
         public void OnValidate()
         {

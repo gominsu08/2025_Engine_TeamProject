@@ -1,8 +1,13 @@
-﻿using GMS.Code.Core.Events;
+﻿using DG.Tweening;
+using GMS.Code.Core.Events;
 using GMS.Code.Core.System.Maps;
+using GMS.Code.Items;
 using GMS.Code.UI.MainPanel;
 using GMS.Code.Utill;
+using PSW.Code.Container;
+using System;
 using System.Collections.Generic;
+using System.Resources;
 using UnityEngine;
 
 namespace GMS.Code.Core.System.Machines
@@ -85,6 +90,7 @@ namespace GMS.Code.Core.System.Machines
 
     public class MachineManager : MonoBehaviour
     {
+        [SerializeField] private ResourceContainer _container;
         public MachineContainer MachineContainer { get; private set; }
         public List<MachineSO> machineSOs = new List<MachineSO>();
 
@@ -112,10 +118,26 @@ namespace GMS.Code.Core.System.Machines
                     if (machineSO.machineType == machineType)
                     {
                         Machine machine = Instantiate(machineSO.machinePrefab, tileInfo.tileObject.transform);
+                        machine.transform.position += Vector3.up * 0.5f;
+                        machine.transform.DOScale(2,0.1f);
+                        machine.MachineInit(tileInfo.item,HandleItemGet);
+                        machine.MachineEnable();
                         MachineContainer.AddMachine(machine, tileInfo);
                     }
                 }
             }
+        }
+
+        private void HandleItemGet(ItemSO targetItem, MachineSO machineSO)
+        {
+           int value = machineSO.GetTierToValue(targetItem.tier);
+
+            _container.PlusItem(targetItem,value / 12);
+        }
+
+        private void Update()
+        {
+            MachineContainer.Update();
         }
 
         public MachineType IsMachineType(TileInformation tileInfo)// 해당 타일에 설치되어있는 기계의 종류를 반환하는 함수

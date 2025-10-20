@@ -6,6 +6,7 @@ using GMS.Code.Core.System.Maps;
 using PSW.Code.Container;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GMS.Code.UI.MainPanel
 {
@@ -74,6 +75,7 @@ namespace GMS.Code.UI.MainPanel
                         _container.MinusItem(item.itemSO, item.value);
                     }
                     Bus<MachineBuildingEvent>.Raise(new MachineBuildingEvent(tier, machineType, _targetTileInfo));
+                    Bus<UIRefreshEvent>.Raise(new UIRefreshEvent(_targetTileInfo));
                 }
             }
             else
@@ -87,6 +89,7 @@ namespace GMS.Code.UI.MainPanel
                 {
                     _container.MinusCoin(1700);
                     Bus<MachineBuildingEvent>.Raise(new MachineBuildingEvent(tier, machineType, _targetTileInfo));
+                    Bus<UIRefreshEvent>.Raise(new UIRefreshEvent(_targetTileInfo));
                 }
             }
 

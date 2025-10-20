@@ -10,14 +10,14 @@ namespace GMS.Code.Core.System.Machines
         private const float RESOURCE_GAIN_PER_COLLECT = 5f;
         private float _timer = 0;
         private ItemSO _targetItemData;
-        private UnityAction<ItemSO, Tier> _action;
+        private UnityAction<ItemSO, MachineSO> _action;
 
         public bool IsMining {  get; private set; } = false;
         public float MiningTime => _timer;
 
         [field: SerializeField] public MachineSO machineSO { get; private set; }
 
-        public void MachineInit(ItemSO targetItemData , UnityAction<ItemSO,Tier> callback)
+        public void MachineInit(ItemSO targetItemData , UnityAction<ItemSO,MachineSO> callback)
         {
             _action = callback;
             _targetItemData = targetItemData;
@@ -41,7 +41,7 @@ namespace GMS.Code.Core.System.Machines
             if(_timer >= RESOURCE_GAIN_PER_COLLECT)
             {
                 _timer = 0;
-                _action?.Invoke(_targetItemData, machineSO.machineTier);
+                _action?.Invoke(_targetItemData, machineSO);
             }
         }
 

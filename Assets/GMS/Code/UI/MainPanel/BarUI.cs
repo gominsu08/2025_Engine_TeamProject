@@ -17,7 +17,6 @@ namespace GMS.Code.UI.MainPanel
         public void UpdateUI(float currentTime)
         {
             float newWidth = currentTime / _maxTime;
-            Debug.Log("UPDATE : " + newWidth);
             fillRect.localScale = new Vector2(newWidth, 1);
         }
 
