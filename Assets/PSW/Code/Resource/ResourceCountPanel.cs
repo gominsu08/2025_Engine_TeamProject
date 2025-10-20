@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class ResourceCountPanel : MonoBehaviour
+namespace PSW.Code.Resource
 {
-    
+    public class ResourceCountPanel : MonoBehaviour
+    {
+
+    }
 }

@@ -11,11 +11,8 @@ public class Test : MonoBehaviour
     [SerializeField] private ItemSO keyItem;
     private void Start()
     {
-        print((resourceContainer != null) + " " + (keyItem != null));
         resourceContainer.PlusCoin(10);
-        print(resourceContainer.IsTargetCountItem(keyItem, 20));
         resourceContainer.PlusCoin(10);
-        print(resourceContainer.IsTargetCountItem(keyItem, 20));
     }
 
     private void Update()
