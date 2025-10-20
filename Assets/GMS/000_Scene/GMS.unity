@@ -4046,7 +4046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &831353457
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6292,9 +6292,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sawtoothSystem: {fileID: 1394517616}
   machineManager: {fileID: 1460450555}
+  container: {fileID: 201410289}
   makePanel: {fileID: 421921431}
   miningPanel: {fileID: 1722962116}
-  buildingMachinePanel: {fileID: 0}
+  buildingMachinePanel: {fileID: 831353458}
   toolBarUI: {fileID: 638748985}
   rotationTime: 4
   parentTransform: {fileID: 1699253578}
