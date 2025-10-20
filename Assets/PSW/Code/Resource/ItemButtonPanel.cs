@@ -15,8 +15,8 @@ namespace PSW.Code.Resource
             foreach(ItemSO item in itemList)
             {
                 Instantiate(buttonPrefab, transform)
-                    .GetComponent<ItemButton>()
-                    .Init(item.icon,this);
+                    .GetComponentInChildren<ItemButton>()
+                    .Init(item, this);
             }
         }
 
