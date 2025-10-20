@@ -11,6 +11,7 @@ namespace GMS.Code.Core.System.Maps
     {
         public int x, z;
         public bool isUpTile, isDownTile, isLeftTile, isRightTile;
+        public GameObject tileObject;
         public ItemSO item;
 
         public List<Direction> GetAdjacentTiles()
@@ -138,6 +139,7 @@ namespace GMS.Code.Core.System.Maps
                 tileInfo.item = resourceTile.GetResourceItem();
             tile.name = $"Tile {tileInfo.x} {tileInfo.z}";
             tile.transform.parent = transform;
+            tileInfo.tileObject = tile.gameObject;
             tile.Init(tileInfo, resourceContainer, this);
             _tileCount++;
         }

@@ -1,4 +1,4 @@
-﻿using GMS.Code.Core.System.Machine;
+﻿using GMS.Code.Core.System.Machines;
 using GMS.Code.Core.System.Maps;
 using GMS.Code.Items;
 using PSW.Code.Container;
@@ -30,7 +30,7 @@ namespace GMS.Code.UI.MainPanel
         {
             _targetItem = targetItem;
             _tileInfo = tileInfo;
-            barUI.EnableForUI(_machineManager.GetMiningTime(_tileInfo));
+            barUI.EnableForUI(5);
             destroyButtonUI.Init(_toolBarUI);
             destroyButtonUI.EnableForUI(new ToolBarUIData()
             {

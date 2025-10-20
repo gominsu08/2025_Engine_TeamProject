@@ -1,6 +1,6 @@
 using GMS.Code.Core;
 using GMS.Code.Core.Events;
-using GMS.Code.Core.System.Machine;
+using GMS.Code.Core.System.Machines;
 using GMS.Code.Core.System.Maps;
 using GMS.Code.UI;
 using GMS.Code.UI.MainPanel;

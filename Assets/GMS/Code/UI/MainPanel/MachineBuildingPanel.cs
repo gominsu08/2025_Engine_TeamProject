@@ -1,8 +1,7 @@
-﻿using Assets.GMS.Code.Core.System.Machine;
-using Assets.GMS.Code.UI.MainPanel;
+﻿using Assets.GMS.Code.UI.MainPanel;
 using GMS.Code.Core;
 using GMS.Code.Core.Events;
-using GMS.Code.Core.System.Machine;
+using GMS.Code.Core.System.Machines;
 using GMS.Code.Core.System.Maps;
 using PSW.Code.Container;
 using System.Collections.Generic;
@@ -57,23 +56,41 @@ namespace GMS.Code.UI.MainPanel
         public void HandleMachineBuild(Tier tier, List<ItemAndValuePair> list)
         {
             bool isFail = false;
-            foreach (ItemAndValuePair item in list)
-            {
-                if (!_container.IsTargetCountItem(item.itemSO, item.value))
-                {
-                    isFail = true;
-                }
-            }
 
-            if (isFail == false)
+            if (list.Count != 0)
             {
                 foreach (ItemAndValuePair item in list)
                 {
-                    _container.MinusItem(item.itemSO, item.value);
+                    if (!_container.IsTargetCountItem(item.itemSO, item.value))
+                    {
+                        isFail = true;
+                    }
                 }
-                Bus<MachineBuildingEvent>.Raise(new MachineBuildingEvent(tier, machineType, _targetTileInfo));
+
+                if (isFail == false)
+                {
+                    foreach (ItemAndValuePair item in list)
+                    {
+                        _container.MinusItem(item.itemSO, item.value);
+                    }
+                    Bus<MachineBuildingEvent>.Raise(new MachineBuildingEvent(tier, machineType, _targetTileInfo));
+                }
             }
-            else if(isFail)
+            else
+            {
+                if (!_container.IsTargetCoin(1700))
+                {
+                    isFail = true;
+                }
+
+                if (isFail == false)
+                {
+                    _container.MinusCoin(1700);
+                    Bus<MachineBuildingEvent>.Raise(new MachineBuildingEvent(tier, machineType, _targetTileInfo));
+                }
+            }
+
+            if (isFail)
             {
                 //실패
             }

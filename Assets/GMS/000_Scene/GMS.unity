@@ -6810,6 +6810,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6098ef784b71343b91ff7e8fb684a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  machineSOs:
+  - {fileID: 11400000, guid: bcee537bd043b8c44add3c0475986280, type: 2}
+  - {fileID: 11400000, guid: 6e43b77d62c00ea4a92b50fc57dd407a, type: 2}
+  - {fileID: 11400000, guid: 47fa89c5ded888d4c9cdc69ea6f8e19f, type: 2}
+  - {fileID: 11400000, guid: 696cdb40de7d3f7478c96de26d5f178a, type: 2}
+  - {fileID: 11400000, guid: 6c34f6e6fec86744cbe7450bd716695d, type: 2}
+  - {fileID: 11400000, guid: 2eb235811d023664e9bfe2126f4adf06, type: 2}
+  - {fileID: 11400000, guid: 82ffba209749f59439a6af888339a052, type: 2}
+  - {fileID: 11400000, guid: fa11e82fd2c9da948849eca4eaf5e45a, type: 2}
+  - {fileID: 11400000, guid: 40043edd24ca2934e918bfc46db3077d, type: 2}
+  - {fileID: 11400000, guid: ec35fd211f0d8af49bd64616698692d7, type: 2}
+  - {fileID: 11400000, guid: 66e99350d56360e499f6e89b9373dcaf, type: 2}
+  - {fileID: 11400000, guid: 172ee3ce24f78534dacb320ef5062a74, type: 2}
 --- !u!4 &1460450556
 Transform:
   m_ObjectHideFlags: 0
@@ -6913,7 +6926,7 @@ Transform:
   m_GameObject: {fileID: 1479227457}
   serializedVersion: 2
   m_LocalRotation: {x: -0.003491821, y: -0.86490583, z: 0.5019016, w: -0.004536167}
-  m_LocalPosition: {x: -0.26536366, y: 14.887865, z: 6.9807105}
+  m_LocalPosition: {x: -0.2, y: 8.9, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

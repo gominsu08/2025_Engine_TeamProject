@@ -1,11 +1,10 @@
-﻿using GMS.Code.Core.System.Machine;
-using GMS.Code.Items;
+﻿using GMS.Code.Items;
 using GMS.Code.UI.MainPanel;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.GMS.Code.Core.System.Machine
+namespace GMS.Code.Core.System.Machines
 {
     [Serializable]
     public class ItemAndValuePair
@@ -15,23 +14,24 @@ namespace Assets.GMS.Code.Core.System.Machine
     }
 
     [CreateAssetMenu(fileName = "MachineData", menuName = "SO/GMS/System/Machine/MachineData")]
-    public class MachinceSO : ScriptableObject
+    public class MachineSO : ScriptableObject
     {
         public string machineName;
         public Tier machineTier;
         public MachineType machineType;
         public Sprite machineIcon;
+        public Machine machinePrefab;
         public List<ItemAndValuePair> itemList = new List<ItemAndValuePair>();
-        public string Description { get; private set; }
         public bool isMoney;
         private int money = 1700;
+        public string Description { get; private set; }
 
         public void OnValidate()
         {
             if (isMoney)
             {
                 Description = string.Empty;
-                Description += "1700원";
+                Description += "1700원   ";
                 return;
             }
 

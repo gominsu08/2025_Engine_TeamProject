@@ -72,7 +72,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d92c1ed5a66016643852a0f5bee29ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilePrefab: {fileID: 7329143214918789443}
   ghostTiles:
   - {fileID: 6408379867581665042}
   - {fileID: 4701103162852255140}
@@ -169,8 +168,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2505642851634945670, guid: 0bb12ca1338a4b9409d3bb248768ade9, type: 3}
-  - {fileID: 7575915981058242857, guid: 0bb12ca1338a4b9409d3bb248768ade9, type: 3}
+  - {fileID: 2100000, guid: f9d850063c993264698f21e286e9f48d, type: 2}
+  - {fileID: 2100000, guid: db73d01a4cabe984f838042ab1766dfd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
