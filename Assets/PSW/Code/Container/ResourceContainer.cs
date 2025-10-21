@@ -38,6 +38,7 @@ namespace PSW.Code.Container
         public void PlusItem(ItemSO keyItem, int plusCount)
         {
             SetItem(keyItem, plusCount);
+            Debug.Log(GetItemCount(keyItem));
         }
         public void MinusItem(ItemSO keyItem, int minusCount)
         {
@@ -52,6 +53,7 @@ namespace PSW.Code.Container
         public void PlusCoin(int plusCoin)
         {
             SetCoin(plusCoin);
+            
         }
         public void MinusCoin(int minusCoin)
         {

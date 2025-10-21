@@ -10,9 +10,15 @@ namespace PSW.Code.Sawtooth
         [SerializeField] private List<SawtoothSystem> sawtoothSystemList;
         private float _rotationValue;
         private Vector3 _rotationDir;
+        private Vector3 _startDir;
         private WaitForSeconds wait = new WaitForSeconds(0.5f);
         private bool _isEndRotation;
         private bool _isStopRotation = true;
+
+        private void Awake()
+        {
+            _startDir = transform.eulerAngles;
+        }
 
         public void StartSawtooth(float time, bool isLeft, Transform parent)
         {
@@ -32,6 +38,8 @@ namespace PSW.Code.Sawtooth
         public void SawtoothStop()
         {
             _isEndRotation = true;
+            StopAllCoroutines();
+            DOTween.KillAll(gameObject);
             sawtoothSystemList.ForEach(v => v.SawtoothStop());
         }
 
@@ -49,6 +57,15 @@ namespace PSW.Code.Sawtooth
                 StartCoroutine(SetTime());
             else
                 _isStopRotation = true;
+        }
+
+        public void ResetSawtooth()
+        {
+            transform.DORotate(_startDir,0.5f);
+            foreach (var item in sawtoothSystemList)
+            {
+                item.ResetSawtooth();
+            }
         }
 
     }

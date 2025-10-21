@@ -1,25 +1,27 @@
-﻿using Assets.GMS.Code.Core.System.Machine;
-using GMS.Code.UI;
-using GMS.Code.UI.MainPanel;
+﻿using GMS.Code.Core.System.Machines;
+using PSW.Code.Sawtooth;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-namespace Assets.GMS.Code.UI.MainPanel
+namespace GMS.Code.UI.MainPanel
 {
     public class BuildingMachineButtonUI : MonoBehaviour, IUIElement<UnityAction<Tier, List<ItemAndValuePair>>, Tier>, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private ButtonUI button;
         [SerializeField] private TextUI text;
         [SerializeField] private IconUI icon;
-        [SerializeField] private MachinceSO machineSO;
+        [SerializeField] private MachineSO machineSO;
         [SerializeField] private Color disableColor, defaultColor;
+        [SerializeField] private SawtoothSystem sawtooth;
+        [SerializeField] private Transform parent;
         private RectTransform MyRect => transform as RectTransform;
         private ToolBarUIData _toolBarUIData;
         private ToolBarUI _toolBarUI;
         private Tier _targetTier;
         private UnityAction<Tier, List<ItemAndValuePair>> _callback;
+        private bool _isEnable;
 
 
         public void DisableUI()
@@ -47,14 +49,16 @@ namespace Assets.GMS.Code.UI.MainPanel
             {
                 button.SetVisualDisable();
                 icon.SetColor(disableColor);
+                _isEnable = false;
             }
             else
             {
                 button.EnableForUI(_toolBarUIData, HandleButtonClick);
                 icon.SetColor(defaultColor);
-                icon.EnableForUI(machineSO.machineIcon);
+                _isEnable = true;
             }
 
+            icon.EnableForUI(machineSO.machineIcon);
             text.EnableForUI(machineSO.machineName);
             gameObject.SetActive(true);
         }
@@ -66,6 +70,10 @@ namespace Assets.GMS.Code.UI.MainPanel
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (!_isEnable) return;
+
+            sawtooth.StartSawtooth(10,true,parent);
+
             Vector2 position = new Vector2(MyRect.position.x - MyRect.sizeDelta.x / 2, MyRect.position.y + MyRect.sizeDelta.y / 2);
 
             _toolBarUI.EnableForUI(position, _toolBarUIData);
@@ -73,6 +81,10 @@ namespace Assets.GMS.Code.UI.MainPanel
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (!_isEnable) return;
+
+            sawtooth.SawtoothStop();
+            sawtooth.ResetSawtooth();
             _toolBarUI.DisableUI();
         }
     }

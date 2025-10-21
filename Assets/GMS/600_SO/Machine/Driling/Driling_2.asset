@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cee99e44cba65cd4db4e08cd9ca4a201, type: 3}
+  m_Script: {fileID: 11500000, guid: fbb16d186340c7044ac406c0204c2e1e, type: 3}
   m_Name: Driling_2
   m_EditorClassIdentifier: 
   machineName: "\uC2DC\uCD94\uAE30 Lv.2"
   machineTier: 2
   machineType: 3
   machineIcon: {fileID: 21300000, guid: d3fc0ab74e6bca14fa7bf032ea76899b, type: 3}
+  machinePrefab: {fileID: 1967430548817887890, guid: 5ca22ec25f0fa594499ade8e31921a6d, type: 3}
   itemList:
   - itemSO: {fileID: 11400000, guid: 5f055f8e757160d46ae01178f05333ad, type: 2}
     value: 90
@@ -23,10 +24,13 @@ MonoBehaviour:
     value: 90
   - itemSO: {fileID: 11400000, guid: bf3b42d31b6b3d945b5cfa632b5b5e90, type: 2}
     value: 50
+  - itemSO: {fileID: 11400000, guid: e73cbc7009db5bc47b84a86ceb81c61b, type: 2}
+    value: 25
   - itemSO: {fileID: 11400000, guid: 06b42fe5832a39347bcbf73a51c257ec, type: 2}
     value: 5
   - itemSO: {fileID: 11400000, guid: 3979c8573bc52d149909addf4a966130, type: 2}
     value: 5
-  - itemSO: {fileID: 11400000, guid: e73cbc7009db5bc47b84a86ceb81c61b, type: 2}
-    value: 25
+  tierAndValuePairs:
+  - tier: 2
+    value: 24
   isMoney: 0

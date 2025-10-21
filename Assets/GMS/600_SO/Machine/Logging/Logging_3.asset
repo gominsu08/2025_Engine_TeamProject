@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cee99e44cba65cd4db4e08cd9ca4a201, type: 3}
+  m_Script: {fileID: 11500000, guid: fbb16d186340c7044ac406c0204c2e1e, type: 3}
   m_Name: Logging_3
   m_EditorClassIdentifier: 
   machineName: "\uBC8C\uBAA9\uAE30 Lv.3"
-  machineTier: 1
+  machineTier: 3
   machineType: 4
   machineIcon: {fileID: 21300000, guid: d3fc0ab74e6bca14fa7bf032ea76899b, type: 3}
+  machinePrefab: {fileID: 1073664063575248446, guid: e25126d52e9ed1641820882139e90a94, type: 3}
   itemList:
   - itemSO: {fileID: 11400000, guid: 5f055f8e757160d46ae01178f05333ad, type: 2}
     value: 120
@@ -27,10 +28,15 @@ MonoBehaviour:
     value: 25
   - itemSO: {fileID: 11400000, guid: 4b6e90d5753aeb24c95e59e3f8876741, type: 2}
     value: 30
-  - itemSO: {fileID: 11400000, guid: e73cbc7009db5bc47b84a86ceb81c61b, type: 2}
-    value: 20
   - itemSO: {fileID: 11400000, guid: 06b42fe5832a39347bcbf73a51c257ec, type: 2}
     value: 7
   - itemSO: {fileID: 11400000, guid: 3979c8573bc52d149909addf4a966130, type: 2}
     value: 10
+  tierAndValuePairs:
+  - tier: 1
+    value: 144
+  - tier: 2
+    value: 96
+  - tier: 3
+    value: 60
   isMoney: 0

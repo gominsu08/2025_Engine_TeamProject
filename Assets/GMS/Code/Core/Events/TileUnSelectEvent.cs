@@ -18,4 +18,14 @@ namespace GMS.Code.Core.Events
             this.isBuy = isBuy;
         }
     }
+
+    public struct TileUseUnSelectEvent : IEvent
+    {
+        public TileInformation tileInfo;
+
+        public TileUseUnSelectEvent(TileInformation tile)
+        {
+            tileInfo = tile;
+        }
+    }
 }
