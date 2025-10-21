@@ -9180,6 +9180,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -100
       objectReference: {fileID: 0}
+    - target: {fileID: 2347944081317750397, guid: 815612329df016e46a1a6d1923129d2a, type: 3}
+      propertyPath: machineSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 66e99350d56360e499f6e89b9373dcaf, type: 2}
+    - target: {fileID: 3771232464883587180, guid: 815612329df016e46a1a6d1923129d2a, type: 3}
+      propertyPath: machineSO
+      value: 
+      objectReference: {fileID: 11400000, guid: ec35fd211f0d8af49bd64616698692d7, type: 2}
     - target: {fileID: 3808136110695401481, guid: 815612329df016e46a1a6d1923129d2a, type: 3}
       propertyPath: m_Name
       value: MiningMachineBuildingPanel
@@ -9674,7 +9682,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3058975601568916081, guid: ca7b25d6b3508e94a9b7f55d343eba38, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5314823104792359617, guid: ca7b25d6b3508e94a9b7f55d343eba38, type: 3}
       propertyPath: m_AnchorMax.y

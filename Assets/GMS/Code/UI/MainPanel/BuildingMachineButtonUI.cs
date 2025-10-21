@@ -84,6 +84,7 @@ namespace GMS.Code.UI.MainPanel
             if (!_isEnable) return;
 
             sawtooth.SawtoothStop();
+            sawtooth.KillDOTween();
             sawtooth.ResetSawtooth();
             _toolBarUI.DisableUI();
         }
