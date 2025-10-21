@@ -480,6 +480,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 337140601064004218, guid: 53e64f22451d64d4c9e7618c50eb58a3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c822cd50e2f075b41a247c8d8253c136, type: 2}
+    - target: {fileID: 2905073323890156917, guid: 53e64f22451d64d4c9e7618c50eb58a3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.02254903
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497426024961662045, guid: 53e64f22451d64d4c9e7618c50eb58a3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c822cd50e2f075b41a247c8d8253c136, type: 2}
+    - target: {fileID: 6959083569485504229, guid: 53e64f22451d64d4c9e7618c50eb58a3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c822cd50e2f075b41a247c8d8253c136, type: 2}
     - target: {fileID: 7208446948686651127, guid: 53e64f22451d64d4c9e7618c50eb58a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.222
@@ -520,6 +536,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8064808348430121590, guid: 53e64f22451d64d4c9e7618c50eb58a3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c822cd50e2f075b41a247c8d8253c136, type: 2}
     - target: {fileID: 8503673330646481607, guid: 53e64f22451d64d4c9e7618c50eb58a3, type: 3}
       propertyPath: m_Name
       value: CutTree
