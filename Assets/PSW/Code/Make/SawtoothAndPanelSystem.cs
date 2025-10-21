@@ -87,7 +87,7 @@ namespace PSW.Code.Make
                     else
                         miningPanel.EnableForUI(info.item, info);
                 }
-                SawtoothButtonClick();
+                PanelUp();
                 _isWait = false;
             }
         }
@@ -137,7 +137,13 @@ namespace PSW.Code.Make
             }
         }
 
-        public void SawtoothButtonClick()
+        public async void SawtoothButtonClick()
+        {
+            MachineType typeEnum = machineManager.IsMachineType(_prevSelectTile);
+            await WaitPanel(_isLeft, _prevSelectTile, typeEnum);
+        }
+
+        private void PanelUp()
         {
             if (sawtoothSystem.GetIsStopRotation() && makePanel.GetIsStopMove())
             {
@@ -145,7 +151,6 @@ namespace PSW.Code.Make
                 _isLeft = !_isLeft;
                 makePanel.StartPopPanel();
             }
-
         }
 
         public void DisableAllUI()

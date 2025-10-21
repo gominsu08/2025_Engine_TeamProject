@@ -27,6 +27,7 @@ namespace GMS.Code.Core.System.Maps
             _tileManager = tileManager;
 
             Bus<TileSelectEvent>.OnEvent += HandleTileSelect;
+            Bus<TileUseUnSelectEvent>.OnEvent += HandleUseUnSelect;
 
             foreach (GhostTile ghost in ghostTiles)
             {
@@ -76,6 +77,14 @@ namespace GMS.Code.Core.System.Maps
             animator.SetMaterial(false);
             transform.DOMoveY(_startYPos, 0.2f);
             DisableAllGhost();
+        }
+
+        public void HandleUseUnSelect(TileUseUnSelectEvent evt)
+        {
+            if(TileUtill.IsSame(evt.tileInfo,TileInfo) && _isSelect == true)
+            {
+                UnSelect();
+            }
         }
 
         public void EnableAllGhost()

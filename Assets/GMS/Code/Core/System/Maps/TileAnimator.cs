@@ -21,7 +21,6 @@ namespace GMS.Code.Core.System.Maps
 
         public void SetMaterial(bool isSelect)
         {
-            Debug.Log(isSelect);
             if (isSelect)
             {
                 mat_1.SetColor("_OutlineColor",Color.white);

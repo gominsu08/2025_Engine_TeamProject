@@ -51,6 +51,18 @@ namespace GMS.Code.Core.System.Machines
             return machineType;
         }
 
+        public MachineAndTileInfoPair GetPair(TileInformation info)
+        {
+            MachineAndTileInfoPair pair = default;
+            for (int i = 0; i < machineAndTileInfoPairs.Count; i++)
+            {
+                if (TileUtill.IsSame(machineAndTileInfoPairs[i].tileInformation, info))
+                    pair = machineAndTileInfoPairs[i];
+            }
+
+            return pair;
+        }
+
         public Machine GetMachintToTileInfo(TileInformation info)
         {
             Machine machine = null;
@@ -67,6 +79,13 @@ namespace GMS.Code.Core.System.Machines
         public bool HasMachineOnTile(TileInformation info)
         {
             return GetMachintToTileInfo(info) != null;
+        }
+
+        public void RemoveMachine(TileInformation tileInfo)
+        {
+            MachineAndTileInfoPair pair = GetPair(tileInfo);
+            machineAndTileInfoPairs.Remove(pair);
+            MonoBehaviour.Destroy(pair.machine.gameObject);
         }
 
         public void AddMachine(Machine machine, TileInformation tileInfo)
@@ -150,6 +169,11 @@ namespace GMS.Code.Core.System.Machines
             Machine machine = MachineContainer.GetMachintToTileInfo(tileInfo);
 
             return machine.MiningTime;
+        }
+
+        internal void DestroyMachine(TileInformation tileInfo)
+        {
+            MachineContainer.RemoveMachine(tileInfo);
         }
     }
 }
