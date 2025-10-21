@@ -92,7 +92,7 @@ MonoBehaviour:
   - {fileID: 5314091930757545441}
   - {fileID: 3829920884314079989}
   - {fileID: 8271666414175231727}
-  resourceItem: {fileID: 11400000, guid: 5f055f8e757160d46ae01178f05333ad, type: 2}
+  resourceItem: {fileID: 11400000, guid: b4c16715d0bbe144ea0a46d1685ec530, type: 2}
 --- !u!114 &3829920884314079989 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4441748659208493744, guid: 522736a4eef211a45bca408adfcab165, type: 3}
