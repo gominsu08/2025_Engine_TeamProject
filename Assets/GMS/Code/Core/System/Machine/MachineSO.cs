@@ -62,7 +62,7 @@ namespace GMS.Code.Core.System.Machines
                 foreach (ItemAndValuePair item in itemList)
                 {
                     if (item.itemSO == null || item.value == 0) return;
-                    Description += $"{item.itemSO.itemName} : {item.value}개 | ";
+                    Description += $"{item.itemSO.itemName} : {item.value}개 \n ";
                 }
             }
         }

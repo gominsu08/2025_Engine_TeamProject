@@ -39,7 +39,9 @@ namespace GMS.Code.UI
         {
             textUI.SetText(_data.text);
             _myRect.anchoredPosition = _position;
-            _myRect.sizeDelta = new Vector2(textUI.text.Length * 20f / 2 + 20, textUI.rectTransform.sizeDelta.y);
+            float lineCount = textUI.textInfo.lineCount;
+            float textLenght = textUI.text.Length;
+            _myRect.sizeDelta = new Vector2((textLenght) * 20f / 2 + 20 / lineCount, textUI.textInfo.lineCount * 60);
         }
     }
 }
