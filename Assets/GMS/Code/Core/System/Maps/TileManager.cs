@@ -1,7 +1,6 @@
 using GMS.Code.Core.Events;
 using GMS.Code.Items;
 using PSW.Code.Container;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +10,7 @@ namespace GMS.Code.Core.System.Maps
     {
         public int x, z;
         public bool isUpTile, isDownTile, isLeftTile, isRightTile;
+        public GameObject tileObject;
         public ItemSO item;
 
         public List<Direction> GetAdjacentTiles()
@@ -64,15 +64,7 @@ namespace GMS.Code.Core.System.Maps
 
         private void Awake()
         {
-            AddTile(0, 0);
-            AddTile(0, 1);
-            AddTile(1, 0);
-            AddTile(-1, 0);
-            AddTile(0, -1);
-            AddTile(-1, -1);
-            AddTile(-1, 1);
-            AddTile(1, -1);
-            AddTile(1, 1);
+            StartTileSet();
             Bus<TileBuyEvent>.OnEvent += HandleBuyTileEvent;
         }
 
@@ -131,20 +123,44 @@ namespace GMS.Code.Core.System.Maps
             return result;
         }
 
-        private void CreateTile(TileInformation tileInfo)
+        private void CreateTile(TileInformation tileInfo, bool isStartTileSet = false)
         {
             DefaultTile tile = Instantiate(GetTilePrefab(), new Vector3(tileInfo.x, 0, tileInfo.z), Quaternion.identity);
-            if(tile is ResourceTile resourceTile)
+            if (tile is ResourceTile resourceTile)
                 tileInfo.item = resourceTile.GetResourceItem();
             tile.name = $"Tile {tileInfo.x} {tileInfo.z}";
             tile.transform.parent = transform;
-            tile.Init(tileInfo, resourceContainer, this);
+            tileInfo.tileObject = tile.gameObject;
+            tile.Init(tileInfo, resourceContainer, this, !isStartTileSet);
             _tileCount++;
+        }
+
+        public void StartTileSet()
+        {
+            int[,] startTilePos = new int[,]
+            {
+                {0, 0   },
+                {0, 1   },
+                {1, 0   },
+                {-1, 0  },
+                {0, -1  },
+                {-1, -1 },
+                {-1, 1  },
+                {1, -1  },
+                {1, 1   },
+            };
+            
+            for(int i = 0; i < 9; i++)
+            {
+                TileInformation result = CreateTileInfo(startTilePos[i,0], startTilePos[i, 1]);
+                CreateTile(result, true);
+                tiles.Add(result);
+            }
         }
 
         private DefaultTile GetTilePrefab()
         {
-            return TilePrefabs[UnityEngine.Random.Range(0,TilePrefabs.Count)];
+            return TilePrefabs[UnityEngine.Random.Range(0, TilePrefabs.Count)];
         }
 
         public TileInformation GetTileInfo(int x, int z)

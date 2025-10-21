@@ -1,12 +1,13 @@
 using GMS.Code.Core;
 using GMS.Code.Core.Events;
-using GMS.Code.Core.System.Machine;
+using GMS.Code.Core.System.Machines;
 using GMS.Code.Core.System.Maps;
 using GMS.Code.UI;
 using GMS.Code.UI.MainPanel;
 using GMS.Code.Utill;
 using PSW.Code.Container;
 using PSW.Code.Sawtooth;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace PSW.Code.Make
@@ -48,7 +49,21 @@ namespace PSW.Code.Make
             buildingMachinePanel.Init(toolBarUI, container);
             Bus<TileSelectEvent>.OnEvent += HandleTileSelectEvent;
             Bus<TileUnSelectEvent>.OnEvent += HandleTileUnSelectEvent;
+            Bus<UIRefreshEvent>.OnEvent += RefreshUI;
             _completionSource = new AwaitableCompletionSource();
+        }
+
+        private void OnDestroy()
+        {
+            Bus<TileSelectEvent>.OnEvent -= HandleTileSelectEvent;
+            Bus<TileUnSelectEvent>.OnEvent -= HandleTileUnSelectEvent;
+            Bus<UIRefreshEvent>.OnEvent -= RefreshUI;
+            Disable();
+        }
+
+        private async void RefreshUI(UIRefreshEvent evt)
+        {
+            await RefreshUI(evt.info);
         }
 
         private async void HandleTileUnSelectEvent(TileUnSelectEvent evt)
@@ -58,7 +73,7 @@ namespace PSW.Code.Make
             _prevSelectTile = null;
         }
 
-        private async System.Threading.Tasks.Task WaitPanel(bool isLeft = false, TileInformation info = null, MachineType type = MachineType.None)
+        private async Task WaitPanel(bool isLeft = false, TileInformation info = null, MachineType type = MachineType.None)
         {
 
             _isWait = true;
@@ -72,18 +87,24 @@ namespace PSW.Code.Make
                     else
                         miningPanel.EnableForUI(info.item, info);
                 }
-                SawtoothButtonClick();
+                PanelUp();
                 _isWait = false;
             }
         }
 
         private async void HandleTileSelectEvent(TileSelectEvent evt)
         {
-            MachineType typeEnum = machineManager.IsMachineType(evt.tileInfo);
+            await RefreshUI(evt.tileInfo);
+        }
+
+        public async Task RefreshUI(TileInformation info)
+        {
+            Disable();
+            MachineType typeEnum = machineManager.IsMachineType(info);
 
             if (typeEnum == MachineType.None)
             {
-                buildingMachinePanel.EnableForUI(evt.tileInfo.item, evt.tileInfo);
+                buildingMachinePanel.EnableForUI(info.item, info);
             }
             else if (typeEnum == MachineType.Brazier)
             {
@@ -91,17 +112,17 @@ namespace PSW.Code.Make
             }
             else
             {
-                miningPanel.EnableForUI(evt.tileInfo.item, evt.tileInfo);
+                miningPanel.EnableForUI(info.item, info);
             }
 
-            if (_prevSelectTile != null && !(TileUtill.IsSame(evt.tileInfo, _prevSelectTile)))
+            if (_prevSelectTile != null && !(TileUtill.IsSame(info, _prevSelectTile)))
             {
-                _prevSelectTile = evt.tileInfo;
+                _prevSelectTile = info;
                 return;
             }
-            await WaitPanel(true, evt.tileInfo);
+            await WaitPanel(true, info, typeEnum);
 
-            _prevSelectTile = evt.tileInfo;
+            _prevSelectTile = info;
         }
 
         public void Update()
@@ -116,7 +137,13 @@ namespace PSW.Code.Make
             }
         }
 
-        public void SawtoothButtonClick()
+        public async void SawtoothButtonClick()
+        {
+            MachineType typeEnum = machineManager.IsMachineType(_prevSelectTile);
+            await WaitPanel(_isLeft, _prevSelectTile, typeEnum);
+        }
+
+        private void PanelUp()
         {
             if (sawtoothSystem.GetIsStopRotation() && makePanel.GetIsStopMove())
             {
@@ -124,14 +151,22 @@ namespace PSW.Code.Make
                 _isLeft = !_isLeft;
                 makePanel.StartPopPanel();
             }
-
         }
 
         public void DisableAllUI()
         {
             if (_isLeft)
+            {
                 miningPanel.DisableUI();
+                buildingMachinePanel.DisableUI();
+            }
 
+        }
+
+        public void Disable()
+        {
+            miningPanel.DisableUI();
+            buildingMachinePanel.DisableUI();
         }
     }
 }

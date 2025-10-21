@@ -3,21 +3,25 @@ using UnityEngine.Events;
 
 namespace GMS.Code.UI.MainPanel
 {
-    public class BarUI : MonoBehaviour, IUIElement<float>
+    public class BarUI : MonoBehaviour, IUIElement<float, UnityAction>
     {
         [SerializeField] private RectTransform fillRect;
+        private UnityAction _action;
         private float _maxTime;
 
-        public void EnableForUI(float maxTime)
+        public void EnableForUI(float maxTime, UnityAction callback)
         {
             _maxTime = maxTime;
             gameObject.SetActive(true);
+            _action = callback;
         }
 
         public void UpdateUI(float currentTime)
         {
+
             float newWidth = currentTime / _maxTime;
-            Debug.Log("UPDATE : " + newWidth);
+            if (newWidth >= 1 - Mathf.Epsilon)
+                _action?.Invoke();
             fillRect.localScale = new Vector2(newWidth, 1);
         }
 
