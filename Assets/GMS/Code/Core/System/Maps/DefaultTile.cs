@@ -20,7 +20,7 @@ namespace GMS.Code.Core.System.Maps
         [SerializeField] private TileAnimator animator;
         [SerializeField] private List<GhostTile> ghostTiles = new List<GhostTile>();
 
-        public virtual void Init(TileInformation myInfo, ResourceContainer resourceContainer, TileManager tileManager)
+        public virtual void Init(TileInformation myInfo, ResourceContainer resourceContainer, TileManager tileManager, bool isBuy = false)
         {
             TileInfo = myInfo;
             _resourceContainer = resourceContainer;
@@ -33,6 +33,9 @@ namespace GMS.Code.Core.System.Maps
                 ghost.Init(_resourceContainer,_tileManager,TileInfo);
             }
             _startYPos = transform.position.y;
+
+            if(isBuy)
+                OnClick();
         }
 
         public virtual void OnDestroy()
@@ -93,7 +96,9 @@ namespace GMS.Code.Core.System.Maps
         {
             if (TileInfo.x == evt.x && TileInfo.z == evt.z) return;
             _isSelect = false;
-            Bus<TileUnSelectEvent>.Raise(new TileUnSelectEvent(TileInfo,true));
+            Bus<TileUnSelectEvent>.Raise(new TileUnSelectEvent(TileInfo, true));
+            animator.SetMaterial(false);
+            transform.DOMoveY(_startYPos, 0.2f);
             DisableAllGhost();
             Bus<TileBuyEvent>.OnEvent -= HandleBuyTileEvent;
         }
