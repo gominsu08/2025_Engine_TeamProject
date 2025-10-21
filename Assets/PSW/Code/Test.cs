@@ -8,16 +8,19 @@ using UnityEngine.InputSystem;
 public class Test : MonoBehaviour
 {
     [SerializeField] private ResourceContainer resourceContainer;
-    [SerializeField] private ItemSO keyItem;
-    private void Start()
-    {
-        resourceContainer.PlusCoin(10);
-        resourceContainer.PlusCoin(10);
-    }
+    [SerializeField] private ItemSO key1Item;
+    [SerializeField] private ItemSO key2Item;
+    [SerializeField] private ItemSO key3Item;
+    [SerializeField] private int testValue;
+
 
     private void Update()
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
-            resourceContainer.PlusCoin(10);
+        {
+            resourceContainer.PlusItem(key1Item, testValue);
+            resourceContainer.PlusItem(key2Item, testValue);
+            resourceContainer.PlusItem(key3Item, testValue);
+        }
     }
 }
