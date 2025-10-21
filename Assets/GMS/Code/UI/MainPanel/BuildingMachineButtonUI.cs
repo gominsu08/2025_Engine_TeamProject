@@ -1,7 +1,8 @@
-﻿using Assets.GMS.Code.Core.System.Machine;
+﻿using GMS.Code.Core.System.Machines;
 using GMS.Code.UI;
 using GMS.Code.UI.MainPanel;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -13,7 +14,7 @@ namespace Assets.GMS.Code.UI.MainPanel
         [SerializeField] private ButtonUI button;
         [SerializeField] private TextUI text;
         [SerializeField] private IconUI icon;
-        [SerializeField] private MachinceSO machineSO;
+        [SerializeField] private MachineSO machineSO;
         [SerializeField] private Color disableColor, defaultColor;
         private RectTransform MyRect => transform as RectTransform;
         private ToolBarUIData _toolBarUIData;
