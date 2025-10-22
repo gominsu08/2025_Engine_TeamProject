@@ -7,6 +7,7 @@ using TMPro;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace PSW.Code.Sale
 {
@@ -19,6 +20,7 @@ namespace PSW.Code.Sale
         [SerializeField] private GameObject saleBoxPrefab;
         [SerializeField] private Transform boxTrm;
         public UnityEvent OnSaleEvent { private set; get; } = new ();
+        public UnityEvent OnResetEvent { private set; get; } = new ();
 
         private int addCoin = 0;
 
@@ -34,11 +36,19 @@ namespace PSW.Code.Sale
             }
         }
 
+        public void ResetAddCoin()
+        {
+            OnResetEvent?.Invoke();
+            addCoin = 0;
+            coinText.text = addCoin.ToString();
+        }
+
         public void Sale()
         {
             OnSaleEvent?.Invoke();
             resourceContainer.PlusCoin(addCoin);
             addCoin = 0;
+            coinText.text = addCoin.ToString();
         }
 
         public void SetAddCoin(int coin)

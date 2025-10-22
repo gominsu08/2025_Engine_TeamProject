@@ -35,12 +35,17 @@ namespace PSW.Code.Sawtooth
             transform.SetParent(parent, true);
         }
 
-        public void SawtoothStop()
+        public void SawtoothStop(bool isStopAll = true)
         {
             _isEndRotation = true;
-            StopAllCoroutines();
-            DOTween.KillAll(gameObject);
-            sawtoothSystemList.ForEach(v => v.SawtoothStop());
+
+            if(isStopAll)
+            {
+                StopAllCoroutines();
+                DOTween.KillAll(gameObject);
+            }
+            _isStopRotation = true;
+            sawtoothSystemList.ForEach(v => v.SawtoothStop(isStopAll));
         }
 
         public bool GetIsStopRotation() => _isStopRotation;

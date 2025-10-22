@@ -26,7 +26,8 @@ public class SaleBox : MonoBehaviour
     {
         _thisItem = item;
         _panel = panel;
-        panel.OnSaleEvent.AddListener(NullText);
+        panel.OnSaleEvent.AddListener(SaleItem);
+        panel.OnResetEvent.AddListener(ResetItem);
         _resourceContainer = resourceContainer;
 
         icon.sprite = item.icon;
@@ -59,12 +60,10 @@ public class SaleBox : MonoBehaviour
             }
             else
             {
-                _panel.SetAddCoin(-(int)(currentText - _currentCount) * _thisItem.sellMoney);
-
+                _panel.SetAddCoin(-((int)(_currentCount - currentText) * _thisItem.sellMoney));
             }
 
-
-                _currentCount = currentText;
+            _currentCount = currentText;
             inputField.text = currentText.ToString();
         }
         else
@@ -72,6 +71,18 @@ public class SaleBox : MonoBehaviour
             _panel.SetAddCoin(-(int)_currentCount * _thisItem.sellMoney);
             NullText();
         }
+    }
+
+    private void SaleItem()
+    {
+        _resourceContainer.MinusItem(_thisItem,(int)_currentCount);
+        ResetItem();
+    }
+
+    private void ResetItem()
+    {
+        _currentCount = 0;
+        NullText();
     }
 
     private void NullText()

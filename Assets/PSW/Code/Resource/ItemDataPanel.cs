@@ -83,7 +83,10 @@ namespace PSW.Code.Resource
             if (_moveCount < time && _moveCount > 0)
                 StartCoroutine(PopDownPanel());
             else
-                rootSawtooth.SawtoothStop();
+            {
+                rootSawtooth.SawtoothStop(false);
+                rootSawtooth.ResetSawtooth();
+            }
         }
 
     }
