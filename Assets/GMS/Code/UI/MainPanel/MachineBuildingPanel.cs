@@ -1,12 +1,10 @@
-﻿using Assets.GMS.Code.UI.MainPanel;
-using GMS.Code.Core;
+﻿using GMS.Code.Core;
 using GMS.Code.Core.Events;
 using GMS.Code.Core.System.Machines;
 using GMS.Code.Core.System.Maps;
 using PSW.Code.Container;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace GMS.Code.UI.MainPanel
 {
@@ -51,7 +49,6 @@ namespace GMS.Code.UI.MainPanel
             foreach (BuildingMachineButtonUI machineButton in machineBuildingButton)
                 machineButton.EnableForUI(HandleMachineBuild, _targetTier);
             gameObject.SetActive(true);
-
         }
 
         public void HandleMachineBuild(Tier tier, List<ItemAndValuePair> list)
