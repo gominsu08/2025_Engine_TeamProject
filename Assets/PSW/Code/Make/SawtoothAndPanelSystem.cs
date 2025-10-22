@@ -102,17 +102,20 @@ namespace PSW.Code.Make
             Disable();
             MachineType typeEnum = machineManager.IsMachineType(info);
 
-            if (typeEnum == MachineType.None)
+            if(_isLeft == false)
             {
-                buildingMachinePanel.EnableForUI(info.item, info);
-            }
-            else if (typeEnum == MachineType.Brazier)
-            {
-                //화로UI
-            }
-            else
-            {
-                miningPanel.EnableForUI(info.item, info);
+                if (typeEnum == MachineType.None)
+                {
+                    buildingMachinePanel.EnableForUI(info.item, info);
+                }
+                else if (typeEnum == MachineType.Brazier)
+                {
+                    //화로UI
+                }
+                else
+                {
+                    miningPanel.EnableForUI(info.item, info);
+                }
             }
 
             //if (_prevSelectTile != null && !(TileUtill.IsSame(info, _prevSelectTile)))
