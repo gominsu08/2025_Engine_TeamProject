@@ -73,7 +73,7 @@ namespace GMS.Code.UI.MainPanel
             }
             else
             {
-                for (int i = 0; i < _machineSO.itemList.Count; i++)
+                for (int i = 0; i < list.Count; i++)
                 {
                     if (list[i] == false)
                         childPanels[i].ChangeColor();
