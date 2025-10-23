@@ -37,8 +37,8 @@ namespace PSW.Code.TimeSystem
             }
             else if (Time.time - _startTime > oneDayTime)
             {
-                Bus<OneDayTimeEvent>.Raise(_oneDayTimeEvent);
                 _oneDayTimeEvent.Day = ++day;
+                Bus<OneDayTimeEvent>.Raise(_oneDayTimeEvent);
                 print("하루 지남");
                 _startTime = Time.time;
                 _isOneDelivery = false;

@@ -85,6 +85,7 @@ namespace PSW.Code.Resource
             else
             {
                 rootSawtooth.SawtoothStop(false);
+                rootSawtooth.ResetSawtooth();
             }
         }
 

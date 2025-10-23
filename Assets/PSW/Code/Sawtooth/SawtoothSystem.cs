@@ -27,6 +27,7 @@ namespace PSW.Code.Sawtooth
 
             _rotationValue *= isLeft ? 1 : -1;
 
+            StopAllCoroutines();
             StartCoroutine(SetTime());
             sawtoothSystemList.ForEach(v => v.StartSawtooth(time, !isLeft, parent));
 
@@ -44,6 +45,7 @@ namespace PSW.Code.Sawtooth
                 StopAllCoroutines();
                 DOTween.KillAll(gameObject);
             }
+
             _isStopRotation = true;
             sawtoothSystemList.ForEach(v => v.SawtoothStop(isStopAll));
         }

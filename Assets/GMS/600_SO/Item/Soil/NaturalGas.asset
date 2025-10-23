@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NaturalGas
   m_EditorClassIdentifier: 
   itemName: "\uCC9C\uC5F0\uAC00\uC2A4"
-  icon: {fileID: 21300000, guid: 3f720443075ce8846ad754010f5b6d1c, type: 3}
+  icon: {fileID: 21300000, guid: c230e2f0b69820846a3ee38a9b4a4af1, type: 3}
   isStackable: 1
   maxStack: 99
   sellMoney: 1200
