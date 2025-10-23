@@ -15,9 +15,6 @@ namespace PSW.Code.Payment
         [SerializeField] private float popUpValue;
         [SerializeField] private float timeValue;
 
-        [SerializeField] private TextMeshProUGUI _coinText;
-        private int _deliveryCoin = 1000;
-
         private WaitForSeconds wait = new WaitForSeconds(0.5f);
 
         private float _moveValue;
@@ -27,7 +24,6 @@ namespace PSW.Code.Payment
         private void Start()
         {
             Bus<PaymentTimeEvent>.OnEvent += PopUp;
-            Bus<OneDayTimeEvent>.OnEvent += PopDown;
             _targetMoveValue = transform.localPosition.y;
             _moveValue = popUpValue / timeValue;
         }
@@ -37,11 +33,7 @@ namespace PSW.Code.Payment
             sawtoothSystem.StartSawtooth(timeValue,true,transform);
             StartCoroutine(PaymentPopUpTime(true));
         }
-        private void PopDown(OneDayTimeEvent evt)
-        {
-            sawtoothSystem.StartSawtooth(timeValue, false, transform);
-            StartCoroutine(PaymentPopUpTime(false));
-        }
+
         private IEnumerator PaymentPopUpTime(bool _isUp)
         {
             if (_isUp == false)

@@ -7354,7 +7354,7 @@ GameObject:
   - component: {fileID: 1801386558}
   - component: {fileID: 1801386557}
   m_Layer: 5
-  m_Name: InPanel
+  m_Name: PaymentDataPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8301,7 +8301,6 @@ MonoBehaviour:
   sawtoothSystem: {fileID: 1327642653}
   popUpValue: 325
   timeValue: 6
-  _coinText: {fileID: 0}
 --- !u!224 &1951865336 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8888645342150099266, guid: 80d27ffef75f59e43b1c0fc3224b1528, type: 3}

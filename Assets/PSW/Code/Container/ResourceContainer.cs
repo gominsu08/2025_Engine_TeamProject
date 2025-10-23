@@ -10,7 +10,7 @@ namespace PSW.Code.Container
     {
         [SerializeField] private int maxCoin = 999999;
 
-        private ChangeCoin _changeCoin;
+        private ChangeCoinEvent _changeCoin;
         private ChangeItem _changeItem;
 
         private Dictionary<ItemSO, int> _resourceCountDic = new Dictionary<ItemSO, int>();
@@ -48,7 +48,7 @@ namespace PSW.Code.Container
         {
             _coin = Mathf.Clamp(_coin + coin, 0, maxCoin);
             _changeCoin.coin = _coin;
-            Bus<ChangeCoin>.Raise(_changeCoin);
+            Bus<ChangeCoinEvent>.Raise(_changeCoin);
         }
         public void PlusCoin(int plusCoin)
         {
@@ -84,7 +84,7 @@ namespace PSW.Code.Container
         }
     }
 
-    public struct ChangeCoin : IEvent { public int coin; }
+    public struct ChangeCoinEvent : IEvent { public int coin; }
     public struct ChangeItem : IEvent 
     {
         public ItemSO KeyItem;
