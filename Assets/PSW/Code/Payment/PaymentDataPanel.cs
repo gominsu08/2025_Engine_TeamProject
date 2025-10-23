@@ -10,12 +10,19 @@ namespace PSW.Code.Payment
     {
         [SerializeField] private ResourceContainer resourceContainer;
         [SerializeField] private TextMeshProUGUI _coinText;
+
+        [SerializeField] private int lastDay = 7;
         [SerializeField] private int oneDayPlusCoin = 1000;
 
         [SerializeField] private Color notTargetCoinColor;
-        private int _dDayPaymentCoin;
 
+        private PaymentEndEvent paymentEndEvent;
+        private GameWinEvent gameWinEvent;
+
+        private int _dDayPaymentCoin;
+        
         private bool _isNotPayment;
+        private bool _isLastDay;
 
         private void Start()
         {
@@ -34,6 +41,8 @@ namespace PSW.Code.Payment
 
         private void OneDay(OneDayTimeEvent evt)
         {
+            if (evt.Day >= lastDay) _isLastDay = true;
+
             if(_isNotPayment)
             {
                 GameOverEvent gameOver = new GameOverEvent();
@@ -45,6 +54,19 @@ namespace PSW.Code.Payment
         private void ChangeCoin(ChangeCoinEvent evt)
         {
             SetTargetCoinText();
+        }
+
+        public void PaymentButtonClick()
+        {
+            if (resourceContainer.IsTargetCoin(_dDayPaymentCoin))
+            {
+                if(_isLastDay)
+                    Bus<GameWinEvent>.Raise(gameWinEvent);
+                
+                resourceContainer.MinusCoin(_dDayPaymentCoin);
+                Bus<PaymentEndEvent>.Raise(paymentEndEvent);
+                _isNotPayment = false;
+            }
         }
 
         private void SetTargetCoinText()
@@ -63,4 +85,5 @@ namespace PSW.Code.Payment
     }
 
     public struct GameWinEvent : IEvent { };
+    public struct PaymentEndEvent : IEvent { };
 }

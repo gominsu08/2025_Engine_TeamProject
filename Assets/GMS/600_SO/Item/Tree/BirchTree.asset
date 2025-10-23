@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BirchTree
   m_EditorClassIdentifier: 
   itemName: "\uC790\uC791\uB098\uBB34"
-  icon: {fileID: 21300000, guid: 467063edaddee1245bea7aea0ba649b9, type: 3}
+  icon: {fileID: 21300000, guid: 4b37880c6f42cc94794f438917708a49, type: 3}
   isStackable: 1
   maxStack: 99
   sellMoney: 4500

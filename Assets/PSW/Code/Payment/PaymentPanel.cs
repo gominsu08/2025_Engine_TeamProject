@@ -24,8 +24,15 @@ namespace PSW.Code.Payment
         private void Start()
         {
             Bus<PaymentTimeEvent>.OnEvent += PopUp;
+            Bus<PaymentEndEvent>.OnEvent += PopDown;
             _targetMoveValue = transform.localPosition.y;
             _moveValue = popUpValue / timeValue;
+        }
+
+        private void PopDown(PaymentEndEvent evt)
+        {
+            sawtoothSystem.StartSawtooth(timeValue, false, transform);
+            StartCoroutine(PaymentPopUpTime(false));
         }
 
         private void PopUp(PaymentTimeEvent evt)
@@ -53,7 +60,7 @@ namespace PSW.Code.Payment
             if (_moveCount < timeValue && _moveCount > 0)
                 StartCoroutine(PaymentPopUpTime(_isUp));
             else
-                sawtoothSystem.SawtoothStop();
+                sawtoothSystem.SawtoothStop(false);
         }
 
 
