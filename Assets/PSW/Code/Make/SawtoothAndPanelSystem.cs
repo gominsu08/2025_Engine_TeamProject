@@ -66,10 +66,10 @@ namespace PSW.Code.Make
             RefreshUI(evt.info);
         }
 
-        private async void HandleTileUnSelectEvent(TileUnSelectEvent evt)
+        private void HandleTileUnSelectEvent(TileUnSelectEvent evt)
         {
             if ((_prevSelectTile != null && !(TileUtill.IsSame(evt.tileInfo, _prevSelectTile))) || evt.isBuy) return;
-            await WaitPanel();
+            Disable();
             _prevSelectTile = null;
         }
 
