@@ -15,6 +15,7 @@ namespace GMS.Code.UI.MainPanel
         private RectTransform MyRect => transform as RectTransform;
         private ToolBarUI _toolBarUI;
         private ToolBarUIData _toolBarUIData;
+        private bool _isNotToolBar;
 
         public virtual void DisableUI()
         {
@@ -25,9 +26,10 @@ namespace GMS.Code.UI.MainPanel
             gameObject.SetActive(false);
         }
 
-        public void Init(ToolBarUI toolBarUI)
+        public void Init(ToolBarUI toolBarUI, bool isNotToolBar = false)
         {
             _toolBarUI = toolBarUI;
+            _isNotToolBar = isNotToolBar;
         }
 
         public virtual void EnableForUI( ToolBarUIData toolBarUIData, Action callback)
@@ -46,7 +48,7 @@ namespace GMS.Code.UI.MainPanel
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (button.enabled == false) return;
+            if (button.enabled == false || _isNotToolBar) return;
             Vector2 position = new Vector2(MyRect.position.x - MyRect.sizeDelta.x/2, MyRect.position.y + MyRect.sizeDelta.y/2);
 
             _toolBarUI.EnableForUI(position, _toolBarUIData);
@@ -54,6 +56,7 @@ namespace GMS.Code.UI.MainPanel
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (_isNotToolBar) return;
             _toolBarUI.DisableUI();
         }
     }

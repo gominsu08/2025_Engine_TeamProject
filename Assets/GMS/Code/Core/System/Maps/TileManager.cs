@@ -52,6 +52,104 @@ namespace GMS.Code.Core.System.Maps
         }
     }
 
+    public class TileContainer
+    {
+        private int _startTileCreateCount = 0;
+        private DefaultTile _tile;
+        private DefaultTile _treeTile;
+        private List<DefaultTile> _startTile = new List<DefaultTile>();
+        private List<DefaultTile> _tierOneTiles = new List<DefaultTile>();
+        private List<DefaultTile> _tierTwoTiles = new List<DefaultTile>();
+        private List<DefaultTile> _tierThreeTiles = new List<DefaultTile>();
+
+        public DefaultTile GetRandomTile(int curTileCount)
+        {
+            if (curTileCount < 35)
+                return _tierOneTiles[Random.Range(0, _tierOneTiles.Count)];
+            else if (curTileCount < 65)
+            {
+                DefaultTile _1tile = _tierOneTiles[Random.Range(0, _tierOneTiles.Count)];
+                DefaultTile _2tile = _tierTwoTiles[Random.Range(0, _tierTwoTiles.Count)];
+
+                if (Random.value > 0.5f)
+                    return _1tile;
+                else
+                    return _2tile;
+            }
+            else
+            {
+                DefaultTile _1tile = _tierOneTiles[Random.Range(0, _tierOneTiles.Count)];
+                DefaultTile _2tile = _tierTwoTiles[Random.Range(0, _tierTwoTiles.Count)];
+                DefaultTile _3tile = _tierThreeTiles[Random.Range(0, _tierThreeTiles.Count)];
+
+                DefaultTile selectTile;
+                float randomValue = Random.value;
+                if (randomValue < 0.2f)
+                {
+                    selectTile = _1tile;
+                }
+                else if (randomValue <( curTileCount > 100 ? 0.7f : 0.5f))
+                {
+                    selectTile = _2tile;
+                }
+                else
+                {
+                    selectTile = _3tile;
+                }
+
+                return selectTile;
+            }
+        }
+
+        public DefaultTile GetStartTile()
+        {
+            _startTileCreateCount++;
+            return _startTile[_startTileCreateCount - 1];
+        }
+
+        public void StartTileSet()
+        {
+            _startTile.Add(_tile);
+            _startTile.Add(_tile);
+            _startTile.Add(_treeTile);
+            _startTile.Add(_tile);
+            _startTile.Add(_tile);
+            _startTile.Add(_treeTile);
+            _startTile.Add(_tile);
+            _startTile.Add(_tile);
+            _startTile.Add(_treeTile);
+        }
+
+        public TileContainer(List<DefaultTile> tilePrefabs)
+        {
+            foreach (DefaultTile tile in tilePrefabs)
+            {
+                if (!(tile is ResourceTile resourceTile))
+                {
+                    _tile = tile;
+                    continue;
+                }
+
+                else if (resourceTile.GetResourceItem().tier == UI.MainPanel.Tier.FirstTier)
+                {
+                    _tierOneTiles.Add(tile);
+                    if (resourceTile.GetResourceItem().itemType == ItemType.Tree)
+                        _treeTile = tile;
+                }
+                else if (resourceTile.GetResourceItem().tier == UI.MainPanel.Tier.SecondTier)
+                {
+                    _tierTwoTiles.Add(tile);
+                }
+                else if (resourceTile.GetResourceItem().tier == UI.MainPanel.Tier.ThirdTier)
+                {
+                    _tierThreeTiles.Add(tile);
+                }
+            }
+
+            StartTileSet();
+        }
+    }
+
     public class TileManager : MonoBehaviour
     {
         public int TileBuyPrice => 1000 + ((_tileCount - initialTileCount) * 200);
@@ -60,10 +158,12 @@ namespace GMS.Code.Core.System.Maps
         [SerializeField] private ResourceContainer resourceContainer;
         [SerializeField] private int initialTileCount = 9;
         private List<TileInformation> tiles = new List<TileInformation>();
+        private TileContainer _tileContainer;
         private int _tileCount = 0;
 
         private void Awake()
         {
+            _tileContainer = new TileContainer(TilePrefabs);
             StartTileSet();
             Bus<TileBuyEvent>.OnEvent += HandleBuyTileEvent;
         }
@@ -125,7 +225,7 @@ namespace GMS.Code.Core.System.Maps
 
         private void CreateTile(TileInformation tileInfo, bool isStartTileSet = false)
         {
-            DefaultTile tile = Instantiate(GetTilePrefab(), new Vector3(tileInfo.x, 0, tileInfo.z), Quaternion.identity);
+            DefaultTile tile = Instantiate(GetTilePrefab(isStartTileSet), new Vector3(tileInfo.x, 0, tileInfo.z), Quaternion.identity);
             if (tile is ResourceTile resourceTile)
                 tileInfo.item = resourceTile.GetResourceItem();
             tile.name = $"Tile {tileInfo.x} {tileInfo.z}";
@@ -149,18 +249,21 @@ namespace GMS.Code.Core.System.Maps
                 {1, -1  },
                 {1, 1   },
             };
-            
-            for(int i = 0; i < 9; i++)
+
+            for (int i = 0; i < 9; i++)
             {
-                TileInformation result = CreateTileInfo(startTilePos[i,0], startTilePos[i, 1]);
+                TileInformation result = CreateTileInfo(startTilePos[i, 0], startTilePos[i, 1]);
                 CreateTile(result, true);
                 tiles.Add(result);
             }
         }
 
-        private DefaultTile GetTilePrefab()
+        private DefaultTile GetTilePrefab(bool isStartTileSet)
         {
-            return TilePrefabs[UnityEngine.Random.Range(0, TilePrefabs.Count)];
+            if (isStartTileSet == false)
+                return _tileContainer.GetRandomTile(_tileCount);
+            else
+                return _tileContainer.GetStartTile();
         }
 
         public TileInformation GetTileInfo(int x, int z)

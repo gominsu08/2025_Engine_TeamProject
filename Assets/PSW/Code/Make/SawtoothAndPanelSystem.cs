@@ -61,9 +61,9 @@ namespace PSW.Code.Make
             Disable();
         }
 
-        private async void RefreshUI(UIRefreshEvent evt)
+        private void RefreshUI(UIRefreshEvent evt)
         {
-            await RefreshUI(evt.info);
+            RefreshUI(evt.info);
         }
 
         private async void HandleTileUnSelectEvent(TileUnSelectEvent evt)
@@ -92,35 +92,38 @@ namespace PSW.Code.Make
             }
         }
 
-        private async void HandleTileSelectEvent(TileSelectEvent evt)
+        private void HandleTileSelectEvent(TileSelectEvent evt)
         {
-            await RefreshUI(evt.tileInfo);
+            RefreshUI(evt.tileInfo);
         }
 
-        public async Task RefreshUI(TileInformation info)
+        public void RefreshUI(TileInformation info)
         {
             Disable();
             MachineType typeEnum = machineManager.IsMachineType(info);
 
-            if (typeEnum == MachineType.None)
+            if(_isLeft == false)
             {
-                buildingMachinePanel.EnableForUI(info.item, info);
-            }
-            else if (typeEnum == MachineType.Brazier)
-            {
-                //화로UI
-            }
-            else
-            {
-                miningPanel.EnableForUI(info.item, info);
+                if (typeEnum == MachineType.None)
+                {
+                    buildingMachinePanel.EnableForUI(info.item, info);
+                }
+                else if (typeEnum == MachineType.Brazier)
+                {
+                    //화로UI
+                }
+                else
+                {
+                    miningPanel.EnableForUI(info.item, info);
+                }
             }
 
-            if (_prevSelectTile != null && !(TileUtill.IsSame(info, _prevSelectTile)))
-            {
-                _prevSelectTile = info;
-                return;
-            }
-            await WaitPanel(true, info, typeEnum);
+            //if (_prevSelectTile != null && !(TileUtill.IsSame(info, _prevSelectTile)))
+            //{
+            //    _prevSelectTile = info;
+            //    return;
+            //}
+            //await WaitPanel(true, info, typeEnum);
 
             _prevSelectTile = info;
         }

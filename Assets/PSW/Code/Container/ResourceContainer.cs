@@ -16,6 +16,11 @@ namespace PSW.Code.Container
         private Dictionary<ItemSO, int> _resourceCountDic = new Dictionary<ItemSO, int>();
         private int _coin = 0;
 
+        private void Start()
+        {
+            PlusCoin(5000);
+        }
+
         private void SetItem(ItemSO keyItem, int count)
         {
             if (_resourceCountDic.TryGetValue(keyItem, out int countValue))

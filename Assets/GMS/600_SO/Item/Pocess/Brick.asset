@@ -16,7 +16,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: d3eaa135d4aa49c41879a49ce8764536, type: 3}
   isStackable: 1
   maxStack: 99
-  sellMoney: 5000
+  sellMoney: 500
   itemType: 4
   machineType: 1
   tier: 2

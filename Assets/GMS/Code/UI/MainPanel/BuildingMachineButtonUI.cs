@@ -14,6 +14,7 @@ namespace GMS.Code.UI.MainPanel
         [SerializeField] private IconUI icon;
         [SerializeField] private MachineSO machineSO;
         [SerializeField] private Color disableColor, defaultColor;
+        [SerializeField] private ResourcePopup popup;
         [SerializeField] private SawtoothSystem sawtooth;
         [SerializeField] private Transform parent;
         private RectTransform MyRect => transform as RectTransform;
@@ -36,6 +37,7 @@ namespace GMS.Code.UI.MainPanel
         public void Init(ToolBarUI toolBarUI)
         {
             _toolBarUI = toolBarUI;
+            popup.Init(machineSO);
         }
 
         public void EnableForUI(UnityAction<Tier, List<ItemAndValuePair>> callback, Tier targetTier)
@@ -43,7 +45,8 @@ namespace GMS.Code.UI.MainPanel
             _targetTier = targetTier;
             _callback = callback;
             _toolBarUIData = new ToolBarUIData(machineSO.Description);
-            button.Init(_toolBarUI);
+            button.Init(_toolBarUI,true);
+            popup.DisableUI();
 
             if ((int)targetTier > (int)machineSO.machineTier)
             {
@@ -71,12 +74,8 @@ namespace GMS.Code.UI.MainPanel
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (!_isEnable) return;
-
-            sawtooth.StartSawtooth(10,true,parent);
-
-            Vector2 position = new Vector2(MyRect.position.x - MyRect.sizeDelta.x / 2, MyRect.position.y + MyRect.sizeDelta.y / 2);
-
-            _toolBarUI.EnableForUI(position, _toolBarUIData);
+            sawtooth.StartSawtooth(10, true, parent);
+            popup.EnableForUI();
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -84,8 +83,9 @@ namespace GMS.Code.UI.MainPanel
             if (!_isEnable) return;
 
             sawtooth.SawtoothStop();
+            sawtooth.KillDOTween();
             sawtooth.ResetSawtooth();
-            _toolBarUI.DisableUI();
+            popup.DisableUI();
         }
     }
 }

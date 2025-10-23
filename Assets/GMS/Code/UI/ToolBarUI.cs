@@ -17,13 +17,16 @@ namespace GMS.Code.UI
     public class ToolBarUI : MonoBehaviour, IUIElement<Vector2, ToolBarUIData>
     {
         [SerializeField] private TextMeshProUGUI textUI;
-        private RectTransform _myRect => transform as RectTransform;
+        private RectTransform MyRect => transform as RectTransform;
         private ToolBarUIData _data;
         private Vector2 _position;
 
         public void DisableUI()
         {
             textUI.SetText(string.Empty);
+            MyRect.sizeDelta = new Vector2(200,60);
+            _position = Vector2.zero;
+            _data = new ToolBarUIData(string.Empty  );
             gameObject.SetActive(false);
         }
 
@@ -38,10 +41,11 @@ namespace GMS.Code.UI
         public void TextSet()
         {
             textUI.SetText(_data.text);
-            _myRect.anchoredPosition = _position;
+            textUI.UpdateMeshPadding();
+            MyRect.anchoredPosition = _position;
             float lineCount = textUI.textInfo.lineCount;
             float textLenght = textUI.text.Length;
-            _myRect.sizeDelta = new Vector2((textLenght) * 20f / 2 + 20 / lineCount, textUI.textInfo.lineCount * 60);
+            MyRect.sizeDelta = new Vector2((textLenght) * 20f + 20, 60);
         }
     }
 }
