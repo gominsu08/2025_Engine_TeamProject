@@ -11,10 +11,10 @@ public class TextPanel : MonoBehaviour
 
     private void Awake()
     {
-        Bus<TimeEvent>.OnEvent += Text;
+        Bus<PaymentTimeEvent>.OnEvent += Text;
     }
 
-    public async void Text(TimeEvent time)
+    public async void Text(PaymentTimeEvent time)
     {
         transform.DOScale(Vector3.one, 0.5f);
         panelText.text = "납품시간입니다.";

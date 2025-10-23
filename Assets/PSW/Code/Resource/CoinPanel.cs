@@ -11,10 +11,10 @@ namespace PSW.Code.Resource
 
         private void Start()
         {
-            Bus<ChangeCoin>.OnEvent += SetCoinText;
+            Bus<ChangeCoinEvent>.OnEvent += SetCoinText;
         }
 
-        private void SetCoinText(ChangeCoin evt)
+        private void SetCoinText(ChangeCoinEvent evt)
         {
             coinText.text = evt.coin.ToString();
         }

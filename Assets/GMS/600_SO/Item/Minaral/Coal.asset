@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Coal
   m_EditorClassIdentifier: 
   itemName: "\uC11D\uD0C4"
-  icon: {fileID: 21300000, guid: d1e047d3aebfb0746bc2674ef610a75a, type: 3}
+  icon: {fileID: 21300000, guid: 07472660867ede64b8854e1450fc2c6d, type: 3}
   isStackable: 1
   maxStack: 99
   sellMoney: 2500
