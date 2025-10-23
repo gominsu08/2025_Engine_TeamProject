@@ -35,7 +35,7 @@ namespace PSW.Code.Sawtooth
             transform.SetParent(parent, true);
         }
 
-        public void SawtoothStop(bool isStopAll = true)
+        public void SawtoothStop(bool isStopAll = false)
         {
             _isEndRotation = true;
 

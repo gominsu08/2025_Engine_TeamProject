@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1203887581150462942}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.35}
+  m_LocalPosition: {x: 0, y: 0, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4887,6 +4887,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2861402669860577352}
     m_Modifications:
+    - target: {fileID: 337140601064004218, guid: 53e64f22451d64d4c9e7618c50eb58a3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9f986679294230040b7c1b8bbd4e2590, type: 2}
     - target: {fileID: 4025738010596081194, guid: 53e64f22451d64d4c9e7618c50eb58a3, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -4907,6 +4911,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6201972035303963694, guid: 53e64f22451d64d4c9e7618c50eb58a3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9f986679294230040b7c1b8bbd4e2590, type: 2}
+    - target: {fileID: 6497426024961662045, guid: 53e64f22451d64d4c9e7618c50eb58a3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9f986679294230040b7c1b8bbd4e2590, type: 2}
+    - target: {fileID: 6959083569485504229, guid: 53e64f22451d64d4c9e7618c50eb58a3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9f986679294230040b7c1b8bbd4e2590, type: 2}
     - target: {fileID: 7208446948686651127, guid: 53e64f22451d64d4c9e7618c50eb58a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.222
@@ -4947,6 +4963,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8064808348430121590, guid: 53e64f22451d64d4c9e7618c50eb58a3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9f986679294230040b7c1b8bbd4e2590, type: 2}
     - target: {fileID: 8503673330646481607, guid: 53e64f22451d64d4c9e7618c50eb58a3, type: 3}
       propertyPath: m_Name
       value: CutTree

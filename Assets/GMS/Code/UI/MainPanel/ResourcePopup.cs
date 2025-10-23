@@ -25,8 +25,6 @@ namespace GMS.Code.UI.MainPanel
                 foreach (var child in childPanels)
                     child.DisableUI();
             }
-            panel.DOKill();
-            MyRect.DOKill();
             panel.DOSizeDelta(new Vector2(panel.sizeDelta.x, _startY), 0.2f);
             MyRect.DOSizeDelta(new Vector2(panel.sizeDelta.x, _startY), 0.2f).OnComplete(() => gameObject.SetActive(false));
 
@@ -36,9 +34,6 @@ namespace GMS.Code.UI.MainPanel
         public void EnableForUI()
         {
             Bus<MachineBuildingFailEvent>.OnEvent += HandleMachineBuildingFailEvent;
-
-            panel.DOKill();
-            MyRect.DOKill();
             gameObject.SetActive(true);
 
             if (!_machineSO.isMoney)
@@ -46,6 +41,8 @@ namespace GMS.Code.UI.MainPanel
                 for (int i = 0; i < _machineSO.itemList.Count; i++)
                 {
                     childPanels[i].EnableForUI(_machineSO.itemList[i].itemSO, _machineSO.itemList[i].value);
+
+                    childPanels[i].SetColor(Color.white);
                 }
             }
 
@@ -54,6 +51,7 @@ namespace GMS.Code.UI.MainPanel
 
             if (_machineSO.isMoney)
             {
+                iconUI.SetColor(Color.white);
                 moneyTextUI.SetColor(Color.white);
             }
         }
@@ -73,11 +71,13 @@ namespace GMS.Code.UI.MainPanel
                     iconUI.SetColor(Color.white);
                 });
             }
-
-            for (int i = 0; i < _machineSO.itemList.Count; i++)
+            else
             {
-                if (list[i] == false)
-                    childPanels[i].ChangeColor();
+                for (int i = 0; i < _machineSO.itemList.Count; i++)
+                {
+                    if (list[i] == false)
+                        childPanels[i].ChangeColor();
+                }
             }
         }
 

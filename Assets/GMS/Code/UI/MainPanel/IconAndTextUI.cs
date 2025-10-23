@@ -44,5 +44,11 @@ namespace GMS.Code.UI.MainPanel
                 icon.SetColor(Color.white);
             });
         }
+
+        public void SetColor(Color color)
+        {
+            text.SetColor(color);
+            icon.SetColor(color);
+        }
     }
 }
