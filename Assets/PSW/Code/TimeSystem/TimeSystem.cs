@@ -11,10 +11,16 @@ namespace PSW.Code.TimeSystem
         [SerializeField] private float deliveryTime = 112.5f;
         [SerializeField] private Transform transformParent;
 
-        private int day = 1;
+        [SerializeField] private float minLightXValue;
+        [SerializeField] private Light directionalLight;
+
+        private bool _isMorning = true; 
+        private int _day = 1;
 
         private bool _isOneDelivery;
         private float _startTime;
+        private float _currentTime;
+
         private PaymentTimeEvent _onTimeEvent;
         private OneDayTimeEvent _oneDayTimeEvent;
 
@@ -29,20 +35,26 @@ namespace PSW.Code.TimeSystem
 
         private void Update()
         {
-            if (Time.time - _startTime > deliveryTime && _isOneDelivery == false)
+            _currentTime = Time.time - _startTime;
+            if (_currentTime > deliveryTime && _isOneDelivery == false)
             {
-                _onTimeEvent.Day = day;
+                _onTimeEvent.Day = _day;
                 Bus<PaymentTimeEvent>.Raise(_onTimeEvent);
                 _isOneDelivery = true;
             }
-            else if (Time.time - _startTime > oneDayTime)
+            else if (_currentTime > oneDayTime)
             {
-                _oneDayTimeEvent.Day = ++day;
+                _oneDayTimeEvent.Day = ++_day;
                 Bus<OneDayTimeEvent>.Raise(_oneDayTimeEvent);
                 print("하루 지남");
                 _startTime = Time.time;
                 _isOneDelivery = false;
             }
+        }
+
+        public void SetDirectionalLight()
+        {
+            //if()
         }
     }
     public struct PaymentTimeEvent : IEvent { public int Day; }
