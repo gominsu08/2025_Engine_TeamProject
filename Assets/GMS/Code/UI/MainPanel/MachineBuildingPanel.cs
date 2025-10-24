@@ -54,22 +54,25 @@ namespace GMS.Code.UI.MainPanel
         public void HandleMachineBuild(Tier tier, List<ItemAndValuePair> list)
         {
             bool isFail = false;
+            List<bool> trues = new List<bool>();
 
             if (list.Count != 0)
             {
-                foreach (ItemAndValuePair item in list)
+                for (int i = 0; i < list.Count; i++)
                 {
-                    if (!_container.IsTargetCountItem(item.itemSO, item.value))
+                    trues.Add(true);
+                    if (!_container.IsTargetCountItem(list[i].itemSO, list[i].value))
                     {
+                        trues[i] = false;
                         isFail = true;
                     }
                 }
 
                 if (isFail == false)
                 {
-                    foreach (ItemAndValuePair item in list)
+                    for (int i = 0; i < list.Count; i ++)
                     {
-                        _container.MinusItem(item.itemSO, item.value);
+                        _container.MinusItem(list[i].itemSO, list[i].value);
                     }
                     Bus<MachineBuildingEvent>.Raise(new MachineBuildingEvent(tier, machineType, _targetTileInfo));
                     Bus<UIRefreshEvent>.Raise(new UIRefreshEvent(_targetTileInfo));
@@ -79,6 +82,7 @@ namespace GMS.Code.UI.MainPanel
             {
                 if (!_container.IsTargetCoin(1700))
                 {
+                    trues.Add(false);
                     isFail = true;
                 }
 
@@ -92,7 +96,7 @@ namespace GMS.Code.UI.MainPanel
 
             if (isFail)
             {
-                //실패
+                Bus<MachineBuildingFailEvent>.Raise(new MachineBuildingFailEvent(tier, machineType, trues));
             }
         }
 

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace GMS.Code.Core
@@ -36,6 +37,7 @@ namespace GMS.Code.Core
 
         public void OnClick(InputAction.CallbackContext context)
         {
+           
             if (context.performed)
                 OnClickAction?.Invoke();
         }

@@ -54,7 +54,7 @@ public class GameEndPanel : MonoBehaviour
 
     public void RePlay()
     {
-        SceneManager.LoadScene("SW");
+        SceneManager.LoadScene("MainScene");
     }
 
     private IEnumerator MovePanel()
