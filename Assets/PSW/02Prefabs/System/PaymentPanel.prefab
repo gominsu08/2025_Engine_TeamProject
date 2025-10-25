@@ -233,7 +233,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 196, y: -20}
-  m_SizeDelta: {x: 41.71, y: 50}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6815999978259145327
 CanvasRenderer:
@@ -652,6 +652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceContainer: {fileID: 0}
   _coinText: {fileID: 2058898347838796893}
+  lastDay: 7
   oneDayPlusCoin: 1000
   notTargetCoinColor: {r: 0.6226415, g: 0.059914548, b: 0.059914548, a: 1}
 --- !u!1 &7944185758481310577

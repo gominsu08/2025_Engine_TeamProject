@@ -7,19 +7,18 @@ using UnityEngine.UI;
 
 public class SettingPanel : MonoBehaviour
 {
-    [SerializeField] private List<VolumeText> volumeTextList;
+    [SerializeField] private AudioMixer _mixer;
+    [SerializeField] private List<VolumeData> volumeTextList;
 
     private void Start()
     {
-        foreach(VolumeText text in volumeTextList)
-        {
-            print(text.Group.name);
-        }
+        foreach (VolumeData text in volumeTextList)
+            text.Init(_mixer);
     }
 }
 
 [Serializable]
-public struct VolumeText
+public struct VolumeData
 {
     public AudioMixerGroup Group;
     public TextMeshProUGUI Text;
