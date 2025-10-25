@@ -2,6 +2,7 @@ using GMS.Code.Core;
 using GMS.Code.Items;
 using PSW.Code.Container;
 using PSW.Code.Sale;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -13,14 +14,17 @@ public class SaleBox : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI countText;
     [SerializeField] private TMP_InputField inputField;
+    [SerializeField] private OneClickCoinButton startOneClickCoinButton;
 
     private ItemSO _thisItem;
     private SalePanel _panel;
     private ResourceContainer _resourceContainer;
 
+    private List<OneClickCoinButton> oneClickCoinButtonList;
+
     private int _currentMaxCount;
     private long _currentCount;
-    private bool _isSetText;
+    private int _addCointValue;
 
     public void Init(ItemSO item, SalePanel panel, ResourceContainer resourceContainer)
     {
@@ -29,6 +33,12 @@ public class SaleBox : MonoBehaviour
         panel.OnSaleEvent.AddListener(SaleItem);
         panel.OnResetEvent.AddListener(ResetItem);
         _resourceContainer = resourceContainer;
+
+        GetComponentsInChildren<PlusMinusButton>().ToList().ForEach(v => v.Init(this));
+        oneClickCoinButtonList = GetComponentsInChildren<OneClickCoinButton>().ToList();
+
+        startOneClickCoinButton.SetButton(true);
+        _addCointValue = startOneClickCoinButton.GetCoinValue();
 
         icon.sprite = item.icon;
         nameText.text = item.itemName;
@@ -42,7 +52,6 @@ public class SaleBox : MonoBehaviour
     private void SetText(string finalText)
     {
         bool isNumberOnly = finalText.All(char.IsDigit) && finalText.ToArray().Length > 0;
-        _isSetText = true;
 
         if (isNumberOnly)
         {
@@ -54,14 +63,9 @@ public class SaleBox : MonoBehaviour
                 currentText = 0;
 
             if(currentText > _currentCount)
-            {
-                print((currentText - _currentCount));
                 _panel.SetAddCoin((int)(currentText - _currentCount) * _thisItem.sellMoney);
-            }
             else
-            {
                 _panel.SetAddCoin(-((int)(_currentCount - currentText) * _thisItem.sellMoney));
-            }
 
             _currentCount = currentText;
             inputField.text = currentText.ToString();
@@ -72,25 +76,20 @@ public class SaleBox : MonoBehaviour
             NullText();
         }
     }
-
     private void SaleItem()
     {
         _resourceContainer.MinusItem(_thisItem,(int)_currentCount);
         ResetItem();
     }
-
     private void ResetItem()
     {
         _currentCount = 0;
         NullText();
     }
-
     private void NullText()
     {
         inputField.text = "";
-        _isSetText = false;
     }
-
     private void SetCountText(ChangeItem evt)
     {
         if(_thisItem == evt.KeyItem)
@@ -98,5 +97,22 @@ public class SaleBox : MonoBehaviour
             countText.text = evt.Count.ToString();
             _currentMaxCount = evt.Count;
         }
+    }
+
+    public void SetCount(bool isPius)
+    {
+        long tempCount = _currentCount;
+        tempCount += (isPius ? _addCointValue : -_addCointValue);
+        print(tempCount.ToString());
+        SetText(tempCount.ToString());
+    }
+
+    public void ButtonSetUp(OneClickCoinButton coinButton)
+    {
+        foreach (OneClickCoinButton oneClick in oneClickCoinButtonList)
+            oneClick.SetButton(false);
+
+        coinButton.SetButton(true);
+        _addCointValue = coinButton.GetCoinValue();
     }
 }
