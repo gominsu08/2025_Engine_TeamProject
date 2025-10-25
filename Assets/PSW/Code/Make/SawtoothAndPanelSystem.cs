@@ -75,7 +75,7 @@ namespace PSW.Code.Make
 
         private async Task WaitPanel(bool isLeft = false, TileInformation info = null, MachineType type = MachineType.None)
         {
-
+            GameManager.Instance.ChangeSelectMode();
             _isWait = true;
             if (_isLeft == isLeft)
             {

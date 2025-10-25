@@ -11,7 +11,7 @@ namespace GMS.Code.Core.System.Maps
     public class DefaultTile : MonoBehaviour, IClickable
     {
         public TileInformation TileInfo { get; private set; }
-        
+
         private bool _isSelect = false;
         private TileManager _tileManager;
         private ResourceContainer _resourceContainer;
@@ -28,15 +28,24 @@ namespace GMS.Code.Core.System.Maps
 
             Bus<TileSelectEvent>.OnEvent += HandleTileSelect;
             Bus<TileUseUnSelectEvent>.OnEvent += HandleUseUnSelect;
+            Bus<ChangeSelectModeEvent>.OnEvent += HandleSelectModeChange;
 
             foreach (GhostTile ghost in ghostTiles)
             {
-                ghost.Init(_resourceContainer,_tileManager,TileInfo);
+                ghost.Init(_resourceContainer, _tileManager, TileInfo);
             }
             _startYPos = transform.position.y;
 
-            if(isBuy)
+            if (isBuy)
                 OnClick();
+        }
+
+        private void HandleSelectModeChange(ChangeSelectModeEvent evt)
+        {
+            if (!GameManager.Instance.IsBuildingMode && _isSelect == true)
+                EnableAllGhost();
+            else
+                DisableAllGhost();
         }
 
         public virtual void OnDestroy()
@@ -46,7 +55,7 @@ namespace GMS.Code.Core.System.Maps
 
         private void HandleTileSelect(TileSelectEvent evt)
         {
-            if (TileUtill.IsSame(TileInfo,evt.tileInfo) || !_isSelect) return;
+            if (TileUtill.IsSame(TileInfo, evt.tileInfo) || !_isSelect) return;
             UnSelect();
         }
 
@@ -60,14 +69,15 @@ namespace GMS.Code.Core.System.Maps
 
             _isSelect = true;
             Bus<TileSelectEvent>.Raise(new TileSelectEvent(TileInfo));
-            EnableAllGhost();
+            if (!GameManager.Instance.IsBuildingMode)
+                EnableAllGhost();
             TileSelect();
         }
 
         private void TileSelect()
         {
             animator.SetMaterial(true);
-            transform.DOMoveY(_startYPos + 0.5f,0.2f);
+            transform.DOMoveY(_startYPos + 0.5f, 0.2f);
         }
 
         public virtual void UnSelect()
@@ -81,7 +91,7 @@ namespace GMS.Code.Core.System.Maps
 
         public void HandleUseUnSelect(TileUseUnSelectEvent evt)
         {
-            if(TileUtill.IsSame(evt.tileInfo,TileInfo) && _isSelect == true)
+            if (TileUtill.IsSame(evt.tileInfo, TileInfo) && _isSelect == true)
             {
                 UnSelect();
             }

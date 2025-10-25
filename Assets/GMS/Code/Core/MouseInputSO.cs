@@ -9,9 +9,12 @@ namespace GMS.Code.Core
     public class MouseInputSO : ScriptableObject, Controls.IPlayerActions
     {
         public Action OnClickAction;
+        public Action OnTabKeyDownEvent;
+        public Action OnRightClickEvent;
         [SerializeField] private LayerMask whatIsTargetLayer;
 
         public Vector2 MousePosition { get; private set; }
+        public Vector2 MouseDelta { get; private set; }
 
         private Controls controls;
 
@@ -67,6 +70,21 @@ namespace GMS.Code.Core
             return default;
         }
 
+        public void OnTab(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+                OnTabKeyDownEvent?.Invoke();
+        }
 
+        public void OnRightClick(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+                OnRightClickEvent?.Invoke();
+        }
+
+        public void OnDelta(InputAction.CallbackContext context)
+        {
+            MouseDelta = context.ReadValue<Vector2>();
+        }
     }
 }
