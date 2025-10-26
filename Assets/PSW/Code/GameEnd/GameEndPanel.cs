@@ -28,8 +28,14 @@ public class GameEndPanel : MonoBehaviour
     {
         _moveValue = targetY / time;
         _moveTargetValue = transform.localPosition.y;
-        Bus<GameOverEvent>.OnEvent += (GameOver);
-        Bus<GameWinEvent>.OnEvent += (GameWin);
+        Bus<GameOverEvent>.OnEvent += GameOver;
+        Bus<GameWinEvent>.OnEvent += GameWin;
+    }
+
+    private void OnDestroy()
+    {
+        Bus<GameOverEvent>.OnEvent -= GameOver;
+        Bus<GameWinEvent>.OnEvent -= GameWin;
     }
 
     private void GameOver(GameOverEvent evt)

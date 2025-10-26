@@ -14,6 +14,11 @@ namespace PSW.Code.Resource
             Bus<ChangeCoinEvent>.OnEvent += SetCoinText;
         }
 
+        private void OnDestroy()
+        {
+            Bus<ChangeCoinEvent>.OnEvent -= SetCoinText;
+        }
+
         private void SetCoinText(ChangeCoinEvent evt)
         {
             coinText.text = evt.coin.ToString();

@@ -30,6 +30,11 @@ namespace PSW.Code.Resource
             moneyPanel.Init(thisItem.sellMoney.ToString());
         }
 
+        private void OnDestroy()
+        {
+            Bus<ChangeItem>.OnEvent -= SetText;
+        }
+
         private void SetText(ChangeItem evt)
         {
             if(evt.KeyItem == _item)

@@ -12,6 +12,11 @@ public class DayPanel : MonoBehaviour
         Bus<OneDayTimeEvent>.OnEvent += NewDay;
     }
 
+    private void OnDestroy()
+    {
+        Bus<OneDayTimeEvent>.OnEvent -= NewDay;
+    }
+
     private void NewDay(OneDayTimeEvent evt)
     {
         dayText.text = $"{evt.Day} Day";

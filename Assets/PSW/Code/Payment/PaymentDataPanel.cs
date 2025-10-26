@@ -31,6 +31,13 @@ namespace PSW.Code.Payment
             Bus<ChangeCoinEvent>.OnEvent += ChangeCoin;
         }
 
+        private void OnDestroy()
+        {
+            Bus<PaymentTimeEvent>.OnEvent -= StartPayment;
+            Bus<OneDayTimeEvent>.OnEvent -= OneDay;
+            Bus<ChangeCoinEvent>.OnEvent -= ChangeCoin;
+        }
+
         private void StartPayment(PaymentTimeEvent evt)
         {
             _dDayPaymentCoin += oneDayPlusCoin;

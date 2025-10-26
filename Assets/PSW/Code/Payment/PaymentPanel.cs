@@ -29,6 +29,12 @@ namespace PSW.Code.Payment
             _moveValue = popUpValue / timeValue;
         }
 
+        private void OnDestroy()
+        {
+            Bus<PaymentTimeEvent>.OnEvent -= PopUp;
+            Bus<PaymentEndEvent>.OnEvent -= PopDown;
+        }
+
         private void PopDown(PaymentEndEvent evt)
         {
             sawtoothSystem.StartSawtooth(timeValue, false, transform);

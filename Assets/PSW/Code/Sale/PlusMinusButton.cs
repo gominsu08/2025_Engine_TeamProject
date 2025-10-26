@@ -21,7 +21,6 @@ public class PlusMinusButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        print("À¸¾û");
         _isAdd = true;
         holdRoutine = StartCoroutine(PlusMinus());
     }
