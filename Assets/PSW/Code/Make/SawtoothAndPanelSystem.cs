@@ -106,7 +106,14 @@ namespace PSW.Code.Make
             {
                 if (typeEnum == MachineType.None)
                 {
-                    buildingMachinePanel.EnableForUI(info.item, info);
+                    if(!(info.tileObject is CenterTile center))
+                    {
+                        buildingMachinePanel.EnableForUI(info.item, info);
+                    }
+                    else
+                    {
+
+                    }
                 }
                 else if (typeEnum == MachineType.Brazier)
                 {

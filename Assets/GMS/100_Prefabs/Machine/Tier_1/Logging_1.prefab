@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08636f0cdbedea24192d1640366f28ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemInformationUIPrefab: {fileID: 1271544098867081445, guid: cf9847e5f430bb749ba4a95f3d96176c, type: 3}
   <machineSO>k__BackingField: {fileID: 11400000, guid: 2eb235811d023664e9bfe2126f4adf06, type: 2}
 --- !u!1 &9045910804454919074
 GameObject:

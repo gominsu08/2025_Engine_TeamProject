@@ -10,7 +10,8 @@ namespace GMS.Code.Core
     {
         public Action OnClickAction;
         public Action OnTabKeyDownEvent;
-        public Action OnRightClickEvent;
+        public Action<bool> OnRightClickEvent;
+        public Action OnRightClickTriggerEvent;
         [SerializeField] private LayerMask whatIsTargetLayer;
 
         public Vector2 MousePosition { get; private set; }
@@ -78,8 +79,16 @@ namespace GMS.Code.Core
 
         public void OnRightClick(InputAction.CallbackContext context)
         {
+            if (context.started)
+                OnRightClickEvent?.Invoke(true);
+            else if (context.canceled)
+                OnRightClickEvent?.Invoke(false);
+
+
             if (context.performed)
-                OnRightClickEvent?.Invoke();
+            {
+                OnRightClickTriggerEvent?.Invoke();
+            }
         }
 
         public void OnDelta(InputAction.CallbackContext context)

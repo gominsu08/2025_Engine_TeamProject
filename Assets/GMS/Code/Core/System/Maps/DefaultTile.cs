@@ -51,6 +51,8 @@ namespace GMS.Code.Core.System.Maps
         public virtual void OnDestroy()
         {
             Bus<TileSelectEvent>.OnEvent -= HandleTileSelect;
+            Bus<TileUseUnSelectEvent>.OnEvent -= HandleUseUnSelect;
+            Bus<ChangeSelectModeEvent>.OnEvent -= HandleSelectModeChange;
         }
 
         private void HandleTileSelect(TileSelectEvent evt)

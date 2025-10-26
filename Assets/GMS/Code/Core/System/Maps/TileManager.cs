@@ -6,11 +6,16 @@ using UnityEngine;
 
 namespace GMS.Code.Core.System.Maps
 {
+    public struct EndAddTileEvent:IEvent
+    {
+
+    }
+
     public class TileInformation
     {
         public int x, z;
         public bool isUpTile, isDownTile, isLeftTile, isRightTile;
-        public GameObject tileObject;
+        public DefaultTile tileObject;
         public ItemSO item;
 
         public List<Direction> GetAdjacentTiles()
@@ -55,6 +60,7 @@ namespace GMS.Code.Core.System.Maps
     public class TileContainer
     {
         private int _startTileCreateCount = 0;
+        private CenterTile _centerTile;
         private DefaultTile _tile;
         private DefaultTile _treeTile;
         private List<DefaultTile> _startTile = new List<DefaultTile>();
@@ -109,7 +115,7 @@ namespace GMS.Code.Core.System.Maps
 
         public void StartTileSet()
         {
-            _startTile.Add(_tile);
+            _startTile.Add(_centerTile);
             _startTile.Add(_tile);
             _startTile.Add(_treeTile);
             _startTile.Add(_tile);
@@ -124,11 +130,18 @@ namespace GMS.Code.Core.System.Maps
         {
             foreach (DefaultTile tile in tilePrefabs)
             {
-                if (!(tile is ResourceTile resourceTile))
+                if(tile is CenterTile center)
+                {
+                    _centerTile = center;
+                    continue;
+                }
+                else if (!(tile is ResourceTile resourceTile))
                 {
                     _tile = tile;
                     continue;
                 }
+
+                
 
                 else if (resourceTile.GetResourceItem().tier == UI.MainPanel.Tier.FirstTier)
                 {
@@ -178,6 +191,7 @@ namespace GMS.Code.Core.System.Maps
             TileInformation result = CreateTileInfo(x, z);
             CreateTile(result);
             tiles.Add(result);
+            Bus<EndAddTileEvent>.Raise(new EndAddTileEvent());
         }
 
         private TileInformation CreateTileInfo(int x, int z)
@@ -230,7 +244,7 @@ namespace GMS.Code.Core.System.Maps
                 tileInfo.item = resourceTile.GetResourceItem();
             tile.name = $"Tile {tileInfo.x} {tileInfo.z}";
             tile.transform.parent = transform;
-            tileInfo.tileObject = tile.gameObject;
+            tileInfo.tileObject = tile;
             tile.Init(tileInfo, resourceContainer, this, !isStartTileSet);
             _tileCount++;
         }

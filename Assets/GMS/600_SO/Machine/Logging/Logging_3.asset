@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Logging_3
   m_EditorClassIdentifier: 
   machineName: "\uBC8C\uBAA9\uAE30 Lv.3"
+  machineDescription: 
   machineTier: 3
   machineType: 4
   machineIcon: {fileID: 21300000, guid: d3fc0ab74e6bca14fa7bf032ea76899b, type: 3}
+  maxCarryingValue: 50
   machinePrefab: {fileID: 1073664063575248446, guid: e25126d52e9ed1641820882139e90a94, type: 3}
   itemList:
   - itemSO: {fileID: 11400000, guid: 5f055f8e757160d46ae01178f05333ad, type: 2}

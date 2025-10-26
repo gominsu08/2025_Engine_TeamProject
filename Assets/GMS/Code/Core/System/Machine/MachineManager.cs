@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Resources;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GMS.Code.Core.System.Machines
 {
@@ -24,7 +25,7 @@ namespace GMS.Code.Core.System.Machines
 
     public class MachineAndTileInfoPair
     {
-        public Machine machine;
+        public         Machine machine;
         public TileInformation tileInformation;
 
         public MachineAndTileInfoPair(Machine target, TileInformation tileInfo)
@@ -38,6 +39,18 @@ namespace GMS.Code.Core.System.Machines
     {
         public List<MachineAndTileInfoPair> machineAndTileInfoPairs = new List<MachineAndTileInfoPair>();
 
+        public int AddEventCarryingValueChangedEvent(Action<int> handler, TileInformation tileInfo)
+        {
+            GetMachintToTileInfo(tileInfo).carryingValueChangeEvent += handler;
+
+            return GetCurCarrayingValue(tileInfo);
+        }
+
+        public void RemoveEventCarryingValueChangedEvent(Action<int> handler, TileInformation tileInfo)
+        {
+            GetMachintToTileInfo(tileInfo).carryingValueChangeEvent -= handler;
+        }
+
         public MachineType GetMachintTypeToTileInfo(TileInformation info)
         {
             MachineType machineType = MachineType.None;
@@ -49,6 +62,18 @@ namespace GMS.Code.Core.System.Machines
             }
 
             return machineType;
+        }
+
+        public int GetMaxCarrayingValue(TileInformation info)
+        {
+            Machine machine = GetMachintToTileInfo(info);
+            return machine.machineSO.maxCarryingValue;
+        }
+
+        public int GetCurCarrayingValue(TileInformation info)
+        {
+            Machine machine = GetMachintToTileInfo(info);
+            return machine.GetCurCarraringValue();
         }
 
         public MachineAndTileInfoPair GetPair(TileInformation info)
@@ -139,19 +164,12 @@ namespace GMS.Code.Core.System.Machines
                         Machine machine = Instantiate(machineSO.machinePrefab, tileInfo.tileObject.transform);
                         machine.transform.position += Vector3.up * 0.5f;
                         machine.transform.DOScale(2,0.1f);
-                        machine.MachineInit(tileInfo.item,HandleItemGet);
+                        machine.MachineInit(tileInfo);
                         machine.MachineEnable();
                         MachineContainer.AddMachine(machine, tileInfo);
                     }
                 }
             }
-        }
-
-        private void HandleItemGet(ItemSO targetItem, MachineSO machineSO)
-        {
-           int value = machineSO.GetTierToValue(targetItem.tier);
-
-            _container.PlusItem(targetItem,value / 12);
         }
 
         private void Update()
