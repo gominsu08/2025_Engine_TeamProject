@@ -8,21 +8,21 @@ namespace GMS.Code.Core.System.Machines
 {
     public class Machine : MonoBehaviour
     {
-        [SerializeField] private ItemInformationUI itemInformationUIPrefab;
+        [SerializeField] protected ItemInformationUI itemInformationUIPrefab;
 
-        private const float RESOURCE_GAIN_PER_COLLECT = 5f;
-        private float _timer = 0;
-        private int _maxCarryingValue;
-        private int _curCarryingValue;
-        private ItemSO _targetItemData;
-        private TileInformation _tileInformation;
-        private ItemInformationUI _warrningMassage;
+        protected const float RESOURCE_GAIN_PER_COLLECT = 5f;
+        protected float _timer = 0;
+        protected int _maxCarryingValue;
+        protected int _curCarryingValue;
+        protected ItemSO _targetItemData;
+        protected TileInformation _tileInformation;
+        protected ItemInformationUI _warrningMassage;
 
         public Action<int> carryingValueChangeEvent;
-        public bool IsMining { get; private set; } = false;
+        public bool IsMining { get; protected set; } = false;
         public float MiningTime => _timer;
 
-        [field: SerializeField] public MachineSO machineSO { get; private set; }
+        [field: SerializeField] public MachineSO machineSO { get; protected set; }
 
         public void MachineInit(TileInformation tileInfo)
         {
@@ -44,9 +44,9 @@ namespace GMS.Code.Core.System.Machines
             IsMining = false;
         }
 
-        private bool _isFull;
+        protected bool _isFull;
 
-        public void MachineUpdate()
+        public virtual void MachineUpdate()
         {
             if (_curCarryingValue >= _maxCarryingValue)
             {
@@ -84,7 +84,7 @@ namespace GMS.Code.Core.System.Machines
             }
         }
 
-        private ItemInformationUI CreateInfoPanelUI(string newValue, float duration)
+        protected ItemInformationUI CreateInfoPanelUI(string newValue, float duration)
         {
             Vector3 pos = new Vector3(_tileInformation.x, 0, _tileInformation.z) + new Vector3(0, 1.3f, -0.4f);
 
@@ -100,7 +100,7 @@ namespace GMS.Code.Core.System.Machines
             MachineDisable();
         }
 
-        internal int GetCurCarraringValue() => _curCarryingValue;
+        public int GetCurCarraringValue() => _curCarryingValue;
 
         public int TakeCarraringValue()
         {

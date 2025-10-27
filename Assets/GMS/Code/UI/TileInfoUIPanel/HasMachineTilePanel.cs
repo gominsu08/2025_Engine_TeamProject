@@ -25,17 +25,6 @@ namespace GMS.Code.UI.TileInfoUIPanel
             machinePanelUI.Init();
             resourceCarryingValueUI.Init(machineManager);
 
-            Bus<EndAddTileEvent>.OnEvent += HandleTileBuyEvent;
-        }
-
-        private void OnDestroy()
-        {
-            Bus<EndAddTileEvent>.OnEvent -= HandleTileBuyEvent;
-        }
-
-        private void HandleTileBuyEvent(EndAddTileEvent evt)
-        {
-            Refresh();
         }
 
         public void EnableForUI(TileInformation tileInfo)
@@ -48,7 +37,7 @@ namespace GMS.Code.UI.TileInfoUIPanel
 
         private void Refresh()
         {
-            if (_tileInformation.item != null)
+            if (_tileInformation != null && _tileInformation.item != null)
             {
                 machinePanelUI.EnableForUI(_tileInformation.item, _machineManager.MachineContainer.GetMachintToTileInfo(_tileInformation).machineSO.machineTier);
                 resourceNameUI.EnableForUI(_tileInformation.item.itemName);

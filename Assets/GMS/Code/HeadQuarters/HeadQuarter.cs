@@ -4,6 +4,8 @@ namespace GMS.Code.HeadQuarters
 {
     public class HeadQuarter : MonoBehaviour
     {
+        [SerializeField] private HeadQuarterMovement quarterMovement;
 
+        //public void 
     }
 }

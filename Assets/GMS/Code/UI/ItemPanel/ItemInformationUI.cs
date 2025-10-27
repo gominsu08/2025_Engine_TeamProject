@@ -1,6 +1,5 @@
 using DG.Tweening;
 using GMS.Code.Items;
-using GMS.Code.UI.MainPanel;
 using UnityEngine;
 
 namespace GMS.Code.UI.ItemPanel
@@ -10,12 +9,16 @@ namespace GMS.Code.UI.ItemPanel
         [SerializeField] private SpriteIconUIObject spriteObjectl;
         [SerializeField] private TextUIObject textUI;
 
-        public void Init(ItemSO item, string value, float duration)
+        public void Init(ItemSO item, string value, float duration, bool isNotDestroy = false)
         {
             spriteObjectl.EnableForUI(item.icon);
             textUI.EnableForUI(value);
 
-            transform.DOMoveY(transform.position.y + 0.2f , duration).OnComplete(() => Destroy(gameObject));
+            transform.DOMoveY(transform.position.y + 0.2f, duration).OnComplete(() =>
+            {
+                if (!isNotDestroy)
+                    Destroy(gameObject);
+            });
         }
 
         public void DisableUI()
