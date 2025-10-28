@@ -36,6 +36,11 @@ namespace PSW.Code.Sawtooth
             transform.SetParent(parent, true);
         }
 
+        public void OneRotationSawtooth(float time, float dir = 1)
+        {
+            transform.DORotate(new Vector3(0, 0, 360f * dir), time, RotateMode.FastBeyond360);
+        }
+
         public void SawtoothStop(bool isStopAll = false)
         {
             _isEndRotation = true;

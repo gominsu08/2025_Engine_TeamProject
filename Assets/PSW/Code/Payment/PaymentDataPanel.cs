@@ -29,6 +29,10 @@ namespace PSW.Code.Payment
             Bus<PaymentTimeEvent>.OnEvent += StartPayment;
             Bus<OneDayTimeEvent>.OnEvent += OneDay;
             Bus<ChangeCoinEvent>.OnEvent += ChangeCoin;
+
+            GameOverEvent gameOver = new GameOverEvent();
+            gameOver.D_Day = 1;
+            Bus<GameOverEvent>.Raise(gameOver);
         }
 
         private void OnDestroy()
