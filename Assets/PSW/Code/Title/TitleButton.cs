@@ -11,8 +11,15 @@ public class TitleButton : MonoBehaviour
     [SerializeField] private SawtoothSystem rootSawtooth;
 
     private bool _isRotation;
+    private bool _isClickPlay;
 
-    public void Play(string sceneName) => transaction.FadeIn(sceneName);
+    public void Play(string sceneName)
+    {
+        if (_isClickPlay) return;
+
+        _isClickPlay = true;
+        transaction.FadeIn(sceneName);
+    }
 
     public void Exit() => Application.Quit();
 

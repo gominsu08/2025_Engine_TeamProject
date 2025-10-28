@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class GameEndPanel : MonoBehaviour
 {
+    [SerializeField] private Transaction transaction;
     [SerializeField] private SawtoothSystem rootSawtooth;
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private Transform sawtoothTrm;
@@ -60,7 +61,12 @@ public class GameEndPanel : MonoBehaviour
 
     public void RePlay()
     {
-        SceneManager.LoadScene("MainScene");
+        transaction.FadeIn("MainScene");
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 
     private IEnumerator MovePanel()

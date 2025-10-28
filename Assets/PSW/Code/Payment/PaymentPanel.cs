@@ -21,6 +21,8 @@ namespace PSW.Code.Payment
         private float _targetMoveValue;
         private int _moveCount = 0;
 
+        private bool _isStopPanelMove = true;
+
         private void Start()
         {
             Bus<PaymentTimeEvent>.OnEvent += PopUp;
@@ -28,7 +30,6 @@ namespace PSW.Code.Payment
             _targetMoveValue = transform.localPosition.y;
             _moveValue = popUpValue / timeValue;
         }
-
         private void OnDestroy()
         {
             Bus<PaymentTimeEvent>.OnEvent -= PopUp;
@@ -37,19 +38,24 @@ namespace PSW.Code.Payment
 
         private void PopDown(PaymentEndEvent evt)
         {
-            sawtoothSystem.StartSawtooth(timeValue, false, transform);
-            StartCoroutine(PaymentPopUpTime(false));
+            PopPayment(false);
         }
 
         private void PopUp(PaymentTimeEvent evt)
         {
-            sawtoothSystem.StartSawtooth(timeValue,true,transform);
-            StartCoroutine(PaymentPopUpTime(true));
+            PopPayment(true);
         }
 
-        private IEnumerator PaymentPopUpTime(bool _isUp)
+        public void PopPayment(bool isUp)
         {
-            if (_isUp == false)
+            sawtoothSystem.StartSawtooth(timeValue, isUp, transform);
+            _isStopPanelMove = false;
+            StartCoroutine(PaymentPopUpTime(isUp));
+        }
+
+        private IEnumerator PaymentPopUpTime(bool isUp)
+        {
+            if (isUp == false)
             {
                 _targetMoveValue += _moveValue;
                 _moveCount--;
@@ -64,11 +70,13 @@ namespace PSW.Code.Payment
             yield return wait;
 
             if (_moveCount < timeValue && _moveCount > 0)
-                StartCoroutine(PaymentPopUpTime(_isUp));
+                StartCoroutine(PaymentPopUpTime(isUp));
             else
+            {
+                _isStopPanelMove = true;
                 sawtoothSystem.SawtoothStop(false);
+            }
         }
-
-
+        public bool GetIsStopMove() => _isStopPanelMove;
     }
 }

@@ -9,6 +9,7 @@ public class TransactionPanel : MonoBehaviour
 {
     [SerializeField] private bool isLeft;
     [SerializeField] private Transform sawtoothTrm;
+    [SerializeField] private Transform doorSawtoothTrm;
 
     [SerializeField] private SawtoothSystem doorSawtooth;
     [SerializeField] private SawtoothSystem rootSawtooth;
@@ -24,13 +25,20 @@ public class TransactionPanel : MonoBehaviour
     private float _currentXValue;
     private int _count = 0;
 
-    public void Init(float time)
+    public void Init(float time, bool isStartOpen = false)
     {
         _time = time;
         _currentXValue = transform.localPosition.x;
         _openValue = _currentXValue;
         _targetValue = _currentXValue / time;
         _closeValue = _openValue + (_targetValue * time);
+
+        if(isStartOpen)
+        {
+            _count = (int)_time;
+            transform.DOLocalMoveX(_closeValue, 0);
+            _currentXValue = _closeValue;
+        }
     }
 
     public void CloseTransaction(string loadSceneName)
@@ -49,8 +57,9 @@ public class TransactionPanel : MonoBehaviour
         transform.DOLocalMoveX(_openValue, 0);
         _currentXValue = _openValue;
 
-        doorSawtooth.OneRotationSawtooth(1f);
-        await Awaitable.WaitForSecondsAsync(1f);
+        doorSawtooth.StartSawtooth(4, true, doorSawtoothTrm);
+        await Awaitable.WaitForSecondsAsync(2f);
+        doorSawtooth.SawtoothStop();
 
         StartCoroutine(PopPanel(true));
         rootSawtooth.StartSawtooth(_time, true, sawtoothTrm);
@@ -79,8 +88,8 @@ public class TransactionPanel : MonoBehaviour
             rootSawtooth.SawtoothStop(false);
             if (isPopUp == false)
             {
-                doorSawtooth.OneRotationSawtooth(1f, -1);
-                yield return new WaitForSeconds(1f);
+                doorSawtooth.StartSawtooth(4, false, doorSawtoothTrm);
+                yield return new WaitForSeconds(2f);
                 if (isLeft)
                 {
                     print(loadSceneName);

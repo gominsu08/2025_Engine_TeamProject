@@ -8,6 +8,7 @@ namespace PSW.Code.Payment
 {
     public class PaymentDataPanel : MonoBehaviour
     {
+        [SerializeField] private PaymentPanel paymentPanel;
         [SerializeField] private ResourceContainer resourceContainer;
         [SerializeField] private TextMeshProUGUI _coinText;
 
@@ -29,10 +30,6 @@ namespace PSW.Code.Payment
             Bus<PaymentTimeEvent>.OnEvent += StartPayment;
             Bus<OneDayTimeEvent>.OnEvent += OneDay;
             Bus<ChangeCoinEvent>.OnEvent += ChangeCoin;
-
-            GameOverEvent gameOver = new GameOverEvent();
-            gameOver.D_Day = 1;
-            Bus<GameOverEvent>.Raise(gameOver);
         }
 
         private void OnDestroy()
@@ -69,6 +66,8 @@ namespace PSW.Code.Payment
 
         public void PaymentButtonClick()
         {
+            if (paymentPanel.GetIsStopMove() == false) return;
+
             if (resourceContainer.IsTargetCoin(_dDayPaymentCoin))
             {
                 if(_isLastDay)
@@ -82,6 +81,8 @@ namespace PSW.Code.Payment
 
         private void SetTargetCoinText()
         {
+            if (paymentPanel.GetIsStopMove() == false) return;
+
             if (resourceContainer.IsTargetCoin(_dDayPaymentCoin))
                 _coinText.color = Color.white;
             else
