@@ -102,13 +102,22 @@ namespace GMS.Code.Core.System.Machines
 
         public int GetCurCarraringValue() => _curCarryingValue;
 
-        public int TakeCarraringValue()
+        public virtual ItemAndValuePair TakeCarraringValue(int maxValue)
         {
-            int value = _curCarryingValue;
-            carryingValueChangeEvent?.Invoke(_curCarryingValue);
-            CreateInfoPanelUI($"-{_curCarryingValue}", 2);
+            int value = Mathf.Clamp(_curCarryingValue,0,maxValue);
+            ItemAndValuePair pair = new ItemAndValuePair(_targetItemData, value);
             _curCarryingValue = 0;
-            return value;
+            carryingValueChangeEvent?.Invoke(_curCarryingValue);
+            CreateInfoPanelUI($"-{pair.value}", 2);
+            return pair;
+        }
+
+        public virtual bool IsCanTake(ItemSO item = null)
+        {
+            bool isValue = _curCarryingValue > 0;
+            bool isItemContains = item != null ?  _targetItemData.itemName.Contains(item.itemName) : true;
+
+            return isValue && isItemContains;
         }
     }
 }
