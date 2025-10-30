@@ -44,6 +44,7 @@ namespace PSW.Code.Payment
             _dDayPaymentCoin += oneDayPlusCoin;
             SetTargetCoinText();
             _coinText.text = _dDayPaymentCoin.ToString();
+            _coinText.ForceMeshUpdate();
             _isNotPayment = true;
         }
 

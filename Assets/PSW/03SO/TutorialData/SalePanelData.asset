@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea065060a064f8469e5122f33a34d82, type: 3}
+  m_Name: SalePanelData
+  m_EditorClassIdentifier: 
+  tutorialImage: {fileID: 21300000, guid: 0f56fd88a7bea3b43b479ae03a7b03e4, type: 3}
+  tutorialText: "\uC22B\uC790 \uBC84\uD2BC\uC744 \uD65C\uC6A9\uD558\uC5EC +-\uBC84\uD2BC\uC758
+    \uAC2F\uC218\uB97C \uC9C0\uC815\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.\n+- \uBC84\uD2BC
+    \uD639\uC740 \uC9C1\uC811 \uC785\uB825\uD558\uC5EC \uD310\uB9E4\uD560 \uC790\uC6D0\uC758
+    \uAC2F\uC218\uB97C \uC120\uD0DD\uD558\uBA70 \n\uD310\uB9E4\uBC84\uD2BC\uC744
+    \uD65C\uC6A9\uD558\uC5EC\uC790\uC6D0\uC744 \uD310\uB9E4\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
