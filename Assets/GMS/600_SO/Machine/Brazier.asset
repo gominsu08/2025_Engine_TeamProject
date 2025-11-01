@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Brazier
   m_EditorClassIdentifier: 
   machineName: "\uD654\uB85C"
-  machineDescription: 
+  machineDescription: "\uC5EC\uB7EC\uC790\uC6D0\uC744 \uC7AC\uB828\uD558\uAE30 \uC704\uD55C
+    \uAE30\uACC4\uC785\uB2C8\uB2E4."
   machineTier: 0
   machineType: 1
   machineIcon: {fileID: 21300000, guid: d3fc0ab74e6bca14fa7bf032ea76899b, type: 3}
   maxCarryingValue: 30
-  machinePrefab: {fileID: 6145001640478893339, guid: 757c221a1ea60944e9e6b999b549e771, type: 3}
+  machinePrefab: {fileID: -1561837488643959269, guid: 757c221a1ea60944e9e6b999b549e771, type: 3}
   itemList:
   - itemSO: {fileID: 11400000, guid: 5f055f8e757160d46ae01178f05333ad, type: 2}
     value: 1

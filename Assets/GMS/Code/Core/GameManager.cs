@@ -77,7 +77,6 @@ namespace GMS.Code.Core
 
             if (!_isCanClick)
             {
-                Debug.Log(!_isCanClick);
                 return;
             }
 

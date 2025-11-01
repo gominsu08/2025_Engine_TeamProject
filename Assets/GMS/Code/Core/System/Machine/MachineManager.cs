@@ -164,7 +164,7 @@ namespace GMS.Code.Core.System.Machines
                         Machine machine = Instantiate(machineSO.machinePrefab, tileInfo.tileObject.transform);
                         machine.transform.position += Vector3.up * 0.5f;
                         machine.transform.DOScale(2,0.1f);
-                        machine.MachineInit(tileInfo);
+                        machine.MachineInit(tileInfo,_container);
                         machine.MachineEnable();
                         MachineContainer.AddMachine(machine, tileInfo);
                     }

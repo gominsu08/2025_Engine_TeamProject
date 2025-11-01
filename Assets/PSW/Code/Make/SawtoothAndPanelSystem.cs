@@ -84,6 +84,10 @@ namespace PSW.Code.Make
                 {
                     if (type == MachineType.None)
                         buildingMachinePanel.EnableForUI(info.item, info);
+                    else if(type == MachineType.Brazier)
+                    {
+
+                    }
                     else
                         miningPanel.EnableForUI(info.item, info);
                 }

@@ -1,6 +1,7 @@
 using GMS.Code.Core.System.Maps;
 using GMS.Code.Items;
 using GMS.Code.UI.ItemPanel;
+using PSW.Code.Container;
 using System;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace GMS.Code.Core.System.Machines
         protected ItemSO _targetItemData;
         protected TileInformation _tileInformation;
         protected ItemInformationUI _warrningMassage;
+        protected ResourceContainer _container;
 
         public Action<int> carryingValueChangeEvent;
         public bool IsMining { get; protected set; } = false;
@@ -24,8 +26,9 @@ namespace GMS.Code.Core.System.Machines
 
         [field: SerializeField] public MachineSO machineSO { get; protected set; }
 
-        public void MachineInit(TileInformation tileInfo)
+        public virtual void MachineInit(TileInformation tileInfo, ResourceContainer container)
         {
+            _container = container;
             _tileInformation = tileInfo;
             _targetItemData = tileInfo.item;
             _timer = 0;
@@ -56,7 +59,7 @@ namespace GMS.Code.Core.System.Machines
                     if (_timer >= RESOURCE_GAIN_PER_COLLECT)
                     {
                         _isFull = false;
-                        ItemInformationUI ui = CreateInfoPanelUI("<size=1>Ã¤±¼¿Ï·á</size>", 1000);
+                        ItemInformationUI ui = CreateInfoPanelUI(_targetItemData, "<size=1>Ã¤±¼¿Ï·á</size>", 1000);
 
                         if (_warrningMassage != null)
                             _warrningMassage.DisableUI();
@@ -80,17 +83,17 @@ namespace GMS.Code.Core.System.Machines
                     _isFull = true;
 
                 carryingValueChangeEvent?.Invoke(_curCarryingValue);
-                CreateInfoPanelUI($"+{newValue}", 2);
+                CreateInfoPanelUI(_targetItemData, $"+{newValue}", 2);
             }
         }
 
-        protected ItemInformationUI CreateInfoPanelUI(string newValue, float duration)
+        protected ItemInformationUI CreateInfoPanelUI(ItemSO targetItemData, string newValue, float duration)
         {
             Vector3 pos = new Vector3(_tileInformation.x, 0, _tileInformation.z) + new Vector3(0, 1.3f, -0.4f);
 
             ItemInformationUI ui = Instantiate(itemInformationUIPrefab, pos, itemInformationUIPrefab.transform.rotation);
 
-            ui.Init(_targetItemData, newValue, duration);
+            ui.Init(targetItemData, newValue, duration);
 
             return ui;
         }
@@ -108,7 +111,7 @@ namespace GMS.Code.Core.System.Machines
             ItemAndValuePair pair = new ItemAndValuePair(_targetItemData, value);
             _curCarryingValue = 0;
             carryingValueChangeEvent?.Invoke(_curCarryingValue);
-            CreateInfoPanelUI($"-{pair.value}", 2);
+            CreateInfoPanelUI(_targetItemData, $"-{pair.value}", 2);
             return pair;
         }
 

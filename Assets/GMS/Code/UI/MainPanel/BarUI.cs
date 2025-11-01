@@ -18,8 +18,7 @@ namespace GMS.Code.UI.MainPanel
 
         public void UpdateUI(float currentTime)
         {
-
-            float newWidth = currentTime / _maxTime;
+            float newWidth = currentTime == 0 ? 0 : currentTime / (_maxTime == 0 ? 10 : _maxTime);
             if (newWidth >= 1 - Mathf.Epsilon)
                 _action?.Invoke();
             fillRect.localScale = new Vector2(newWidth, 1);

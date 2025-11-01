@@ -2,6 +2,7 @@
 using GMS.Code.Core.Events;
 using GMS.Code.Core.System.Machines;
 using GMS.Code.Core.System.Maps;
+using GMS.Code.UI.Braziers;
 using System;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace GMS.Code.UI.TileInfoUIPanel
         [SerializeField] private ResourcePanel resourcePanel;
         [SerializeField] private HasMachineTilePanel machineTilePanel;
         [SerializeField] private CenterTileInfoPanel centerTileInfoPanel;
+        [SerializeField] private BrazierPanel brazierTilePanel;
 
         private RectTransform MyRect => transform as RectTransform;
         private TileManager _tileManager;
@@ -54,9 +56,10 @@ namespace GMS.Code.UI.TileInfoUIPanel
 
         private void RefrashUI()
         {
-            if (_machineManager.IsMachineType(_tileInfo) == MachineType.None)
+            MachineType type = _machineManager.IsMachineType(_tileInfo);
+            if (type == MachineType.None)
             {
-                if(_tileInfo.tileObject is CenterTile center)
+                if (_tileInfo.tileObject is CenterTile center)
                 {
                     centerTileInfoPanel.EnableForUI(center);
                     resourcePanel.DisableUI();
@@ -67,10 +70,20 @@ namespace GMS.Code.UI.TileInfoUIPanel
                     centerTileInfoPanel.DisableUI();
                 }
                 machineTilePanel.DisableUI();
+                brazierTilePanel.DisableUI();
             }
             else
             {
-                machineTilePanel.EnableForUI(_tileInfo);
+                if (type == MachineType.Brazier)
+                {
+                    brazierTilePanel.EnableForUI(_machineManager.MachineContainer.GetMachintToTileInfo(_tileInfo) as Brazier);
+                    machineTilePanel.DisableUI();
+                }
+                else
+                {
+                    machineTilePanel.EnableForUI(_tileInfo);
+                    brazierTilePanel.DisableUI();
+                }
                 resourcePanel.DisableUI();
                 centerTileInfoPanel.DisableUI();
             }
@@ -82,6 +95,8 @@ namespace GMS.Code.UI.TileInfoUIPanel
 
             resourcePanel.DisableUI();
             machineTilePanel.DisableUI();
+            brazierTilePanel.DisableUI();
+            centerTileInfoPanel.DisableUI();
             _isDisable = true;
         }
     }
