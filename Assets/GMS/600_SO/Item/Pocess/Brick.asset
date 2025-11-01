@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Brick
   m_EditorClassIdentifier: 
   itemName: "\uBCBD\uB3CC"
+  itemDescription: "\uBCBD\uB3CC\uC9D1\uC740 \uB0A8\uC790\uC758 \uB85C\uB9DD\uC774\uC8E0"
   icon: {fileID: 21300000, guid: d3eaa135d4aa49c41879a49ce8764536, type: 3}
   isStackable: 1
   maxStack: 99
   sellMoney: 500
+  fuelAmount: 0
   itemType: 4
   machineType: 1
   tier: 2

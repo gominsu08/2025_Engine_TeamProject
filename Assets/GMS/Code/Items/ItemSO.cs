@@ -8,10 +8,12 @@ namespace GMS.Code.Items
     public class ItemSO : ScriptableObject
     {
         public string itemName;
+        public string itemDescription;
         public Sprite icon;
         public bool isStackable = true;
         public int maxStack = 99;
         public int sellMoney;
+        public int fuelAmount;
         public ItemType itemType;
         public MachineType machineType;
         public Tier tier;

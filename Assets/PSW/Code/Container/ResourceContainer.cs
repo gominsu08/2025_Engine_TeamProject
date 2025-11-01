@@ -1,5 +1,7 @@
 using GMS.Code.Core;
+using GMS.Code.Core.System.Machines;
 using GMS.Code.Items;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,9 +18,25 @@ namespace PSW.Code.Container
         private Dictionary<ItemSO, int> _resourceCountDic = new Dictionary<ItemSO, int>();
         private int _coin = 0;
 
+        private void Awake()
+        {
+            Bus<ItemMinusEvent>.OnEvent += HandleMinusItem;
+        }
+
+        private void OnDestroy()
+        {
+            Bus<ItemMinusEvent>.OnEvent -= HandleMinusItem;
+            
+        }
+
         private void Start()
         {
             PlusCoin(5000);
+        }
+
+        private void HandleMinusItem(ItemMinusEvent evt)
+        {
+            MinusItem(evt.item, evt.count);
         }
 
         private void SetItem(ItemSO keyItem, int count)
@@ -30,6 +48,10 @@ namespace PSW.Code.Container
 
                 _changeItem.KeyItem = keyItem;
                 _changeItem.Count = countValue;
+
+                if (countValue <= 0)
+                    Bus<ItemNotHaveEvent>.Raise(new ItemNotHaveEvent(keyItem));
+
                 Bus<ChangeItem>.Raise(_changeItem);
 
                 return;
@@ -43,7 +65,6 @@ namespace PSW.Code.Container
         public void PlusItem(ItemSO keyItem, int plusCount)
         {
             SetItem(keyItem, plusCount);
-            Debug.Log(GetItemCount(keyItem));
         }
         public void MinusItem(ItemSO keyItem, int minusCount)
         {

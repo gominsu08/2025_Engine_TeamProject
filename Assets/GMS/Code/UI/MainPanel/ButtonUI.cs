@@ -40,10 +40,19 @@ namespace GMS.Code.UI.MainPanel
             gameObject.SetActive(true);
         }
 
-        public void SetVisualDisable()
+        public void SetVisualDisable(bool isDisable = true)
         {
-            button.enabled = false;
-            button.onClick.RemoveAllListeners();
+
+
+            if (!isDisable)
+            {
+                button.enabled = true;
+            }
+            else
+            {
+                button.enabled = false;
+                button.onClick.RemoveAllListeners();
+            }
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -58,6 +67,13 @@ namespace GMS.Code.UI.MainPanel
         {
             if (_isNotToolBar) return;
             _toolBarUI.DisableUI();
+        }
+
+        public void SetColor(Color notSelectColor)
+        {
+            var color = button.colors;
+            color.normalColor = notSelectColor;
+            button.colors = color;
         }
     }
 }
