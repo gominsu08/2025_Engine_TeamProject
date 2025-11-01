@@ -1,3 +1,4 @@
+using csiimnida.CSILib.SoundManager.RunTime;
 using GMS.Code.Core.Events;
 using GMS.Code.Items;
 using PSW.Code.Container;
@@ -266,6 +267,7 @@ namespace GMS.Code.Core.System.Maps
             tile.Init(tileInfo, resourceContainer, this, !isStartTileSet);
             _tileCount++;
             _surface.BuildNavMesh();
+            SoundManager.Instance.PlaySound("LandPurchase");
         }
 
         public void StartTileSet()
