@@ -57,7 +57,6 @@ namespace PSW.Code.Payment
                 SoundManager.Instance.PlaySound(_soundName);
 
             _dDayPaymentCoin += oneDayPlusCoin * evt.Day;
-            SetTargetCoinText();
             _coinText.text = _dDayPaymentCoin.ToString();
             _coinText.ForceMeshUpdate();
             _isNotPayment = true;
@@ -105,7 +104,7 @@ namespace PSW.Code.Payment
             }
         }
 
-        private void SetTargetCoinText()
+        public void SetTargetCoinText()
         {
             if (paymentPanel.GetIsStopMove() == false) return;
 
