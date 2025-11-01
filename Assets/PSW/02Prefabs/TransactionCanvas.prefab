@@ -1367,6 +1367,7 @@ GameObject:
   - component: {fileID: 8751334933374804989}
   - component: {fileID: 633539644623608894}
   - component: {fileID: 5913432564214374498}
+  - component: {fileID: 4604131488224824944}
   m_Layer: 5
   m_Name: TransactionCanvas
   m_TagString: Untagged
@@ -1472,6 +1473,18 @@ MonoBehaviour:
   isStartOpen: 1
   isOpen: 0
   time: 4
+--- !u!114 &4604131488224824944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8810723798573004141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1be5ad13314fdca4283dd08ff2ac83b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9217313616478032137
 GameObject:
   m_ObjectHideFlags: 0
