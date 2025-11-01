@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7406361038275685347}
   - component: {fileID: 422555057833011570}
-  m_Layer: 0
+  - component: {fileID: 8413622723335373460}
+  - component: {fileID: 5369278402949863420}
+  m_Layer: 10
   m_Name: Excavator_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,6 +49,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInformationUIPrefab: {fileID: 1271544098867081445, guid: cf9847e5f430bb749ba4a95f3d96176c, type: 3}
   <machineSO>k__BackingField: {fileID: 11400000, guid: 47fa89c5ded888d4c9cdc69ea6f8e19f, type: 2}
+--- !u!65 &8413622723335373460
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825649627906300031}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.36, y: 0.75, z: 0.5}
+  m_Center: {x: -0.04, y: 0.16, z: -0.3}
+--- !u!208 &5369278402949863420
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825649627906300031}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.12, y: 0.375, z: 0.2}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.04, y: 0.16, z: -0.3}
+  m_TimeToStationary: 0.5
 --- !u!1001 &5212669869114364592
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -79,7 +79,7 @@ namespace GMS.Code.Core.System.Maps
         private void TileSelect()
         {
             animator.SetMaterial(true);
-            transform.DOMoveY(_startYPos + 0.5f, 0.2f);
+            transform.DOMoveY(_startYPos + 0.5f, 0.2f).OnComplete(() => Bus<NavMeshSurfaceBaceEvent>.Raise(new NavMeshSurfaceBaceEvent()));
         }
 
         public virtual void UnSelect()
@@ -87,7 +87,7 @@ namespace GMS.Code.Core.System.Maps
             _isSelect = false;
             Bus<TileUnSelectEvent>.Raise(new TileUnSelectEvent(TileInfo));
             animator.SetMaterial(false);
-            transform.DOMoveY(_startYPos, 0.2f);
+            transform.DOMoveY(_startYPos, 0.2f).OnComplete(() => Bus<NavMeshSurfaceBaceEvent>.Raise(new NavMeshSurfaceBaceEvent()));
             DisableAllGhost();
         }
 

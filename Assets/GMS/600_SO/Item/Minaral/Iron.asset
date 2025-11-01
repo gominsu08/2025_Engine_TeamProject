@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Iron
   m_EditorClassIdentifier: 
   itemName: "\uCCA0"
+  itemDescription: "\uCCA0\uC774 \uCCA0\uCCA0 \uB118\uCCD0"
   icon: {fileID: 21300000, guid: 370cf9be3d678a4469159ec0d59f3045, type: 3}
   isStackable: 1
   maxStack: 99
   sellMoney: 900
+  fuelAmount: 0
   itemType: 1
   machineType: 2
   tier: 3

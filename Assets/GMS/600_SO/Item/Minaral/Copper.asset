@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: Copper
   m_EditorClassIdentifier: 
   itemName: "\uAD6C\uB9AC"
+  itemDescription: "\uAD6C\uB9AC\uAC00 \uC774\uB807\uAC8C \uBE44\uC2FC \uBB3C\uAC74\uC774\uB77C\uB2C8
+    \\n<size=12>\uC5BC\uB978 \uAD6C\uB9AC\uB358\uC804\uC744 \uCC3E\uC73C\uB7EC..."
   icon: {fileID: 21300000, guid: 2ffd3cdfbf63cba4c90c294730935a74, type: 3}
   isStackable: 1
   maxStack: 99
   sellMoney: 850
+  fuelAmount: 0
   itemType: 1
   machineType: 2
   tier: 3

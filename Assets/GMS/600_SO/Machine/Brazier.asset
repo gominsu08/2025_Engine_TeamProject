@@ -17,7 +17,7 @@ MonoBehaviour:
     \uAE30\uACC4\uC785\uB2C8\uB2E4."
   machineTier: 0
   machineType: 1
-  machineIcon: {fileID: 21300000, guid: d3fc0ab74e6bca14fa7bf032ea76899b, type: 3}
+  machineIcon: {fileID: 21300000, guid: 325c56338dc99474c96ebb449472426b, type: 3}
   maxCarryingValue: 30
   machinePrefab: {fileID: -1561837488643959269, guid: 757c221a1ea60944e9e6b999b549e771, type: 3}
   itemList:

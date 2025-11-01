@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2861402669860577352}
   - component: {fileID: 7956922690883076129}
-  m_Layer: 0
+  - component: {fileID: 7305573489969094372}
+  - component: {fileID: 4522570328629975983}
+  m_Layer: 10
   m_Name: Logging_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,6 +49,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInformationUIPrefab: {fileID: 1271544098867081445, guid: cf9847e5f430bb749ba4a95f3d96176c, type: 3}
   <machineSO>k__BackingField: {fileID: 11400000, guid: 2eb235811d023664e9bfe2126f4adf06, type: 2}
+--- !u!65 &7305573489969094372
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203887581150462942}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.32, y: 0.39, z: 0.71}
+  m_Center: {x: 0.02, y: 0.21, z: 0.32}
+--- !u!208 &4522570328629975983
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203887581150462942}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.09, y: 0.13, z: 0.355}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.02, y: 0.21, z: 0.32}
+  m_TimeToStationary: 0.5
 --- !u!1 &9045910804454919074
 GameObject:
   m_ObjectHideFlags: 0

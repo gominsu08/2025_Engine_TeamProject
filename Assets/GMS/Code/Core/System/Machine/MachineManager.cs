@@ -1,15 +1,14 @@
 ﻿using DG.Tweening;
 using GMS.Code.Core.Events;
 using GMS.Code.Core.System.Maps;
-using GMS.Code.Items;
 using GMS.Code.UI.MainPanel;
 using GMS.Code.Utill;
 using PSW.Code.Container;
 using System;
 using System.Collections.Generic;
-using System.Resources;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.Assertions.Must;
 
 namespace GMS.Code.Core.System.Machines
 {
@@ -25,7 +24,7 @@ namespace GMS.Code.Core.System.Machines
 
     public class MachineAndTileInfoPair
     {
-        public         Machine machine;
+        public Machine machine;
         public TileInformation tileInformation;
 
         public MachineAndTileInfoPair(Machine target, TileInformation tileInfo)
@@ -120,6 +119,14 @@ namespace GMS.Code.Core.System.Machines
             machineAndTileInfoPairs.Add(pair);
         }
 
+        public List<Machine> GetAllMachine()
+        {
+            List<Machine> machines = new List<Machine>();
+            foreach (var machine in machineAndTileInfoPairs)
+                machines.Add(machine.machine);
+            return machines;
+        }
+
         public void Update()
         {
             for (int i = 0; i < machineAndTileInfoPairs.Count; i++)
@@ -163,8 +170,8 @@ namespace GMS.Code.Core.System.Machines
                     {
                         Machine machine = Instantiate(machineSO.machinePrefab, tileInfo.tileObject.transform);
                         machine.transform.position += Vector3.up * 0.5f;
-                        machine.transform.DOScale(2,0.1f);
-                        machine.MachineInit(tileInfo,_container);
+                        machine.transform.DOScale(2, 0.1f);
+                        machine.MachineInit(tileInfo, _container);
                         machine.MachineEnable();
                         MachineContainer.AddMachine(machine, tileInfo);
                     }
@@ -192,6 +199,48 @@ namespace GMS.Code.Core.System.Machines
         internal void DestroyMachine(TileInformation tileInfo)
         {
             MachineContainer.RemoveMachine(tileInfo);
+        }
+
+        internal List<TileInformation> GetTileInfoToHasMachine(List<TileInformation> iteList)
+        {
+            List<TileInformation> result = new List<TileInformation>();
+            result = iteList.Aggregate(new List<TileInformation>(), (list, item) =>
+            {
+                Machine machine = MachineContainer.GetMachintToTileInfo(item);
+                if (machine != null)
+                {
+                    if (machine.IsCanTake())
+                    {
+                        list.Add(item);
+                    }
+                }
+                return list;
+            });
+
+            return result;
+        }
+
+        public Machine GetTileInfoToHasCarrying()
+        {
+            Machine result = null;
+
+            List<Machine> temp = MachineContainer.GetAllMachine().Aggregate(new List<Machine>(), (list, item) =>
+            {
+                if (item.IsCanTake())
+                {
+                    list.Add((Machine)item);
+                }
+                return list;
+            });
+
+            if(temp.Count > 0)
+            {
+                result = temp[UnityEngine.Random.Range(0, temp.Count)];
+                Debug.Log(result);
+            }
+            
+
+            return result;
         }
     }
 }

@@ -12,10 +12,17 @@ namespace GMS.Code.Core.System.Maps
 {
     public class Storage : MonoBehaviour
     {
+        public static Storage Instance { get; private set; }
+
         private Dictionary<ItemSO,int> carryingItems = new Dictionary<ItemSO,int>();
 
         public void Init()
         {
+            if (Instance != null)
+                Destroy(gameObject);
+
+            Instance = this;
+
             Bus<StorageItemAddEvent>.OnEvent += HandleAddItem;
         }
 
@@ -27,6 +34,7 @@ namespace GMS.Code.Core.System.Maps
         private void HandleAddItem(StorageItemAddEvent evt)
         {
             AddItem(evt.Item,evt.Value);
+            Bus<CenterTilePanelRefresh>.Raise(new CenterTilePanelRefresh());
         }
 
         public void AddItem(ItemSO item, int value)

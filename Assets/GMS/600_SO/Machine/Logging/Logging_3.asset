@@ -16,7 +16,7 @@ MonoBehaviour:
   machineDescription: 
   machineTier: 3
   machineType: 4
-  machineIcon: {fileID: 21300000, guid: d3fc0ab74e6bca14fa7bf032ea76899b, type: 3}
+  machineIcon: {fileID: 21300000, guid: cd90a44ec36690640bb78b09370ce54f, type: 3}
   maxCarryingValue: 50
   machinePrefab: {fileID: 1073664063575248446, guid: e25126d52e9ed1641820882139e90a94, type: 3}
   itemList:

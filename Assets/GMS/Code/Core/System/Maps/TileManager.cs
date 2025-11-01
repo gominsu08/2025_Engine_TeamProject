@@ -2,11 +2,14 @@ using GMS.Code.Core.Events;
 using GMS.Code.Items;
 using PSW.Code.Container;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.AI.Navigation;
+using UnityEditor.Purchasing;
 using UnityEngine;
 
 namespace GMS.Code.Core.System.Maps
 {
-    public struct EndAddTileEvent:IEvent
+    public struct EndAddTileEvent : IEvent
     {
 
     }
@@ -70,7 +73,7 @@ namespace GMS.Code.Core.System.Maps
 
         public DefaultTile GetRandomTile(int curTileCount)
         {
-            if (curTileCount < 35)
+            if (curTileCount < 25)
                 return _tierOneTiles[Random.Range(0, _tierOneTiles.Count)];
             else if (curTileCount < 65)
             {
@@ -94,7 +97,7 @@ namespace GMS.Code.Core.System.Maps
                 {
                     selectTile = _1tile;
                 }
-                else if (randomValue <( curTileCount > 100 ? 0.7f : 0.5f))
+                else if (randomValue < (curTileCount > 100 ? 0.7f : 0.5f))
                 {
                     selectTile = _2tile;
                 }
@@ -130,7 +133,7 @@ namespace GMS.Code.Core.System.Maps
         {
             foreach (DefaultTile tile in tilePrefabs)
             {
-                if(tile is CenterTile center)
+                if (tile is CenterTile center)
                 {
                     _centerTile = center;
                     continue;
@@ -138,10 +141,11 @@ namespace GMS.Code.Core.System.Maps
                 else if (!(tile is ResourceTile resourceTile))
                 {
                     _tile = tile;
+                    _tierOneTiles.Add(tile);
                     continue;
                 }
 
-                
+
 
                 else if (resourceTile.GetResourceItem().tier == UI.MainPanel.Tier.FirstTier)
                 {
@@ -163,10 +167,13 @@ namespace GMS.Code.Core.System.Maps
         }
     }
 
+    public struct NavMeshSurfaceBaceEvent : IEvent { }
+
     public class TileManager : MonoBehaviour
     {
         public int TileBuyPrice => 1000 + ((_tileCount - initialTileCount) * 200);
 
+        [SerializeField] private NavMeshSurface _surface;
         [SerializeField] private List<DefaultTile> TilePrefabs;
         [SerializeField] private ResourceContainer resourceContainer;
         [SerializeField] private int initialTileCount = 9;
@@ -179,6 +186,18 @@ namespace GMS.Code.Core.System.Maps
             _tileContainer = new TileContainer(TilePrefabs);
             StartTileSet();
             Bus<TileBuyEvent>.OnEvent += HandleBuyTileEvent;
+            Bus<NavMeshSurfaceBaceEvent>.OnEvent += HandleTileSelect;
+        }
+
+        private void OnDestroy()
+        {
+            Bus<TileBuyEvent>.OnEvent -= HandleBuyTileEvent;
+            Bus<NavMeshSurfaceBaceEvent>.OnEvent -= HandleTileSelect;
+        }
+
+        private void HandleTileSelect(NavMeshSurfaceBaceEvent evt)
+        {
+            _surface.BuildNavMesh();
         }
 
         private void HandleBuyTileEvent(TileBuyEvent evt)
@@ -247,6 +266,7 @@ namespace GMS.Code.Core.System.Maps
             tileInfo.tileObject = tile;
             tile.Init(tileInfo, resourceContainer, this, !isStartTileSet);
             _tileCount++;
+            _surface.BuildNavMesh();
         }
 
         public void StartTileSet()
@@ -270,6 +290,8 @@ namespace GMS.Code.Core.System.Maps
                 CreateTile(result, true);
                 tiles.Add(result);
             }
+
+
         }
 
         private DefaultTile GetTilePrefab(bool isStartTileSet)
@@ -279,6 +301,8 @@ namespace GMS.Code.Core.System.Maps
             else
                 return _tileContainer.GetStartTile();
         }
+
+        public TileInformation GetRandomTile() => tiles[Random.Range(0, tiles.Count)];
 
         public TileInformation GetTileInfo(int x, int z)
         {
@@ -291,6 +315,19 @@ namespace GMS.Code.Core.System.Maps
                     result = tile;
                 }
             }
+
+            return result;
+        }
+
+        public List<TileInformation> GetTileToItem(ItemSO currentTargetItem)
+        {
+            List<TileInformation> result = new List<TileInformation>();
+            result = tiles.Aggregate(new List<TileInformation>(),(list , item) =>
+            {
+                if(item.item != null && item.item.itemName == currentTargetItem.itemName)
+                    list.Add(item);
+                return list;
+            });
 
             return result;
         }

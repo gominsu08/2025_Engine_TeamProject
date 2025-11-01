@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6925182377490310686}
   - component: {fileID: 7216326899110613325}
   - component: {fileID: 5972577069163688111}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GhostTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

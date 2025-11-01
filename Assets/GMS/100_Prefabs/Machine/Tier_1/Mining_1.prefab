@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6477817613031162811}
   - component: {fileID: 8958962736960530624}
+  - component: {fileID: 3876773039890620904}
+  - component: {fileID: 8389545482575949093}
   m_Layer: 0
   m_Name: Mining_1
   m_TagString: Untagged
@@ -47,6 +49,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInformationUIPrefab: {fileID: 1271544098867081445, guid: cf9847e5f430bb749ba4a95f3d96176c, type: 3}
   <machineSO>k__BackingField: {fileID: 11400000, guid: 40043edd24ca2934e918bfc46db3077d, type: 2}
+--- !u!65 &3876773039890620904
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178362910789558416}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.46, y: 0.72, z: 0.46}
+  m_Center: {x: 0, y: 0.12, z: 0.02}
+--- !u!208 &8389545482575949093
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178362910789558416}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.09, y: 0.36, z: 0.17}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.12, z: 0.02}
+  m_TimeToStationary: 0.5
 --- !u!1001 &2195361655836779041
 PrefabInstance:
   m_ObjectHideFlags: 0

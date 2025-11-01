@@ -29,7 +29,7 @@ namespace GMS.Code.UI.TileInfoUIPanel
             {
                 ItemPanel panel = Instantiate(prefab, parent);
                 panel.EnableForUI(item.itemSO.itemName,item.value,item.itemSO.icon);
-                parent.sizeDelta = new Vector2(parent.sizeDelta.x + 50,parent.sizeDelta.y);
+                parent.sizeDelta = new Vector2(parent.sizeDelta.x ,parent.sizeDelta.y + 50);
                 panels.Add(panel);
             }
             gameObject.SetActive(true);

@@ -18,4 +18,6 @@ namespace GMS.Code.Core.Events
             Value = value;
         }
     }
+
+    public struct CenterTilePanelRefresh : IEvent { }
 }

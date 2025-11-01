@@ -112,6 +112,8 @@ namespace GMS.Code.Core.System.Machines
             _curCarryingValue = 0;
             carryingValueChangeEvent?.Invoke(_curCarryingValue);
             CreateInfoPanelUI(_targetItemData, $"-{pair.value}", 2);
+            if (_warrningMassage != null)
+                _warrningMassage.DisableUI();
             return pair;
         }
 
