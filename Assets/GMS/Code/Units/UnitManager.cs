@@ -20,6 +20,11 @@ namespace GMS.Code.Units
         private void Start()
         {
             UnitCreate();
+            UnitCreate();
+            UnitCreate();
+            UnitCreate();
+            UnitCreate();
+            UnitCreate();
         }
 
         [ContextMenu("UnitCreate")]
