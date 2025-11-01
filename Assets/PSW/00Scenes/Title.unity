@@ -3019,7 +3019,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1162113086
 MonoBehaviour:
@@ -4526,6 +4526,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3c94af9ffb3370644a7ad3e0eda89ff5, type: 2}
   - {fileID: 11400000, guid: d98f2cddd847dd446967e620928376bd, type: 2}
   - {fileID: 11400000, guid: 4d0000a2196ace446932facafb480436, type: 2}
+  - {fileID: 11400000, guid: df8661babf1df254695c629cc0355fdf, type: 2}
+  - {fileID: 11400000, guid: c2296d313d6a0a94aa3d08e6a74bcfdc, type: 2}
+  - {fileID: 11400000, guid: 36aab9b022a603a49a79a5b3df91056f, type: 2}
   textMaskTrm: {fileID: 1881173631}
   tutorialText: {fileID: 1067520088}
   changeTime: 0.4
