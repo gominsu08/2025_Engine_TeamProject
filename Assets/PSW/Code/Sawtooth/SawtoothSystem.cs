@@ -63,7 +63,10 @@ namespace PSW.Code.Sawtooth
         public IEnumerator SetTime()
         {
             _rotationDir.z += _rotationValue;
-            SoundManager.Instance.PlaySound(soundName);
+
+            if(SoundManager.Instance != null)
+                SoundManager.Instance.PlaySound(soundName);
+            
             transform.DORotate(_rotationDir, 0.5f);
 
             yield return wait;

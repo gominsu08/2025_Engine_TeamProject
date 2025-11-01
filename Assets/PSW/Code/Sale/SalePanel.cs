@@ -1,3 +1,4 @@
+using csiimnida.CSILib.SoundManager.RunTime;
 using GMS.Code.Items;
 using PSW.Code.Container;
 using System;
@@ -23,7 +24,7 @@ namespace PSW.Code.Sale
         public UnityEvent OnResetEvent { private set; get; } = new ();
 
         private int addCoin = 0;
-
+        private string _soundName = "Sale";
         private void Start()
         {
             foreach (ItemSO item in itemListSO.itemSOList)
@@ -53,6 +54,9 @@ namespace PSW.Code.Sale
 
         public void SetAddCoin(int coin)
         {
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySound(_soundName);
+
             addCoin += coin;
             coinText.text = addCoin.ToString();
         }

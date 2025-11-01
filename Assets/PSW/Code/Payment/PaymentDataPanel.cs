@@ -1,3 +1,4 @@
+using csiimnida.CSILib.SoundManager.RunTime;
 using GMS.Code.Core;
 using PSW.Code.Container;
 using PSW.Code.TimeSystem;
@@ -21,6 +22,8 @@ namespace PSW.Code.Payment
         private GameWinEvent gameWinEvent;
 
         private int _dDayPaymentCoin;
+
+        private string _soundName = "Payment";
 
         private bool _isAutoPayment;
         private bool _isNotPayment;
@@ -49,6 +52,9 @@ namespace PSW.Code.Payment
 
         private void StartPayment(PaymentTimeEvent evt)
         {
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySound(_soundName);
+
             _dDayPaymentCoin += oneDayPlusCoin * evt.Day;
             SetTargetCoinText();
             _coinText.text = _dDayPaymentCoin.ToString();
