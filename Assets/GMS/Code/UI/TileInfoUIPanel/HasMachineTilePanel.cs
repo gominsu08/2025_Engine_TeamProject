@@ -12,7 +12,6 @@ namespace GMS.Code.UI.TileInfoUIPanel
         [SerializeField] private ResourceTierUI resourceTierUI;
         [SerializeField] private NextTIleBuyUI nextTierUI;
         [SerializeField] private DescriptionUI descriptionUI;
-        [SerializeField] private ResourceCarryingValueUI resourceCarryingValueUI;
 
         private MachineManager _machineManager;
         private TileInformation _tileInformation;
@@ -23,7 +22,6 @@ namespace GMS.Code.UI.TileInfoUIPanel
             _tileManager = tileManager;
             _machineManager = machineManager;
             machinePanelUI.Init();
-            resourceCarryingValueUI.Init(machineManager);
 
         }
 
@@ -52,7 +50,6 @@ namespace GMS.Code.UI.TileInfoUIPanel
                 descriptionUI.EnableForUI("아무것도 존재하지 않는 척박한 땅");
             }
 
-            resourceCarryingValueUI.EnableForUI(_tileInformation);
             nextTierUI.EnableForUI(_tileManager.TileBuyPrice);
         }
 
