@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GMS.Code.Core.System.Maps
+{
+    public interface IClickable
+    {
+        public void OnClick();
+    }
+}

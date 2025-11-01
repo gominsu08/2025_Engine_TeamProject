@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb16d186340c7044ac406c0204c2e1e, type: 3}
+  m_Name: Logging_3
+  m_EditorClassIdentifier: 
+  machineName: "\uBC8C\uBAA9\uAE30 Lv.3"
+  machineDescription: "\uCCB4\uC778\uC18C\uC758 \uC545\uB9C8\uC5D0\uAC8C \uC758\uB8B0\uB97C
+    \uD558\uC5EC\uB9CC\uB4E0 \uCD5C\uC0C1\uAE09\uC758 \uBC8C\uBAA9\uAE30"
+  machineTier: 3
+  machineType: 4
+  machineIcon: {fileID: 21300000, guid: cd90a44ec36690640bb78b09370ce54f, type: 3}
+  maxCarryingValue: 50
+  machinePrefab: {fileID: 1073664063575248446, guid: e25126d52e9ed1641820882139e90a94, type: 3}
+  itemList:
+  - itemSO: {fileID: 11400000, guid: 5f055f8e757160d46ae01178f05333ad, type: 2}
+    value: 120
+  - itemSO: {fileID: 11400000, guid: b495ee52d777314419676f28606c7288, type: 2}
+    value: 120
+  - itemSO: {fileID: 11400000, guid: 45c3d9db6dda4004bacad9bfe2501599, type: 2}
+    value: 55
+  - itemSO: {fileID: 11400000, guid: bf3b42d31b6b3d945b5cfa632b5b5e90, type: 2}
+    value: 25
+  - itemSO: {fileID: 11400000, guid: 4b6e90d5753aeb24c95e59e3f8876741, type: 2}
+    value: 30
+  - itemSO: {fileID: 11400000, guid: 06b42fe5832a39347bcbf73a51c257ec, type: 2}
+    value: 7
+  - itemSO: {fileID: 11400000, guid: 3979c8573bc52d149909addf4a966130, type: 2}
+    value: 10
+  tierAndValuePairs:
+  - tier: 1
+    value: 144
+  - tier: 2
+    value: 96
+  - tier: 3
+    value: 60
+  isMoney: 0

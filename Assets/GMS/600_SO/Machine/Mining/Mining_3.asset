@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb16d186340c7044ac406c0204c2e1e, type: 3}
+  m_Name: Mining_3
+  m_EditorClassIdentifier: 
+  machineName: "\uCC44\uAD74\uAE30 Lv.3"
+  machineDescription: "\uAC70\uC11D\uC758 \uD30C\uD3B8 \uC870\uCC28 \uCE98 \uC218
+    \uC788\uAC8C \uC7AC\uC791\uB418\uC5C8\uC9C0\uB9CC \uD3C9\uBC94\uD55C \uCC44\uAD74\uC6A9\uC73C\uB85C\uB9CC
+    \uC0AC\uC6A9\uB418\uB294 \uCD5C\uC0C1\uAE09 \uCC44\uAD74\uAE30"
+  machineTier: 3
+  machineType: 2
+  machineIcon: {fileID: 21300000, guid: 462295e4788cbbd4fa0790c943ef4a6e, type: 3}
+  maxCarryingValue: 50
+  machinePrefab: {fileID: 8019848042022798458, guid: d02cb440845fa4a429eade221e3f8b95, type: 3}
+  itemList:
+  - itemSO: {fileID: 11400000, guid: 5f055f8e757160d46ae01178f05333ad, type: 2}
+    value: 175
+  - itemSO: {fileID: 11400000, guid: 45c3d9db6dda4004bacad9bfe2501599, type: 2}
+    value: 35
+  - itemSO: {fileID: 11400000, guid: 84e59f83721736b44953d44f63ec8124, type: 2}
+    value: 25
+  - itemSO: {fileID: 11400000, guid: 4b6e90d5753aeb24c95e59e3f8876741, type: 2}
+    value: 35
+  - itemSO: {fileID: 11400000, guid: e73cbc7009db5bc47b84a86ceb81c61b, type: 2}
+    value: 20
+  - itemSO: {fileID: 11400000, guid: 06b42fe5832a39347bcbf73a51c257ec, type: 2}
+    value: 15
+  - itemSO: {fileID: 11400000, guid: 3979c8573bc52d149909addf4a966130, type: 2}
+    value: 3
+  tierAndValuePairs:
+  - tier: 1
+    value: 144
+  - tier: 2
+    value: 96
+  - tier: 3
+    value: 60
+  isMoney: 0

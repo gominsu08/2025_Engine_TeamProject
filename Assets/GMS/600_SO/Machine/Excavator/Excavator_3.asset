@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb16d186340c7044ac406c0204c2e1e, type: 3}
+  m_Name: Excavator_3
+  m_EditorClassIdentifier: 
+  machineName: "\uD3EC\uD06C\uB808\uC778 Lv3"
+  machineDescription: "\uAC00\uC774\uC544\uC758 \uCD95\uBCF5\uACFC \uC778\uB958\uC758
+    \uBAA8\uB4E0 \uAE30\uC220\uC744 \uC0AC\uC6A9\uD558\uC5EC \uB9CC\uB4E4\uC5B4\uC9C4
+    \uD3EC\uD06C\uB808\uC778"
+  machineTier: 3
+  machineType: 5
+  machineIcon: {fileID: 21300000, guid: d3fc0ab74e6bca14fa7bf032ea76899b, type: 3}
+  maxCarryingValue: 35
+  machinePrefab: {fileID: 7078631869662517048, guid: f06de05b8f6941e4f9f2f6eca97a61d8, type: 3}
+  itemList:
+  - itemSO: {fileID: 11400000, guid: b495ee52d777314419676f28606c7288, type: 2}
+    value: 175
+  - itemSO: {fileID: 11400000, guid: 45c3d9db6dda4004bacad9bfe2501599, type: 2}
+    value: 35
+  - itemSO: {fileID: 11400000, guid: 4b6e90d5753aeb24c95e59e3f8876741, type: 2}
+    value: 75
+  - itemSO: {fileID: 11400000, guid: 06b42fe5832a39347bcbf73a51c257ec, type: 2}
+    value: 5
+  - itemSO: {fileID: 11400000, guid: 3979c8573bc52d149909addf4a966130, type: 2}
+    value: 5
+  - itemSO: {fileID: 11400000, guid: efa4502ac4a796040a7fad9bc3c179c5, type: 2}
+    value: 60
+  - itemSO: {fileID: 11400000, guid: 30687136f1f662d40bf44df9450d4ae3, type: 2}
+    value: 100
+  - itemSO: {fileID: 11400000, guid: 75bca30c640cf2f4db4f7de5eedbf4c2, type: 2}
+    value: 8
+  - itemSO: {fileID: 11400000, guid: 3e2d3bf9c416a0249baa49013c5ffde9, type: 2}
+    value: 5
+  tierAndValuePairs:
+  - tier: 1
+    value: 120
+  - tier: 2
+    value: 72
+  isMoney: 0
