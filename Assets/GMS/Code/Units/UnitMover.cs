@@ -26,7 +26,7 @@ namespace GMS.Code.Units
             _isMove = false;
             _agent = GetComponent<NavMeshAgent>();
             _agent.speed = moveSpeed;
-
+            _agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
         }
 
         public void Update()

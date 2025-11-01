@@ -188,9 +188,13 @@ namespace GMS.Code.Core.System.Machines
 
             ItemAndValuePair pair = new ItemAndValuePair(_items[index].itemSO, _items[index].value);
             pair.value = Mathf.Clamp(pair.value, 0, maxValue);
+            _curCarryingValue -= pair.value;
 
             if (_items[index].value > pair.value)
+            {
                 _items[index].value -= pair.value;
+
+            }
             else
                 _items.RemoveAt(index);
 

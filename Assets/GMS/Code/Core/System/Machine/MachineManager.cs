@@ -66,6 +66,8 @@ namespace GMS.Code.Core.System.Machines
         public int GetMaxCarrayingValue(TileInformation info)
         {
             Machine machine = GetMachintToTileInfo(info);
+            if (machine == null)
+                return 0;
             return machine.machineSO.maxCarryingValue;
         }
 

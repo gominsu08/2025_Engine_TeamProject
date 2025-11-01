@@ -47,16 +47,19 @@ namespace GMS.Code.Units
             //여기까지 들어왔으면 Pair안에 내용물은 무조건 존재한다.
             ItemAndValuePair pair = TargetMachine.TakeCarraringValue(_manager.UnitCarryingAmount - _count);
 
-            if (_currentTargetItem == null)
+            if (_currentTargetItem == null && pair != null && pair.itemSO != null)
             {
                 _currentTargetItem = pair.itemSO;
                 backpack.gameObject.SetActive(true);
             }
 
-            if (_count == 0)
-                _count = pair.value;
-            else 
-                _count += pair.value;
+            if(pair != null)
+            {
+                if (_count == 0)
+                    _count = pair.value;
+                else
+                    _count += pair.value;
+            }
         }
 
         public void PutInStorage()
