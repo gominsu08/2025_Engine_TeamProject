@@ -5,26 +5,38 @@ using UnityEngine.InputSystem;
 
 public class Transaction : MonoBehaviour
 {
+    private static bool _isStartTransaction;
     [SerializeField] private bool isStartOpen = true;
     [SerializeField] private bool isOpen;
     [SerializeField] private float time = 3;
     private List<TransactionPanel> _transactionPanelList;
 
+    private bool isChangeStart;
+
     private void Awake()
     {
         _transactionPanelList = GetComponentsInChildren<TransactionPanel>().ToList();
-        _transactionPanelList.ForEach(v => v.Init(time, isOpen));
+
+        if (_isStartTransaction == false && isOpen)
+        {
+            _transactionPanelList.ForEach(v => v.Init(time, isOpen));
+            _isStartTransaction = true;
+            isChangeStart = true;
+        }
+        else
+            _transactionPanelList.ForEach(v => v.Init(time, false));
     }
 
     private async void Start()
     {
         Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
         Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow);
-        if (isStartOpen)
+        if (isStartOpen || _isStartTransaction && isChangeStart == false)
         {
             await Awaitable.WaitForSecondsAsync(0.1f);
             FadeOut();
         }
+
     }
 
     public void FadeIn(string loadSceneName) => _transactionPanelList.ForEach(v => v.CloseTransaction(loadSceneName));
