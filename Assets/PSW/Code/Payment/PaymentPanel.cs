@@ -6,6 +6,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PSW.Code.Payment
 {
@@ -14,6 +15,7 @@ namespace PSW.Code.Payment
         [SerializeField] private SawtoothSystem sawtoothSystem;
         [SerializeField] private float popUpValue;
         [SerializeField] private float timeValue;
+        [SerializeField] private UnityEvent OnStopMovePanelEvent;
 
         private WaitForSeconds wait = new WaitForSeconds(0.5f);
 
@@ -75,6 +77,7 @@ namespace PSW.Code.Payment
             {
                 _isStopPanelMove = true;
                 sawtoothSystem.SawtoothStop(false);
+                OnStopMovePanelEvent?.Invoke();
             }
         }
         public bool GetIsStopMove() => _isStopPanelMove;

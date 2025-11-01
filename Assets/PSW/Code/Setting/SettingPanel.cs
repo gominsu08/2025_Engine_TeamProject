@@ -1,3 +1,5 @@
+using GMS.Code.Core;
+using PSW.Code.Input;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -9,12 +11,27 @@ public class SettingPanel : MonoBehaviour
 {
     [SerializeField] private AudioMixer _mixer;
     [SerializeField] private List<VolumeData> volumeTextList;
+    [SerializeField] private Toggle paymentToggle;
+
+    private AutoPaymentToggle _autoPaymentToggle = new AutoPaymentToggle();
 
     private void Start()
     {
         foreach (VolumeData text in volumeTextList)
             text.Init(_mixer);
+
+        paymentToggle.onValueChanged.AddListener(SetAutoPayment);
     }
+    private void SetAutoPayment(bool isAuto)
+    {
+        _autoPaymentToggle.IsAuto = isAuto;
+        Bus<AutoPaymentToggle>.Raise(_autoPaymentToggle);
+    }
+}
+
+public struct AutoPaymentToggle : IEvent
+{
+    public bool IsAuto;
 }
 
 [Serializable]

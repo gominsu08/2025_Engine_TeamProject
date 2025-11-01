@@ -1,3 +1,4 @@
+using csiimnida.CSILib.SoundManager.RunTime;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ namespace PSW.Code.Sawtooth
     public class SawtoothSystem : MonoBehaviour
     {
         [SerializeField] private List<SawtoothSystem> sawtoothSystemList;
+        private string soundName = "Sawtooth";
+
         private float _rotationValue;
         private Vector3 _rotationDir;
         private Vector3 _startDir;
@@ -60,7 +63,7 @@ namespace PSW.Code.Sawtooth
         public IEnumerator SetTime()
         {
             _rotationDir.z += _rotationValue;
-
+            SoundManager.Instance.PlaySound(soundName);
             transform.DORotate(_rotationDir, 0.5f);
 
             yield return wait;

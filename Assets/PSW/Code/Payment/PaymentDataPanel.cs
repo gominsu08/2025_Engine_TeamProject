@@ -21,7 +21,8 @@ namespace PSW.Code.Payment
         private GameWinEvent gameWinEvent;
 
         private int _dDayPaymentCoin;
-        
+
+        private bool _isAutoPayment;
         private bool _isNotPayment;
         private bool _isLastDay;
 
@@ -30,6 +31,7 @@ namespace PSW.Code.Payment
             Bus<PaymentTimeEvent>.OnEvent += StartPayment;
             Bus<OneDayTimeEvent>.OnEvent += OneDay;
             Bus<ChangeCoinEvent>.OnEvent += ChangeCoin;
+            Bus<AutoPaymentToggle>.OnEvent += SetIsAutoPayment;
         }
 
         private void OnDestroy()
@@ -37,6 +39,12 @@ namespace PSW.Code.Payment
             Bus<PaymentTimeEvent>.OnEvent -= StartPayment;
             Bus<OneDayTimeEvent>.OnEvent -= OneDay;
             Bus<ChangeCoinEvent>.OnEvent -= ChangeCoin;
+            Bus<AutoPaymentToggle>.OnEvent -= SetIsAutoPayment;
+        }
+
+        private void SetIsAutoPayment(AutoPaymentToggle auto)
+        {
+            _isAutoPayment = auto.IsAuto;
         }
 
         private void StartPayment(PaymentTimeEvent evt)
@@ -63,6 +71,13 @@ namespace PSW.Code.Payment
         private void ChangeCoin(ChangeCoinEvent evt)
         {
             SetTargetCoinText();
+        }
+
+        public void AutoPayment()
+        {
+            if (_isAutoPayment == false) return;
+
+            PaymentButtonClick();
         }
 
         public void PaymentButtonClick()
