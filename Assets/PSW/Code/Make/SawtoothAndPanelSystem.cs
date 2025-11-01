@@ -4,6 +4,7 @@ using GMS.Code.Core.System.Machines;
 using GMS.Code.Core.System.Maps;
 using GMS.Code.UI;
 using GMS.Code.UI.MainPanel;
+using GMS.Code.Units;
 using GMS.Code.Utill;
 using PSW.Code.Container;
 using PSW.Code.Sawtooth;
@@ -28,10 +29,12 @@ namespace PSW.Code.Make
         [SerializeField] private MachineManager machineManager;
         [SerializeField] private ResourceContainer container;
         [SerializeField] private MakePanel makePanel;
+        [SerializeField] private UnitManager unitManager;
 
         [Header("Panels")]
         [SerializeField] private ResourceMiningPanel miningPanel;
         [SerializeField] private BuildingMachinePanelContainer buildingMachinePanel;
+        [SerializeField] private HeadQuarterPanel headQuarterPanel;
         [SerializeField] private ToolBarUI toolBarUI;
 
         [Header("Sawtooth")]
@@ -83,8 +86,17 @@ namespace PSW.Code.Make
                 if (info != null)
                 {
                     if (type == MachineType.None)
-                        buildingMachinePanel.EnableForUI(info.item, info);
-                    else if(type == MachineType.Brazier)
+                    {
+                        if (!(info.tileObject is CenterTile center))
+                        {
+                            buildingMachinePanel.EnableForUI(info.item, info);
+                        }
+                        else
+                        {
+                            headQuarterPanel.EnableForUI(container, unitManager);
+                        }
+                    }
+                    else if (type == MachineType.Brazier)
                     {
 
                     }
@@ -106,17 +118,17 @@ namespace PSW.Code.Make
             Disable();
             MachineType typeEnum = machineManager.IsMachineType(info);
 
-            if(_isLeft == false)
+            if (_isLeft == false)
             {
                 if (typeEnum == MachineType.None)
                 {
-                    if(!(info.tileObject is CenterTile center))
+                    if (!(info.tileObject is CenterTile center))
                     {
                         buildingMachinePanel.EnableForUI(info.item, info);
                     }
                     else
                     {
-
+                        headQuarterPanel.EnableForUI(container, unitManager);
                     }
                 }
                 else if (typeEnum == MachineType.Brazier)
@@ -173,6 +185,7 @@ namespace PSW.Code.Make
             {
                 miningPanel.DisableUI();
                 buildingMachinePanel.DisableUI();
+                headQuarterPanel.DisableUI();
             }
 
         }
@@ -181,6 +194,7 @@ namespace PSW.Code.Make
         {
             miningPanel.DisableUI();
             buildingMachinePanel.DisableUI();
+            headQuarterPanel.DisableUI();
         }
     }
 }

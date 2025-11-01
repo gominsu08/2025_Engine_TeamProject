@@ -4,7 +4,6 @@ using PSW.Code.Container;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.AI.Navigation;
-using UnityEditor.Purchasing;
 using UnityEngine;
 
 namespace GMS.Code.Core.System.Maps
@@ -322,9 +321,9 @@ namespace GMS.Code.Core.System.Maps
         public List<TileInformation> GetTileToItem(ItemSO currentTargetItem)
         {
             List<TileInformation> result = new List<TileInformation>();
-            result = tiles.Aggregate(new List<TileInformation>(),(list , item) =>
+            result = tiles.Aggregate(new List<TileInformation>(), (list, item) =>
             {
-                if(item.item != null && item.item.itemName == currentTargetItem.itemName)
+                if (item.item != null && item.item.itemName == currentTargetItem.itemName)
                     list.Add(item);
                 return list;
             });

@@ -2,19 +2,17 @@ using GMS.Code.Core.System.Machines;
 using GMS.Code.Items;
 using GMS.Code.UI.MainPanel;
 using System;
-using System.Threading;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 namespace GMS.Code.UI.Braziers
 {
-    public class SelectItemPanel : MonoBehaviour, IUIElement<Action<ItemSO,ItemSO>,Brazier>
+    public class SelectItemPanel : MonoBehaviour, IUIElement<Action<ItemSO, ItemSO>, Brazier>
     {
         [SerializeField] private ButtonUI resourceButton, fuelButton;
         [SerializeField] private SelectItemFuelPanel selectItemFuelPanel;
         [SerializeField] private SelectItemResourcePanel selectItemResourcePanel;
 
-        private Action<ItemSO,ItemSO> action;
+        private Action<ItemSO, ItemSO> action;
         private Brazier _currentBrazier;
 
         public void DisableUI()
@@ -26,8 +24,8 @@ namespace GMS.Code.UI.Braziers
 
         private void Awake()
         {
-            resourceButton.Init(null,true);
-            fuelButton.Init(null,true);
+            resourceButton.Init(null, true);
+            fuelButton.Init(null, true);
         }
 
         public void EnableForUI(Action<ItemSO, ItemSO> callback, Brazier brazier)
@@ -35,14 +33,14 @@ namespace GMS.Code.UI.Braziers
             action = callback;
             _currentBrazier = brazier;
             selectItemResourcePanel.EnableForUI(callback);
-            resourceButton.EnableForUI(new ToolBarUIData(),() => RefreshUI(true));
-            fuelButton.EnableForUI(new ToolBarUIData(),() => RefreshUI(false));
+            resourceButton.EnableForUI(new ToolBarUIData(), () => RefreshUI(true));
+            fuelButton.EnableForUI(new ToolBarUIData(), () => RefreshUI(false));
             gameObject.SetActive(true);
         }
 
         public void RefreshUI(bool isResource)
         {
-            if(isResource)
+            if (isResource)
             {
                 selectItemFuelPanel.DisableUI();
                 selectItemResourcePanel.EnableForUI(action);

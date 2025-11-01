@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundName: Generate
   soundType: 1
-  clip: {fileID: 8300000, guid: 124e6298bc9670b4abd7122e64292c71, type: 3}
+  clip: {fileID: 8300000, guid: 8fc5f1f317506164d88cea02bd4e5e72, type: 3}
   loop: 0
-  Priority: 128
-  volume: 1
-  pitch: 1
-  stereoPan: 0
+  Priority: 135
+  volume: 0.908
+  pitch: 2.08
+  stereoPan: -0.006
   SpatialBlend: 0
   RandomPitch: 0
   MinPitch: 0.95

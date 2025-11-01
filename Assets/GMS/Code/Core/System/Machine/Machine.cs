@@ -89,6 +89,7 @@ namespace GMS.Code.Core.System.Machines
 
         protected ItemInformationUI CreateInfoPanelUI(ItemSO targetItemData, string newValue, float duration)
         {
+
             Vector3 pos = new Vector3(_tileInformation.x, 0, _tileInformation.z) + new Vector3(0, 1.3f, -0.4f);
 
             ItemInformationUI ui = Instantiate(itemInformationUIPrefab, pos, itemInformationUIPrefab.transform.rotation);
@@ -111,6 +112,7 @@ namespace GMS.Code.Core.System.Machines
             ItemAndValuePair pair = new ItemAndValuePair(_targetItemData, value);
             _curCarryingValue = 0;
             carryingValueChangeEvent?.Invoke(_curCarryingValue);
+            if(pair.value != 0)
             CreateInfoPanelUI(_targetItemData, $"-{pair.value}", 2);
             if (_warrningMassage != null)
                 _warrningMassage.DisableUI();

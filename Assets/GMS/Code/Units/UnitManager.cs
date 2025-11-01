@@ -12,6 +12,8 @@ namespace GMS.Code.Units
         [SerializeField] private Unit unitPrefab;
         [SerializeField] private TileManager tileManager;
         [SerializeField] private MachineManager machineManager;
+
+        public int UnitCount => curUnit.Count;
  
         private List<Unit> curUnit = new List<Unit>();
 

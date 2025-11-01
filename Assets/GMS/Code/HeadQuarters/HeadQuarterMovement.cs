@@ -1,4 +1,6 @@
 ﻿using DG.Tweening;
+using GMS.Code.Core;
+using GMS.Code.Core.Events;
 using GMS.Code.Core.System.Machines;
 using GMS.Code.Core.System.Maps;
 using PSW.Code.Container;
@@ -62,7 +64,7 @@ namespace GMS.Code.HeadQuarters
                     headQuarter.transform.DOMoveY(1, 3).OnComplete(() =>
                     {
                         List<ItemAndValuePair> list = Storage.Instance.TakeItemVlaue();
-
+                        Bus<CenterTilePanelRefresh>.Raise(new CenterTilePanelRefresh());
                         foreach (ItemAndValuePair item in list)
                         {
                             container.PlusItem(item.itemSO, item.value);

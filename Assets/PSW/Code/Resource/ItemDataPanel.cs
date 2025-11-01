@@ -7,7 +7,6 @@ using PSW.Code.Sawtooth;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.ShaderGraph.Legacy;
 using UnityEngine;
 
 namespace PSW.Code.Resource
@@ -37,9 +36,9 @@ namespace PSW.Code.Resource
         {
             _targetMoveValue = transform.localPosition.x;
             GetComponentsInChildren<TierPanel>().ToList().ForEach(v => _panelDic.Add(v.GetTier(), v));
-            
+
             Dictionary<Tier, List<ItemSO>> itemListDic = new Dictionary<Tier, List<ItemSO>>();
-            foreach(ItemSO item in itemListSO.itemSOList)
+            foreach (ItemSO item in itemListSO.itemSOList)
             {
                 if (itemListDic.TryGetValue(item.tier, out List<ItemSO> itemList))
                     itemList.Add(item);
@@ -52,8 +51,8 @@ namespace PSW.Code.Resource
             }
 
 
-            for(int i = 1; i <= (int)Tier.ThirdTier; ++i)
-                _panelDic[(Tier)i].Init(itemListDic[(Tier)i],resourceContainer);
+            for (int i = 1; i <= (int)Tier.ThirdTier; ++i)
+                _panelDic[(Tier)i].Init(itemListDic[(Tier)i], resourceContainer);
 
             _rectTransform = GetComponent<RectTransform>();
         }
@@ -98,5 +97,5 @@ namespace PSW.Code.Resource
         }
 
     }
-        
+
 }

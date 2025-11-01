@@ -1,11 +1,8 @@
 using GMS.Code.Core;
 using GMS.Code.Core.System.Machines;
 using GMS.Code.Items;
-using NUnit.Framework;
 using PSW.Code.Container;
-using System;
 using System.Collections.Generic;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 namespace GMS.Code.UI.Braziers
@@ -45,9 +42,9 @@ namespace GMS.Code.UI.Braziers
 
             foreach (ItemSO item in fuelItems)
             {
-                SelectItemFuelChild newChild = Instantiate(childPrefab,transform);
-                bool isCanPlus = container.IsTargetCountItem(item,1);
-                newChild.EnableForUI(item,_currentBrazier, isCanPlus, HandleResourceMinus, container);
+                SelectItemFuelChild newChild = Instantiate(childPrefab, transform);
+                bool isCanPlus = container.IsTargetCountItem(item, 1);
+                newChild.EnableForUI(item, _currentBrazier, isCanPlus, HandleResourceMinus, container);
                 _childs.Add(newChild);
                 parentSize += 50;
             }
@@ -58,7 +55,7 @@ namespace GMS.Code.UI.Braziers
 
         private void HandleResourceMinus(ItemSO target)
         {
-            container.MinusItem(target,1);
+            container.MinusItem(target, 1);
         }
 
         private void HandleChangeItemEvent(ChangeItem evt)
@@ -71,7 +68,7 @@ namespace GMS.Code.UI.Braziers
             for (int i = _childs.Count - 1; i >= 0; i--)
             {
                 bool isCanSelect = container.IsTargetCountItem(fuelItems[i], 1);
-                _childs[i].EnableForUI(fuelItems[i],_currentBrazier, isCanSelect, HandleResourceMinus, container);
+                _childs[i].EnableForUI(fuelItems[i], _currentBrazier, isCanSelect, HandleResourceMinus, container);
             }
         }
     }
