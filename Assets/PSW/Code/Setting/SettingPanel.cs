@@ -23,11 +23,17 @@ public class SettingPanel : MonoBehaviour
 
         paymentToggle.onValueChanged.AddListener(SetAutoPayment);
     }
+
+    private void OnDestroy()
+    {
+        paymentToggle.onValueChanged.RemoveListener(SetAutoPayment);
+    }
     private void SetAutoPayment(bool isAuto)
     {
         if (SoundManager.Instance != null)
             SoundManager.Instance.PlaySound(_soundName);
 
+        print("s");
         _autoPaymentToggle.IsAuto = isAuto;
         Bus<AutoPaymentToggle>.Raise(_autoPaymentToggle);
     }

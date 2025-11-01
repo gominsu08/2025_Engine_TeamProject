@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116eceed9c4834b4b91b0a1dea2777cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mixer: {fileID: 24100000, guid: a878d72fc8870604c8615ab2ac3dcfe8, type: 2}
+  _mixer: {fileID: 24100000, guid: 18dbd229627698846934e4865f1760c3, type: 2}
   volumeTextList:
   - Group: {fileID: 24300002, guid: 18dbd229627698846934e4865f1760c3, type: 2}
     Text: {fileID: 6163437088862073610}
