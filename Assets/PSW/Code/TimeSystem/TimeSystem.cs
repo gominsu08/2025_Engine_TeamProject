@@ -10,11 +10,8 @@ namespace PSW.Code.TimeSystem
         [SerializeField] private float oneDayTime = 300f;
         [SerializeField] private float deliveryTime = 112.5f;
         [SerializeField] private Transform transformParent;
+        [SerializeField] private SetDirectionalLight setDirectionalLight;
 
-        [SerializeField] private float minLightXValue;
-        [SerializeField] private Light directionalLight;
-
-        private bool _isMorning = true; 
         private int _day = 1;
 
         private bool _isOneDelivery;
@@ -31,6 +28,7 @@ namespace PSW.Code.TimeSystem
             _startTime = Time.time;
             sawtoothSystem = GetComponent<SawtoothSystem>();
             sawtoothSystem.StartSawtooth(oneDayTime * 2, true, transformParent);
+            setDirectionalLight.Init(oneDayTime);
         }
 
         private void Update()
@@ -50,11 +48,6 @@ namespace PSW.Code.TimeSystem
                 _startTime = Time.time;
                 _isOneDelivery = false;
             }
-        }
-
-        public void SetDirectionalLight()
-        {
-            //if()
         }
     }
     public struct PaymentTimeEvent : IEvent { public int Day; }

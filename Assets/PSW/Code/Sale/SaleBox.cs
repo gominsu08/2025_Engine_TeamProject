@@ -49,6 +49,11 @@ public class SaleBox : MonoBehaviour
         inputField.onEndEdit.AddListener(SetText);
     }
 
+    private void OnDestroy()
+    {
+        Bus<ChangeItem>.OnEvent -= SetCountText;
+    }
+
     private void SetText(string finalText)
     {
         bool isNumberOnly = finalText.All(char.IsDigit) && finalText.ToArray().Length > 0;

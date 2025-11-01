@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class GameEndPanel : MonoBehaviour
 {
+    [SerializeField] private Transaction transaction;
     [SerializeField] private SawtoothSystem rootSawtooth;
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private Transform sawtoothTrm;
@@ -28,8 +29,14 @@ public class GameEndPanel : MonoBehaviour
     {
         _moveValue = targetY / time;
         _moveTargetValue = transform.localPosition.y;
-        Bus<GameOverEvent>.OnEvent += (GameOver);
-        Bus<GameWinEvent>.OnEvent += (GameWin);
+        Bus<GameOverEvent>.OnEvent += GameOver;
+        Bus<GameWinEvent>.OnEvent += GameWin;
+    }
+
+    private void OnDestroy()
+    {
+        Bus<GameOverEvent>.OnEvent -= GameOver;
+        Bus<GameWinEvent>.OnEvent -= GameWin;
     }
 
     private void GameOver(GameOverEvent evt)
@@ -54,7 +61,12 @@ public class GameEndPanel : MonoBehaviour
 
     public void RePlay()
     {
-        SceneManager.LoadScene("MainScene");
+        transaction.FadeIn("MainScene");
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 
     private IEnumerator MovePanel()

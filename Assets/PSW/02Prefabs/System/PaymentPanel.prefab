@@ -650,8 +650,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b03c9b57936f5c741a6baa96a11b6c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paymentPanel: {fileID: 4470965903265589383}
   resourceContainer: {fileID: 0}
   _coinText: {fileID: 2058898347838796893}
+  lastDay: 7
   oneDayPlusCoin: 1000
   notTargetCoinColor: {r: 0.6226415, g: 0.059914548, b: 0.059914548, a: 1}
 --- !u!1 &7944185758481310577
