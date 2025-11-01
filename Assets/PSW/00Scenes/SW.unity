@@ -3066,6 +3066,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SawtoothClock
       objectReference: {fileID: 0}
+    - target: {fileID: 8254191028102141886, guid: a607cfe131dce8d478e9b009f14669fa, type: 3}
+      propertyPath: deliveryTime
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3556,11 +3560,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4839072424603197299, guid: 3cb6a554b0440b545a7b9a542591c8eb, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1920
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4839072424603197299, guid: 3cb6a554b0440b545a7b9a542591c8eb, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1080
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5537663451076719037, guid: 3cb6a554b0440b545a7b9a542591c8eb, type: 3}
       propertyPath: m_Name
