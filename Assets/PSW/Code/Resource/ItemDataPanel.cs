@@ -1,3 +1,4 @@
+using csiimnida.CSILib.SoundManager.RunTime;
 using DG.Tweening;
 using GMS.Code.Items;
 using GMS.Code.UI.MainPanel;
@@ -19,6 +20,7 @@ namespace PSW.Code.Resource
 
         [SerializeField] private float time;
 
+
         private Dictionary<Tier, TierPanel> _panelDic = new Dictionary<Tier, TierPanel>();
         private WaitForSeconds wait = new WaitForSeconds(0.5f);
 
@@ -28,6 +30,8 @@ namespace PSW.Code.Resource
         private int _moveCount;
 
         private float _targetMoveValue;
+
+        private string _soundName = "Button";
 
         private void Start()
         {
@@ -57,6 +61,10 @@ namespace PSW.Code.Resource
         public void PopUpPanel()
         {
             if (rootSawtooth.GetIsStopRotation() == false) return;
+
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySound(_soundName);
+
             _isLeft = !_isLeft;
             rootSawtooth.StartSawtooth(time, _isLeft, transform);
             _moveValue = _rectTransform.sizeDelta.x / time;

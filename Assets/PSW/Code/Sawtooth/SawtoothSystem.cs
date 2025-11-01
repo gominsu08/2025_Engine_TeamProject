@@ -9,6 +9,7 @@ namespace PSW.Code.Sawtooth
     public class SawtoothSystem : MonoBehaviour
     {
         [SerializeField] private List<SawtoothSystem> sawtoothSystemList;
+        [SerializeField] private bool notSound;
         private string soundName = "Sawtooth";
 
         private float _rotationValue;
@@ -23,7 +24,7 @@ namespace PSW.Code.Sawtooth
             _startDir = transform.eulerAngles;
         }
 
-        public void StartSawtooth(float time, bool isLeft, Transform parent)
+        public void StartSawtooth(float time, bool isLeft, Transform parent, bool sound = true)
         {
             _rotationDir = transform.eulerAngles;
             _rotationValue = 360f / time;
@@ -31,8 +32,8 @@ namespace PSW.Code.Sawtooth
             _rotationValue *= isLeft ? 1 : -1;
 
             StopAllCoroutines();
-            StartCoroutine(SetTime());
-            sawtoothSystemList.ForEach(v => v.StartSawtooth(time, !isLeft, parent));
+            StartCoroutine(SetTime(sound));
+            sawtoothSystemList.ForEach(v => v.StartSawtooth(time, !isLeft, parent, false));
 
             _isStopRotation = false;
             _isEndRotation = false;
@@ -60,11 +61,11 @@ namespace PSW.Code.Sawtooth
 
         public bool GetIsStopRotation() => _isStopRotation;
 
-        public IEnumerator SetTime()
+        public IEnumerator SetTime(bool sound)
         {
             _rotationDir.z += _rotationValue;
 
-            if(SoundManager.Instance != null)
+            if(SoundManager.Instance != null && sound && notSound == false)
                 SoundManager.Instance.PlaySound(soundName);
             
             transform.DORotate(_rotationDir, 0.5f);
@@ -72,7 +73,7 @@ namespace PSW.Code.Sawtooth
             yield return wait;
 
             if (_isEndRotation == false)
-                StartCoroutine(SetTime());
+                StartCoroutine(SetTime(sound));
             else
                 _isStopRotation = true;
         }

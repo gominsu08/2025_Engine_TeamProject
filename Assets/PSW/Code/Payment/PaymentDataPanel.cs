@@ -24,6 +24,7 @@ namespace PSW.Code.Payment
         private int _dDayPaymentCoin;
 
         private string _soundName = "Payment";
+        private string _buttonSoundName = "Button";
 
         private bool _isAutoPayment;
         private bool _isNotPayment;
@@ -88,6 +89,9 @@ namespace PSW.Code.Payment
 
         public void PaymentButtonClick()
         {
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySound(_buttonSoundName);
+
             if (paymentPanel.GetIsStopMove() == false) return;
 
             if (resourceContainer.IsTargetCoin(_dDayPaymentCoin))

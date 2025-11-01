@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sawtoothSystemList: []
+  notSound: 1
 --- !u!1 &1519311521335365050
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,6 +999,7 @@ MonoBehaviour:
   sawtoothSystemList:
   - {fileID: 4126939101225073541}
   - {fileID: 5044365935710989163}
+  notSound: 1
 --- !u!1 &5525107449793334017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1087,6 +1089,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sawtoothSystemList: []
+  notSound: 1
 --- !u!1 &5654468680564000863
 GameObject:
   m_ObjectHideFlags: 0
