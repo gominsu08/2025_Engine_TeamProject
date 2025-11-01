@@ -19,7 +19,10 @@ namespace PSW.Code.Sale
         public UnityEvent OnResetEvent { private set; get; } = new();
 
         private int addCoin = 0;
+        
         private string _soundName = "Sale";
+        private string _buttonSoundName = "Button";
+
         private void Start()
         {
             foreach (ItemSO item in itemListSO.itemSOList)
@@ -34,6 +37,9 @@ namespace PSW.Code.Sale
 
         public void ResetAddCoin()
         {
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySound(_buttonSoundName);
+
             OnResetEvent?.Invoke();
             addCoin = 0;
             coinText.text = addCoin.ToString();
@@ -41,6 +47,9 @@ namespace PSW.Code.Sale
 
         public void Sale()
         {
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySound(_soundName);
+
             OnSaleEvent?.Invoke();
             resourceContainer.PlusCoin(addCoin);
             addCoin = 0;
