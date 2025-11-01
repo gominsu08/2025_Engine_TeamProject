@@ -82,7 +82,20 @@ namespace GMS.Code.Units
                 if (mover.IsTargetMachine)
                 {
                     TakeItem();
-                    if (_count < _manager.UnitCarryingAmount)
+                    if (_currentTargetItem == null)
+                    {
+                        Machine machine = _machineManager.GetTileInfoToHasCarrying();
+
+                        if (machine == null)
+                        {
+                            StartCoroutine(WaitMachineFind());
+                        }
+                        else
+                        {
+                            SetTargetMachine(machine);
+                        }
+                    }
+                    else if (_count < _manager.UnitCarryingAmount)
                     {
                         //현재 아이템과 같은 타일에 머신이 존재하고 그 머신에 아이템이 있다면
                         List<TileInformation> iteList = _tileManager.GetTileToItem(_currentTargetItem); //같은 아이템 타일들
@@ -134,7 +147,7 @@ namespace GMS.Code.Units
         private IEnumerator WaitMachineFind()
         {
             animator.ChangeAnimation("Idle");
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(Random.Range(2.5f, 3.5f));
             Machine machine = _machineManager.GetTileInfoToHasCarrying();
             if (machine == null)
             {
