@@ -11,6 +11,12 @@ namespace GMS.Code.Core.System.Machines
     {
         public ItemSO itemSO;
         public int value;
+
+        public ItemAndValuePair(ItemSO itemSO, int value)
+        {
+            this.itemSO = itemSO;
+            this.value = value;
+        }
     }
 
     [Serializable]
@@ -24,9 +30,12 @@ namespace GMS.Code.Core.System.Machines
     public class MachineSO : ScriptableObject
     {
         public string machineName;
+        [TextArea]
+        public string machineDescription;
         public Tier machineTier;
         public MachineType machineType;
         public Sprite machineIcon;
+        public int maxCarryingValue;
         public Machine machinePrefab;
         public List<ItemAndValuePair> itemList = new List<ItemAndValuePair>();
         public List<TierAndValuePair> tierAndValuePairs = new List<TierAndValuePair>();

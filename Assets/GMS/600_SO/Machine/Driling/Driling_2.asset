@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Driling_2
   m_EditorClassIdentifier: 
   machineName: "\uC2DC\uCD94\uAE30 Lv.2"
+  machineDescription: 
   machineTier: 2
   machineType: 3
-  machineIcon: {fileID: 21300000, guid: d3fc0ab74e6bca14fa7bf032ea76899b, type: 3}
+  machineIcon: {fileID: 21300000, guid: 44cd124a13a77a74c8c8c2a312eff8b2, type: 3}
+  maxCarryingValue: 15
   machinePrefab: {fileID: 1967430548817887890, guid: 5ca22ec25f0fa594499ade8e31921a6d, type: 3}
   itemList:
   - itemSO: {fileID: 11400000, guid: 5f055f8e757160d46ae01178f05333ad, type: 2}

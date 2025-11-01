@@ -15,8 +15,6 @@ namespace GMS.Code.UI.MainPanel
         [SerializeField] private MachineSO machineSO;
         [SerializeField] private Color disableColor, defaultColor;
         [SerializeField] private ResourcePopup popup;
-        [SerializeField] private SawtoothSystem sawtooth;
-        [SerializeField] private Transform parent;
         private RectTransform MyRect => transform as RectTransform;
         private ToolBarUIData _toolBarUIData;
         private ToolBarUI _toolBarUI;
@@ -74,17 +72,12 @@ namespace GMS.Code.UI.MainPanel
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (!_isEnable) return;
-            sawtooth.StartSawtooth(10, true, parent);
             popup.EnableForUI();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             if (!_isEnable) return;
-
-            sawtooth.SawtoothStop();
-            sawtooth.KillDOTween();
-            sawtooth.ResetSawtooth();
             popup.DisableUI();
         }
     }

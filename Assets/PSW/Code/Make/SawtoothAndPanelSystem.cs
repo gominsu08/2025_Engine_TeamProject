@@ -66,16 +66,16 @@ namespace PSW.Code.Make
             RefreshUI(evt.info);
         }
 
-        private async void HandleTileUnSelectEvent(TileUnSelectEvent evt)
+        private void HandleTileUnSelectEvent(TileUnSelectEvent evt)
         {
             if ((_prevSelectTile != null && !(TileUtill.IsSame(evt.tileInfo, _prevSelectTile))) || evt.isBuy) return;
-            await WaitPanel();
+            Disable();
             _prevSelectTile = null;
         }
 
         private async Task WaitPanel(bool isLeft = false, TileInformation info = null, MachineType type = MachineType.None)
         {
-
+            GameManager.Instance.ChangeSelectMode();
             _isWait = true;
             if (_isLeft == isLeft)
             {
@@ -84,6 +84,10 @@ namespace PSW.Code.Make
                 {
                     if (type == MachineType.None)
                         buildingMachinePanel.EnableForUI(info.item, info);
+                    else if(type == MachineType.Brazier)
+                    {
+
+                    }
                     else
                         miningPanel.EnableForUI(info.item, info);
                 }
@@ -106,7 +110,14 @@ namespace PSW.Code.Make
             {
                 if (typeEnum == MachineType.None)
                 {
-                    buildingMachinePanel.EnableForUI(info.item, info);
+                    if(!(info.tileObject is CenterTile center))
+                    {
+                        buildingMachinePanel.EnableForUI(info.item, info);
+                    }
+                    else
+                    {
+
+                    }
                 }
                 else if (typeEnum == MachineType.Brazier)
                 {

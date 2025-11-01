@@ -73,10 +73,20 @@ namespace GMS.Code.UI.MainPanel
             }
             else
             {
-                for (int i = 0; i < list.Count; i++)
+                try
                 {
-                    if (list[i] == false)
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        if (list[i] == false)
+                            childPanels[i].ChangeColor();
+                    }
+                }
+                catch
+                {
+                    for (int i = 0; i < childPanels.Count; i++)
+                    {
                         childPanels[i].ChangeColor();
+                    }
                 }
             }
         }

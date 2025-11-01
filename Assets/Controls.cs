@@ -108,6 +108,33 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Tab"",
+                    ""type"": ""Button"",
+                    ""id"": ""b4be2781-0478-4395-9bcd-c659976b77a6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""f6cc76ca-0b79-4c2f-8be1-088bd1006a8a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Delta"",
+                    ""type"": ""Value"",
+                    ""id"": ""ecf2ddc0-2c04-415e-9521-5a7a80f29f97"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -130,6 +157,50 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4ecbc0f5-3953-4644-a986-e0c0bdf83078"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""108930cc-d5ea-49f0-a61e-9df85b7c47f5"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c609ad05-6ec8-4ab1-ae26-052979a7c3b4"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""27acb43c-18ef-4ebd-a65f-2a2b00029024"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Delta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -719,6 +790,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_MousePosition = m_Player.FindAction("MousePosition", throwIfNotFound: true);
         m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
+        m_Player_Tab = m_Player.FindAction("Tab", throwIfNotFound: true);
+        m_Player_RightClick = m_Player.FindAction("RightClick", throwIfNotFound: true);
+        m_Player_Delta = m_Player.FindAction("Delta", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -814,6 +888,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_MousePosition;
     private readonly InputAction m_Player_Click;
+    private readonly InputAction m_Player_Tab;
+    private readonly InputAction m_Player_RightClick;
+    private readonly InputAction m_Player_Delta;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -833,6 +910,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Click".
         /// </summary>
         public InputAction @Click => m_Wrapper.m_Player_Click;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Tab".
+        /// </summary>
+        public InputAction @Tab => m_Wrapper.m_Player_Tab;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/RightClick".
+        /// </summary>
+        public InputAction @RightClick => m_Wrapper.m_Player_RightClick;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Delta".
+        /// </summary>
+        public InputAction @Delta => m_Wrapper.m_Player_Delta;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -865,6 +954,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Click.started += instance.OnClick;
             @Click.performed += instance.OnClick;
             @Click.canceled += instance.OnClick;
+            @Tab.started += instance.OnTab;
+            @Tab.performed += instance.OnTab;
+            @Tab.canceled += instance.OnTab;
+            @RightClick.started += instance.OnRightClick;
+            @RightClick.performed += instance.OnRightClick;
+            @RightClick.canceled += instance.OnRightClick;
+            @Delta.started += instance.OnDelta;
+            @Delta.performed += instance.OnDelta;
+            @Delta.canceled += instance.OnDelta;
         }
 
         /// <summary>
@@ -882,6 +980,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Click.started -= instance.OnClick;
             @Click.performed -= instance.OnClick;
             @Click.canceled -= instance.OnClick;
+            @Tab.started -= instance.OnTab;
+            @Tab.performed -= instance.OnTab;
+            @Tab.canceled -= instance.OnTab;
+            @RightClick.started -= instance.OnRightClick;
+            @RightClick.performed -= instance.OnRightClick;
+            @RightClick.canceled -= instance.OnRightClick;
+            @Delta.started -= instance.OnDelta;
+            @Delta.performed -= instance.OnDelta;
+            @Delta.canceled -= instance.OnDelta;
         }
 
         /// <summary>
@@ -1196,6 +1303,27 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnClick(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Tab" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTab(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RightClick" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRightClick(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Delta" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDelta(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
