@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea065060a064f8469e5122f33a34d82, type: 3}
+  m_Name: InfiniteData
+  m_EditorClassIdentifier: 
+  tutorialImage: {fileID: 21300000, guid: c1715f53e03e45a499be8dcc404b5f19, type: 3}
+  tutorialText: "\uBB34\uD55C\uBAA8\uB4DC\uB294 \uB0A9\uBD80\uC758 \uAC71\uC815\uC5C6\uC774
+    \uBB34\uD55C\uC73C\uB85C \uB3C8\uC744 \uBC8C\uACE0 \uB545\uC744 \uB298\uB9B4
+    \uC218 \uC788\uB294 \uBAA8\uB4DC\uC785\uB2C8\uB2E4."
