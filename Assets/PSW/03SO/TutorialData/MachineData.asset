@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea065060a064f8469e5122f33a34d82, type: 3}
   m_Name: MachineData
   m_EditorClassIdentifier: 
-  tutorialImage: {fileID: 0}
+  tutorialImage: {fileID: 21300000, guid: 0acfba487b489444ab6cbcfb806698c2, type: 3}
   tutorialText: "\uB545\uC744 \uD074\uB9AD\uD558\uC5EC \uC120\uD0DD\uD55C \uB4A4
     \uBABD\uD0A4\uC2A4\uD328\uB108 \uBC84\uD2BC \uB204\uB974\uBA74 \n\uD328\uB110\uC774
     \uC62C\uB77C\uBA74\uC11C\uC124\uCE58\uD560 \uC218 \uC788\uB294 \uAE30\uACC4\uC885\uB958\uAC00

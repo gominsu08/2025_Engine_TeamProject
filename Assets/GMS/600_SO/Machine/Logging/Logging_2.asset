@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Logging_2
   m_EditorClassIdentifier: 
   machineName: "\uBC8C\uBAA9\uAE30 Lv.2"
-  machineDescription: 
+  machineDescription: "\uB098\uBB34\uB97C \uBE98\uB974\uAC8C \uC798 \uCE90\uAE30
+    \uC704\uD574 \uD544\uC694\uD55C \uAE30\uACC4"
   machineTier: 2
   machineType: 4
   machineIcon: {fileID: 21300000, guid: cd90a44ec36690640bb78b09370ce54f, type: 3}

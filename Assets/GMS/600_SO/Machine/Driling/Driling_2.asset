@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Driling_2
   m_EditorClassIdentifier: 
   machineName: "\uC2DC\uCD94\uAE30 Lv.2"
-  machineDescription: 
+  machineDescription: "\uCC9C\uC6D0\uC6D0\uB8CC\uB97C \uCE90\uAE30\uC704\uD574 \uD544\uC694\uD55C
+    \uAE30\uCD08\uC801\uC778 \uAE30\uACC4"
   machineTier: 2
   machineType: 3
   machineIcon: {fileID: 21300000, guid: 44cd124a13a77a74c8c8c2a312eff8b2, type: 3}
