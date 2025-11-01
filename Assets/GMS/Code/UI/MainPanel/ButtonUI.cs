@@ -1,4 +1,5 @@
-﻿using System;
+﻿using csiimnida.CSILib.SoundManager.RunTime;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,7 +36,11 @@ namespace GMS.Code.UI.MainPanel
         public virtual void EnableForUI( ToolBarUIData toolBarUIData, Action callback)
         {
             button.enabled = true;
-            button.onClick.AddListener(() => callback?.Invoke());
+            button.onClick.AddListener(() =>
+            {
+                callback?.Invoke();
+                SoundManager.Instance.PlaySound("Button");
+            });
             _toolBarUIData = toolBarUIData;
             gameObject.SetActive(true);
         }

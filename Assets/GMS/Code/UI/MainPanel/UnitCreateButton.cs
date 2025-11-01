@@ -1,3 +1,4 @@
+using csiimnida.CSILib.SoundManager.RunTime;
 using GMS.Code.Units;
 using PSW.Code.Container;
 using UnityEngine;
@@ -50,6 +51,7 @@ namespace GMS.Code.UI.MainPanel
             else
             {
                 popupUI.SetColor();
+                SoundManager.Instance.PlaySound("Fail");
             }
         }
 

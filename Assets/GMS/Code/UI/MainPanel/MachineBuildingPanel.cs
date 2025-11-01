@@ -1,4 +1,5 @@
-﻿using GMS.Code.Core;
+﻿using csiimnida.CSILib.SoundManager.RunTime;
+using GMS.Code.Core;
 using GMS.Code.Core.Events;
 using GMS.Code.Core.System.Machines;
 using GMS.Code.Core.System.Maps;
@@ -58,6 +59,7 @@ namespace GMS.Code.UI.MainPanel
 
             if (list.Count != 0)
             {
+                
                 for (int i = 0; i < list.Count; i++)
                 {
                     trues.Add(true);
@@ -70,10 +72,11 @@ namespace GMS.Code.UI.MainPanel
 
                 if (isFail == false)
                 {
-                    for (int i = 0; i < list.Count; i ++)
+                    for (int i = 0; i < list.Count; i++)
                     {
                         _container.MinusItem(list[i].itemSO, list[i].value);
                     }
+                    SoundManager.Instance.PlaySound("Generate");
                     Bus<MachineBuildingEvent>.Raise(new MachineBuildingEvent(tier, machineType, _targetTileInfo));
                     Bus<UIRefreshEvent>.Raise(new UIRefreshEvent(_targetTileInfo));
                 }
@@ -96,6 +99,8 @@ namespace GMS.Code.UI.MainPanel
 
             if (isFail)
             {
+                SoundManager.Instance.PlaySound("Fail");
+               
                 Bus<MachineBuildingFailEvent>.Raise(new MachineBuildingFailEvent(tier, machineType, trues));
             }
         }

@@ -38,6 +38,8 @@ namespace Bitgem.VFX.StylisedWater
 
         protected bool isDirty = true;
 
+        public void SetIsDirty() => isDirty = true;
+
         private UnityEngine.Mesh mesh = null;
         private MeshFilter meshFilter = null;
 
@@ -53,8 +55,12 @@ namespace Bitgem.VFX.StylisedWater
         [FlagEnum]
         public TileFace IncludeFoam = TileFace.NegX | TileFace.NegZ | TileFace.PosX | TileFace.PosZ;
 
-        [Range(0.1f, 100f)]
-        public float TileSize = 1f;
+        [SerializeField] protected float TileSize = 10f;
+
+        public void SetTileSize(float size)
+        {
+            TileSize = size;
+        }
 
         public bool ShowDebug = true;
         public bool RealtimeUpdates = false;
@@ -63,7 +69,7 @@ namespace Bitgem.VFX.StylisedWater
 
         #region Private methods
 
-        private void ensureReferences()
+        public void ensureReferences()
         {
             // ensure a mesh filter
             if (meshFilter == null)
@@ -371,7 +377,7 @@ namespace Bitgem.VFX.StylisedWater
 
         #region MonoBehaviour events
 
-        void OnValidate()
+        public void OnValidate()
         {
             // keep tile size in a sensible range
             TileSize = Mathf.Clamp(TileSize, 0.1f, 100f);
