@@ -1,3 +1,4 @@
+using csiimnida.CSILib.SoundManager.RunTime;
 using GMS.Code.Core;
 using PSW.Code.Input;
 using System;
@@ -14,7 +15,7 @@ public class SettingPanel : MonoBehaviour
     [SerializeField] private Toggle paymentToggle;
 
     private AutoPaymentToggle _autoPaymentToggle = new AutoPaymentToggle();
-
+    private string _soundName = "Fail";
     private void Start()
     {
         foreach (VolumeData text in volumeTextList)
@@ -24,6 +25,9 @@ public class SettingPanel : MonoBehaviour
     }
     private void SetAutoPayment(bool isAuto)
     {
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySound(_soundName);
+
         _autoPaymentToggle.IsAuto = isAuto;
         Bus<AutoPaymentToggle>.Raise(_autoPaymentToggle);
     }

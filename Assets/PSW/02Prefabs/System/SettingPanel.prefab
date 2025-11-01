@@ -414,13 +414,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mixer: {fileID: 24100000, guid: a878d72fc8870604c8615ab2ac3dcfe8, type: 2}
   volumeTextList:
-  - Group: {fileID: 24300002, guid: a878d72fc8870604c8615ab2ac3dcfe8, type: 2}
+  - Group: {fileID: 24300002, guid: 18dbd229627698846934e4865f1760c3, type: 2}
     Text: {fileID: 6163437088862073610}
     VolumeSlider: {fileID: 4316866086144831109}
-  - Group: {fileID: -7243965708464152109, guid: a878d72fc8870604c8615ab2ac3dcfe8, type: 2}
+  - Group: {fileID: -948099371506133326, guid: 18dbd229627698846934e4865f1760c3, type: 2}
     Text: {fileID: 4861531732864311177}
     VolumeSlider: {fileID: 3249306377866838534}
-  - Group: {fileID: 3156693901627850584, guid: a878d72fc8870604c8615ab2ac3dcfe8, type: 2}
+  - Group: {fileID: -7048142136677610296, guid: 18dbd229627698846934e4865f1760c3, type: 2}
     Text: {fileID: 5425827822752828370}
     VolumeSlider: {fileID: 2678535797113460317}
   paymentToggle: {fileID: 8545471060214114438}
@@ -3365,7 +3365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1013074948147785799, guid: 1a5261c15868b7841aea1730e9ccdeff, type: 3}
       propertyPath: m_text
-      value: VFX
+      value: SFX
       objectReference: {fileID: 0}
     - target: {fileID: 2792968111979770207, guid: 1a5261c15868b7841aea1730e9ccdeff, type: 3}
       propertyPath: m_Pivot.x
@@ -3453,7 +3453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5441659878601816943, guid: 1a5261c15868b7841aea1730e9ccdeff, type: 3}
       propertyPath: m_Name
-      value: SoundSlider(VFX)
+      value: SoundSlider(SFX)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

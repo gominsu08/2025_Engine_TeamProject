@@ -28,12 +28,13 @@ public class TransactionPanel : MonoBehaviour
     public void Init(float time, bool isStartOpen = false)
     {
         _time = time;
-        _currentXValue = transform.localPosition.x;
+        _currentXValue = (isLeft ? -1 : 1) * 480;
         _openValue = _currentXValue;
-        _targetValue = _currentXValue / time;
+        RectTransform rect = GetComponent<RectTransform>();
+        _targetValue = rect.sizeDelta.x / time * (isLeft ? -1 : 1);
         _closeValue = _openValue + (_targetValue * time);
-
-        if(isStartOpen)
+        print(_openValue);
+        if (isStartOpen)
         {
             _count = (int)_time;
             transform.DOLocalMoveX(_closeValue, 0);
@@ -83,7 +84,7 @@ public class TransactionPanel : MonoBehaviour
 
         if (_count < _time && _count > 0)
             StartCoroutine(PopPanel(isPopUp, loadSceneName));
-        else 
+        else
         {
             rootSawtooth.SawtoothStop(false);
             if (isPopUp == false)

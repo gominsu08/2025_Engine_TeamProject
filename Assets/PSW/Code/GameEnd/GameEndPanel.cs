@@ -1,3 +1,4 @@
+using csiimnida.CSILib.SoundManager.RunTime;
 using DG.Tweening;
 using GMS.Code.Core;
 using PSW.Code.Payment;
@@ -24,7 +25,7 @@ public class GameEndPanel : MonoBehaviour
     private bool _gameEnd;
 
     private WaitForSeconds wait = new WaitForSeconds(0.5f);
-
+    private string _soundName = "Button";
     private void Start()
     {
         _moveValue = targetY / time;
@@ -61,12 +62,21 @@ public class GameEndPanel : MonoBehaviour
 
     public void RePlay()
     {
+        ButtonSound();
         transaction.FadeIn("MainScene");
     }
 
     public void Exit()
     {
+        ButtonSound();
         Application.Quit();
+    }
+
+
+    private void ButtonSound()
+    {
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySound(_soundName);
     }
 
     private IEnumerator MovePanel()

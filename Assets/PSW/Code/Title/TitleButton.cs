@@ -1,3 +1,4 @@
+using csiimnida.CSILib.SoundManager.RunTime;
 using PSW.Code.Sawtooth;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class TitleButton : MonoBehaviour
     [SerializeField] private float rotationTime;
     [SerializeField] private SawtoothSystem rootSawtooth;
 
+    private string _soundName = "Button";
+
     private bool _isRotation;
     private bool _isClickPlay;
 
@@ -19,9 +22,18 @@ public class TitleButton : MonoBehaviour
 
         _isClickPlay = true;
         transaction.FadeIn(sceneName);
+        ButtonSound();
     }
-
-    public void Exit() => Application.Quit();
+    public void ButtonSound()
+    {
+        if(SoundManager.Instance != null)
+            SoundManager.Instance.PlaySound(_soundName);
+    }
+    public void Exit()
+    {
+        ButtonSound();
+        Application.Quit();
+    }
 
     public void MouseUpDown(bool isUp)
     {
