@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Transaction : MonoBehaviour
 {
+    private static bool _isStartTransaction;
     [SerializeField] private bool isStartOpen = true;
     [SerializeField] private bool isOpen;
     [SerializeField] private float time = 3;
@@ -13,7 +14,13 @@ public class Transaction : MonoBehaviour
     private void Awake()
     {
         _transactionPanelList = GetComponentsInChildren<TransactionPanel>().ToList();
-        _transactionPanelList.ForEach(v => v.Init(time, isOpen));
+        if (_isStartTransaction == false)
+        {
+            _transactionPanelList.ForEach(v => v.Init(time, isOpen));
+            _isStartTransaction = true;
+        }
+        else
+            _transactionPanelList.ForEach(v => v.Init(time, false));
     }
 
     private async void Start()

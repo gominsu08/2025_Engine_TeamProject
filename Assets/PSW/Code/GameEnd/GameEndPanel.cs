@@ -66,6 +66,12 @@ public class GameEndPanel : MonoBehaviour
         transaction.FadeIn("MainScene");
     }
 
+    public void Title()
+    {
+        ButtonSound();
+        transaction.FadeIn("Title");
+    }
+
     public void Exit()
     {
         ButtonSound();
