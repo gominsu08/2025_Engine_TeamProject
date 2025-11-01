@@ -41,7 +41,7 @@ namespace PSW.Code.Payment
 
         private void StartPayment(PaymentTimeEvent evt)
         {
-            _dDayPaymentCoin += oneDayPlusCoin;
+            _dDayPaymentCoin += oneDayPlusCoin * evt.Day;
             SetTargetCoinText();
             _coinText.text = _dDayPaymentCoin.ToString();
             _coinText.ForceMeshUpdate();

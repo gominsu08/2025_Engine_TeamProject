@@ -654,7 +654,7 @@ MonoBehaviour:
   resourceContainer: {fileID: 0}
   _coinText: {fileID: 2058898347838796893}
   lastDay: 7
-  oneDayPlusCoin: 1000
+  oneDayPlusCoin: 4000
   notTargetCoinColor: {r: 0.6226415, g: 0.059914548, b: 0.059914548, a: 1}
 --- !u!1 &7944185758481310577
 GameObject:

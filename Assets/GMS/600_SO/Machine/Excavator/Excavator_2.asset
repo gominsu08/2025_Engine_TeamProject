@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Excavator_2
   m_EditorClassIdentifier: 
   machineName: "\uD3EC\uD06C\uB808\uC778 Lv2"
-  machineDescription: 
+  machineDescription: "\uB545\uC5D0 \uC788\uB294 \uC790\uC6D0\uB4E4\uC744 \uB9CE\uC774
+    \uCE90\uAE30 \uC704\uD558\uC5EC \uD544\uC694\uD55C \uAE30\uACC4"
   machineTier: 2
   machineType: 5
   machineIcon: {fileID: 21300000, guid: d3fc0ab74e6bca14fa7bf032ea76899b, type: 3}

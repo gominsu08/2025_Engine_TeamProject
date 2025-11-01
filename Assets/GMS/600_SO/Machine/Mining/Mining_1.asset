@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Mining_1
   m_EditorClassIdentifier: 
   machineName: "\uCC44\uAD74\uAE30 Lv.1"
-  machineDescription: 
+  machineDescription: "\uB3CC\uB97C \uCE90\uAE30\uC704\uD574\uC11C \uD544\uC694\uD55C
+    \uAE30\uBCF8\uC801\uC778 \uAE30\uACC4\n"
   machineTier: 1
   machineType: 2
   machineIcon: {fileID: 21300000, guid: 462295e4788cbbd4fa0790c943ef4a6e, type: 3}
