@@ -9,15 +9,14 @@ namespace PSW.Code.Sale
 {
     public class PopPanel : MonoBehaviour
     {
-
         [SerializeField] private Vector2 popUpSize;
         [SerializeField] private float time;
-        [SerializeField] private SawtoothSystem sawtoothSystem;
+        [SerializeField] protected SawtoothSystem sawtoothSystem;
 
         private RectTransform _rectTransform;
         private bool _isLeft;
 
-        private void Start()
+        public void Start()
         {
             _rectTransform = GetComponent<RectTransform>();
         }

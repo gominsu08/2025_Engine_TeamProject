@@ -18,7 +18,9 @@ public class Transaction : MonoBehaviour
 
     private async void Start()
     {
-        if(isStartOpen)
+        Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+        Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow);
+        if (isStartOpen)
         {
             await Awaitable.WaitForSecondsAsync(0.1f);
             FadeOut();
