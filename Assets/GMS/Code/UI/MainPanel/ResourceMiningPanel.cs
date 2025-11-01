@@ -3,10 +3,7 @@ using GMS.Code.Core.Events;
 using GMS.Code.Core.System.Machines;
 using GMS.Code.Core.System.Maps;
 using GMS.Code.Items;
-using PSW.Code.Container;
 using PSW.Code.Sawtooth;
-using System;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 namespace GMS.Code.UI.MainPanel
@@ -36,7 +33,7 @@ namespace GMS.Code.UI.MainPanel
             _targetItem = targetItem;
             _tileInfo = tileInfo;
             barUI.EnableForUI(5, HandleMiningEnd);
-            
+
             destroyButtonUI.Init(_toolBarUI);
             destroyButtonUI.EnableForUI(new ToolBarUIData()
             {
@@ -69,7 +66,7 @@ namespace GMS.Code.UI.MainPanel
 
         private void HandleMiningEnd()
         {
-            sawtoothSystem.StartSawtooth(5,true, parentTrm);
+            sawtoothSystem.StartSawtooth(5, true, parentTrm);
         }
 
         public void DisableUI()

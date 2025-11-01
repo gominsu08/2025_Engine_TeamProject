@@ -1,13 +1,8 @@
 using GMS.Code.Items;
 using PSW.Code.Container;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 namespace PSW.Code.Sale
 {
@@ -19,8 +14,8 @@ namespace PSW.Code.Sale
         [SerializeField] private ItemListSO itemListSO;
         [SerializeField] private GameObject saleBoxPrefab;
         [SerializeField] private Transform boxTrm;
-        public UnityEvent OnSaleEvent { private set; get; } = new ();
-        public UnityEvent OnResetEvent { private set; get; } = new ();
+        public UnityEvent OnSaleEvent { private set; get; } = new();
+        public UnityEvent OnResetEvent { private set; get; } = new();
 
         private int addCoin = 0;
 
