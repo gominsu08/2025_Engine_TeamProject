@@ -21,6 +21,9 @@ namespace csiimnida.CSILib.SoundManager.RunTime
             {
                 Debug.LogError("AudioMixer가 할당되지 않았습니다. SoundManager를 사용하기 전에 할당해주세요.");
             }
+
+            PlaySound("BGM");
+            PlaySound("Bird");
         }
         public void PlaySound(string soundName)
         {
