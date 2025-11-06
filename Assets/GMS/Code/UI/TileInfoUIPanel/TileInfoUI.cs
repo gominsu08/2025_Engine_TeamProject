@@ -37,6 +37,12 @@ namespace GMS.Code.UI.TileInfoUIPanel
             Bus<UIRefreshEvent>.OnEvent += HandleRefreshEvent;
         }
 
+        private void OnDestroy()
+        {
+            Bus<UIRefreshEvent>.OnEvent -= HandleRefreshEvent;
+            
+        }
+
         private void HandleRefreshEvent(UIRefreshEvent evt)
         {
             RefrashUI();
