@@ -53,6 +53,7 @@ namespace GMS.Code.Core.System.Maps
             Bus<TileSelectEvent>.OnEvent -= HandleTileSelect;
             Bus<TileUseUnSelectEvent>.OnEvent -= HandleUseUnSelect;
             Bus<ChangeSelectModeEvent>.OnEvent -= HandleSelectModeChange;
+            Bus<TileBuyEvent>.OnEvent -= HandleBuyTileEvent;
         }
 
         private void HandleTileSelect(TileSelectEvent evt)
@@ -88,6 +89,7 @@ namespace GMS.Code.Core.System.Maps
             Bus<TileUnSelectEvent>.Raise(new TileUnSelectEvent(TileInfo));
             animator.SetMaterial(false);
             transform.DOMoveY(_startYPos, 0.2f).OnComplete(() => Bus<NavMeshSurfaceBaceEvent>.Raise(new NavMeshSurfaceBaceEvent()));
+            Bus<TileBuyEvent>.OnEvent -= HandleBuyTileEvent;
             DisableAllGhost();
         }
 
@@ -126,6 +128,7 @@ namespace GMS.Code.Core.System.Maps
 
         public virtual void DisableAllGhost()
         {
+            Bus<TileBuyEvent>.OnEvent -= HandleBuyTileEvent;
             foreach (GhostTile ghostTile in ghostTiles)
             {
                 ghostTile.Disable();

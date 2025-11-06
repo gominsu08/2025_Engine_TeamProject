@@ -81,6 +81,7 @@ namespace GMS.Code.Units
                 animator.ChangeAnimation("Move");
                 if (mover.IsTargetMachine)
                 {
+                    
                     TakeItem();
                     if (_currentTargetItem == null)
                     {

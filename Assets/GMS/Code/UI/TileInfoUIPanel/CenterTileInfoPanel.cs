@@ -29,6 +29,11 @@ namespace GMS.Code.UI.TileInfoUIPanel
             gameObject.SetActive(false);
         }
 
+        private void OnDestroy()
+        {
+            Bus<CenterTilePanelRefresh>.OnEvent -= HandleEvent;
+        }
+
         public void EnableForUI(CenterTile tile)
         {
             _tile = tile;
