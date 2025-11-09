@@ -39,6 +39,7 @@ namespace GMS.Code.Units
         public void SetTargetMachine(Machine machine)
         {
             TargetMachine = machine;
+            TargetMachine.SetIsTargetMachine(true);
             mover.CalculateMachineDistance();
         }
 
@@ -46,7 +47,7 @@ namespace GMS.Code.Units
         {
             //여기까지 들어왔으면 Pair안에 내용물은 무조건 존재한다.
             ItemAndValuePair pair = TargetMachine.TakeCarraringValue(_manager.UnitCarryingAmount - _count);
-
+            TargetMachine.SetIsTargetMachine(false);
             if (_currentTargetItem == null && pair != null && pair.itemSO != null && pair.value != 0)
             {
                 _currentTargetItem = pair.itemSO;
@@ -99,16 +100,26 @@ namespace GMS.Code.Units
                     else if (_count < _manager.UnitCarryingAmount)
                     {
                         //현재 아이템과 같은 타일에 머신이 존재하고 그 머신에 아이템이 있다면
-                        List<TileInformation> iteList = _tileManager.GetTileToItem(_currentTargetItem); //같은 아이템 타일들
-                        Debug.Log(iteList);
+                        List<TileInformation> itemList = _tileManager.GetTileToItem(_currentTargetItem); //같은 아이템 타일들
 
-                        List<TileInformation> machineTileList = _machineManager.GetTileInfoToHasMachine(iteList); //해당 아이템을 하나이상 가지고있는 타일들
-                        Debug.Log(machineTileList);
+                        List<Machine> machineTileList = _machineManager.GetTileInfoToHasMachine(itemList); //해당 아이템을 하나이상 가지고있는 타일들
+
+                        
 
                         if (machineTileList.Count != 0)
                         {
-                            Machine nextMachine = _machineManager.MachineContainer.GetMachintToTileInfo(machineTileList[Random.Range(0, machineTileList.Count)]);
-                            Debug.Log(nextMachine);
+                            Machine nextMachine = null;
+                            for (int i = 0; i < machineTileList.Count; i++)
+                            {
+                                if (machineTileList[i].isCarraringMax() && !machineTileList[i].IsTargetMachine)
+                                {
+                                    nextMachine = machineTileList[i];
+                                }
+                            }
+
+                            if (nextMachine == null)
+                                nextMachine = machineTileList[Random.Range(0, machineTileList.Count)];
+
                             SetTargetMachine(nextMachine);
                         }
                         else

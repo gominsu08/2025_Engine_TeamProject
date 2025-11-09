@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 
 namespace GMS.Code.Core.System.Machines
 {
@@ -203,17 +202,17 @@ namespace GMS.Code.Core.System.Machines
             MachineContainer.RemoveMachine(tileInfo);
         }
 
-        internal List<TileInformation> GetTileInfoToHasMachine(List<TileInformation> iteList)
+        internal List<Machine> GetTileInfoToHasMachine(List<TileInformation> iteList)
         {
-            List<TileInformation> result = new List<TileInformation>();
-            result = iteList.Aggregate(new List<TileInformation>(), (list, item) =>
+            List<Machine> result = new List<Machine>();
+            result = iteList.Aggregate(new List<Machine>(), (list, item) =>
             {
                 Machine machine = MachineContainer.GetMachintToTileInfo(item);
                 if (machine != null)
                 {
-                    if (machine.IsCanTake())
+                    if (machine.IsCanTake() && !machine.IsTargetMachine)
                     {
-                        list.Add(item);
+                        list.Add(machine);
                     }
                 }
                 return list;
@@ -235,12 +234,29 @@ namespace GMS.Code.Core.System.Machines
                 return list;
             });
 
-            if(temp.Count > 0)
+            for (int i = 0; i < temp.Count; i++)
             {
-                result = temp[UnityEngine.Random.Range(0, temp.Count)];
+                if (temp[i].isCarraringMax() && !temp[i].IsTargetMachine)
+                {
+                    result = temp[i];
+                }
+            }
+
+            if(result !=null)
+                return result;
+
+            if (temp.Count > 0)
+            {
+                int keyCount = 0;
+                while (keyCount <= 1000 && result == null)
+                {
+                    keyCount++;
+                    Machine tempMachine = temp[UnityEngine.Random.Range(0, temp.Count)];
+                    if (!tempMachine.IsTargetMachine)
+                        result = tempMachine;
+                }
                 Debug.Log(result);
             }
-            
 
             return result;
         }
