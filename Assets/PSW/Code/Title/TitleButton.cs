@@ -21,6 +21,7 @@ public class TitleButton : MonoBehaviour
         if (_isClickPlay) return;
 
         _isClickPlay = true;
+        Time.timeScale = 1;
         transaction.FadeIn(sceneName);
         ButtonSound();
     }
