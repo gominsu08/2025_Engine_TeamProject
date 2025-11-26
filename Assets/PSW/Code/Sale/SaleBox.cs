@@ -78,7 +78,7 @@ public class SaleBox : MonoBehaviour
         else
         {
             _panel.SetAddCoin(-(int)_currentCount * _thisItem.sellMoney);
-            NullText();
+            ResetItem();
         }
     }
     private void SaleItem()
@@ -108,7 +108,6 @@ public class SaleBox : MonoBehaviour
     {
         long tempCount = _currentCount;
         tempCount += (isPius ? _addCointValue : -_addCointValue);
-        print(tempCount.ToString());
         SetText(tempCount.ToString());
     }
 

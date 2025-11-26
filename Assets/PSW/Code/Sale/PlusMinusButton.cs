@@ -39,7 +39,6 @@ public class PlusMinusButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     {
         while(_isAdd)
         {
-            print("¤·");
             _saleBox.SetCount(isPlus);
             yield return _wait;
         }

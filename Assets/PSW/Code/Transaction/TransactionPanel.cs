@@ -93,7 +93,7 @@ public class TransactionPanel : MonoBehaviour
                 yield return new WaitForSeconds(2f);
                 if (isLeft)
                 {
-                    print(loadSceneName);
+                    Time.timeScale = 1;
                     SceneManager.LoadScene(loadSceneName);
                 }
             }
