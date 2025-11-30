@@ -62,6 +62,9 @@ namespace GMS.Code.UI.TileInfoUIPanel
 
         private void RefrashUI()
         {
+            Debug.Assert(_tileInfo != null, "이거 왜 널임?");
+            Debug.Assert(_tileInfo.tileObject != null, "오브젝트가 없는거였네.. 근데 얘도 왜 널임? ");
+
             MachineType type = _machineManager.IsMachineType(_tileInfo);
             if (type == MachineType.None)
             {

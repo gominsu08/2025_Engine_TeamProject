@@ -12,10 +12,14 @@ namespace GMS.Code.Core
         public Action OnTabKeyDownEvent;
         public Action<bool> OnRightClickEvent;
         public Action OnRightClickTriggerEvent;
+        public Action OnZoomEvent;
+        public Action<Vector2> OnWASDEvent;
         [SerializeField] private LayerMask whatIsTargetLayer;
 
         public Vector2 MousePosition { get; private set; }
         public Vector2 MouseDelta { get; private set; }
+        public Vector2 ZoomValue { get; private set; }
+        public Vector2 keyValue { get; private set; }
 
         private Controls controls;
 
@@ -94,6 +98,17 @@ namespace GMS.Code.Core
         public void OnDelta(InputAction.CallbackContext context)
         {
             MouseDelta = context.ReadValue<Vector2>();
+        }
+
+        public void OnZoom(InputAction.CallbackContext context)
+        {
+            ZoomValue = context.ReadValue<Vector2>();
+            OnZoomEvent?.Invoke();
+        }
+
+        public void OnWASD(InputAction.CallbackContext context)
+        {
+            keyValue = context.ReadValue<Vector2>();
         }
     }
 }
