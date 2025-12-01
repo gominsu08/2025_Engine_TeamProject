@@ -2,6 +2,7 @@ using GMS.Code.Core.Events;
 using GMS.Code.Core.System.Maps;
 using System;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -13,8 +14,10 @@ namespace GMS.Code.Core
     {
         public UnityEvent OnTabEvent;
         [SerializeField] private MouseInputSO mouseInputSO;
+        [SerializeField] private CinemachinePositionComposer cam;
         [SerializeField] private GameObject cameraTargetObject;
         [SerializeField] private float moveSpeed = 1f;
+        [SerializeField] private float max, min;
         private bool _isCanClick;
         private bool _isOnRightClick;
         private float _doubleClickCheckTime;
@@ -39,6 +42,24 @@ namespace GMS.Code.Core
             mouseInputSO.OnTabKeyDownEvent += HandleTabKeyDownEvent;
             mouseInputSO.OnRightClickEvent += HandleRightClickEvent;
             mouseInputSO.OnRightClickTriggerEvent += HandleRightClickTriggerCheck;
+            mouseInputSO.OnZoomEvent += HandleZoomEvent;
+            
+        }
+
+        public void OnDestroy()
+        {
+            mouseInputSO.OnClickAction -= HandleMouseClickEvent;
+            mouseInputSO.OnTabKeyDownEvent -= HandleTabKeyDownEvent;
+            mouseInputSO.OnRightClickEvent -= HandleRightClickEvent;
+            mouseInputSO.OnRightClickTriggerEvent -= HandleRightClickTriggerCheck;
+            mouseInputSO.OnZoomEvent -= HandleZoomEvent;
+
+        }
+
+
+        private void HandleZoomEvent()
+        {
+            cam.CameraDistance = Mathf.Clamp(cam.CameraDistance - mouseInputSO.ZoomValue.y / 10,min,max );
         }
 
         private void HandleRightClickEvent(bool value)
@@ -52,12 +73,10 @@ namespace GMS.Code.Core
                 cameraTargetObject.transform.position = Vector3.zero;
 
             _doubleClickCheckTime = Time.time;
+
         }
 
-        public void OnDestroy()
-        {
-            mouseInputSO.OnClickAction -= HandleMouseClickEvent;
-        }
+        
 
         private void Update()
         {
@@ -69,6 +88,13 @@ namespace GMS.Code.Core
                 Vector3 pos = new Vector3(mouseInputSO.MouseDelta.x,0, mouseInputSO.MouseDelta.y);
 
                 cameraTargetObject.transform.position += pos * Time.deltaTime * moveSpeed;
+            }
+
+            if(mouseInputSO.keyValue != Vector2.zero)
+            {
+                Vector3 pos = new Vector3(-mouseInputSO.keyValue.x, 0, -mouseInputSO.keyValue.y);
+
+                cameraTargetObject.transform.position += pos * Time.deltaTime * 5;
             }
         }
 

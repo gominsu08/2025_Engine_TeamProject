@@ -15,9 +15,10 @@ namespace GMS.Code.Core.System.Maps
     {
         public Direction direction;
 
-        [SerializeField] private Color tileBuyFailColor;
-        [SerializeField] private Color defaultColor;
+        [SerializeField][ColorUsage(true,true)] private Color tileBuyFailColor;
+        [SerializeField][ColorUsage(true, true)] private Color defaultColor;
         [SerializeField] private MeshRenderer ghostTileRenderer;
+
 
         private int _x, _z;
         private Material _material_1;

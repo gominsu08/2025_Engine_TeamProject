@@ -23,6 +23,7 @@ namespace GMS.Code.Core.System.Machines
         public Action<int> carryingValueChangeEvent;
         public bool IsMining { get; protected set; } = false;
         public float MiningTime => _timer;
+        public bool IsTargetMachine { get; protected set; }
 
         [field: SerializeField] public MachineSO machineSO { get; protected set; }
 
@@ -104,6 +105,8 @@ namespace GMS.Code.Core.System.Machines
             MachineDisable();
         }
 
+        public bool isCarraringMax() => _curCarryingValue >= _maxCarryingValue;
+
         public int GetCurCarraringValue() => _curCarryingValue;
 
         public virtual ItemAndValuePair TakeCarraringValue(int maxValue)
@@ -113,7 +116,7 @@ namespace GMS.Code.Core.System.Machines
             _curCarryingValue = 0;
             carryingValueChangeEvent?.Invoke(_curCarryingValue);
             if(pair.value != 0)
-            CreateInfoPanelUI(_targetItemData, $"-{pair.value}", 2);
+            //CreateInfoPanelUI(_targetItemData, $"-{pair.value}", 2);
             if (_warrningMassage != null)
                 _warrningMassage.DisableUI();
             return pair;
@@ -126,5 +129,7 @@ namespace GMS.Code.Core.System.Machines
 
             return isValue && isItemContains;
         }
+
+        public void SetIsTargetMachine(bool isTargetMachine) => IsTargetMachine = isTargetMachine;
     }
 }

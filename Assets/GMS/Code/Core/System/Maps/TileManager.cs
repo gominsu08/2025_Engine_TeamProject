@@ -183,10 +183,10 @@ namespace GMS.Code.Core.System.Maps
 
         private void Awake()
         {
-            _tileContainer = new TileContainer(TilePrefabs);
-            StartTileSet();
             Bus<TileBuyEvent>.OnEvent += HandleBuyTileEvent;
             Bus<NavMeshSurfaceBaceEvent>.OnEvent += HandleTileSelect;
+            _tileContainer = new TileContainer(TilePrefabs);
+            StartTileSet();
         }
 
         private void OnDestroy()

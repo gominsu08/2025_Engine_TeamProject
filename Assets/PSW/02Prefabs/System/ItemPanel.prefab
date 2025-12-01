@@ -71,7 +71,7 @@ MonoBehaviour:
   itemListSO: {fileID: 11400000, guid: 6d464950cc884ef4286ec47d4c666086, type: 2}
   resourceContainer: {fileID: 0}
   rootSawtooth: {fileID: 5151478713955413700}
-  time: 5
+  time: 3
 --- !u!114 &4290417214401569849
 MonoBehaviour:
   m_ObjectHideFlags: 0

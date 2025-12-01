@@ -135,6 +135,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""62101987-bc23-42fc-8cda-a021417bb202"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""type"": ""Value"",
+                    ""id"": ""7954a34f-ef98-4a22-9d4b-6c7520637dcb"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -203,6 +221,72 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Delta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42f5eee8-2b1b-4b49-a8e8-cf3c000c1f7f"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""38a59197-2864-4b0f-8747-9a8be63fed38"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""bfcb3906-9182-452e-ae03-fc9fed8d9dfd"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""7bb53c20-b257-4403-a3c8-a5d69df0735a"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""93b7ad86-6aa2-4f13-a3d5-70c76fe016bf"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""a41a04c9-ce2c-4e80-bf6a-baf82e443b65"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -793,6 +877,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Tab = m_Player.FindAction("Tab", throwIfNotFound: true);
         m_Player_RightClick = m_Player.FindAction("RightClick", throwIfNotFound: true);
         m_Player_Delta = m_Player.FindAction("Delta", throwIfNotFound: true);
+        m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
+        m_Player_WASD = m_Player.FindAction("WASD", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -891,6 +977,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Tab;
     private readonly InputAction m_Player_RightClick;
     private readonly InputAction m_Player_Delta;
+    private readonly InputAction m_Player_Zoom;
+    private readonly InputAction m_Player_WASD;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -922,6 +1010,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Delta".
         /// </summary>
         public InputAction @Delta => m_Wrapper.m_Player_Delta;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Zoom".
+        /// </summary>
+        public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/WASD".
+        /// </summary>
+        public InputAction @WASD => m_Wrapper.m_Player_WASD;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -963,6 +1059,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Delta.started += instance.OnDelta;
             @Delta.performed += instance.OnDelta;
             @Delta.canceled += instance.OnDelta;
+            @Zoom.started += instance.OnZoom;
+            @Zoom.performed += instance.OnZoom;
+            @Zoom.canceled += instance.OnZoom;
+            @WASD.started += instance.OnWASD;
+            @WASD.performed += instance.OnWASD;
+            @WASD.canceled += instance.OnWASD;
         }
 
         /// <summary>
@@ -989,6 +1091,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Delta.started -= instance.OnDelta;
             @Delta.performed -= instance.OnDelta;
             @Delta.canceled -= instance.OnDelta;
+            @Zoom.started -= instance.OnZoom;
+            @Zoom.performed -= instance.OnZoom;
+            @Zoom.canceled -= instance.OnZoom;
+            @WASD.started -= instance.OnWASD;
+            @WASD.performed -= instance.OnWASD;
+            @WASD.canceled -= instance.OnWASD;
         }
 
         /// <summary>
@@ -1324,6 +1432,20 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDelta(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Zoom" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnZoom(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "WASD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnWASD(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

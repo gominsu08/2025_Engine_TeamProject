@@ -63,18 +63,22 @@ public class GameEndPanel : MonoBehaviour
     public void RePlay()
     {
         ButtonSound();
+        Time.timeScale = 1;
+
         transaction.FadeIn("MainScene");
     }
 
     public void Title()
     {
         ButtonSound();
+        Time.timeScale = 1;
         transaction.FadeIn("Title");
     }
 
     public void Exit()
     {
         ButtonSound();
+        Time.timeScale = 1;
         Application.Quit();
     }
 
@@ -96,7 +100,10 @@ public class GameEndPanel : MonoBehaviour
         if(_moveCount < time)
             StartCoroutine(MovePanel());
         else
+        {
+            Time.timeScale = 0;
             rootSawtooth.SawtoothStop(false);
+        }
     }
 
 }

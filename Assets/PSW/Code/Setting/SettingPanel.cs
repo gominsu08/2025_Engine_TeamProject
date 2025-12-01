@@ -37,6 +37,14 @@ public class SettingPanel : MonoBehaviour
         _autoPaymentToggle.IsAuto = isAuto;
         Bus<AutoPaymentToggle>.Raise(_autoPaymentToggle);
     }
+
+    public void SpeedTimeButton(int speed)
+    {
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySound(_soundName);
+
+        Time.timeScale = speed;
+    }
 }
 
 public struct AutoPaymentToggle : IEvent

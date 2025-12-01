@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8958962736960530624}
   - component: {fileID: 3876773039890620904}
   - component: {fileID: 8389545482575949093}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mining_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

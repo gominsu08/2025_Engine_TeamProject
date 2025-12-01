@@ -68,8 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 2
-  tileBuyFailColor: {r: 1, g: 0.33479726, b: 0.31132066, a: 0.53333336}
-  defaultColor: {r: 0.31372547, g: 0.95988417, b: 1, a: 0.4745098}
+  tileBuyFailColor: {r: 2.996079, g: 0.38628668, b: 0.39484847, a: 0.9372549}
+  defaultColor: {r: 0.6689355, g: 2.9960783, b: 2.1403549, a: 0.9372549}
   ghostTileRenderer: {fileID: 3932695956469027425}
 --- !u!1 &8139504384436639721
 GameObject:
