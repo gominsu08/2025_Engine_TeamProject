@@ -48,6 +48,12 @@ namespace GMS.Code.Core.System.Machines
             IsMining = false;
         }
 
+        private void OnDestroy()
+        {
+            if (_warrningMassage != null)
+                _warrningMassage.DisableUI();
+        }
+
         protected bool _isFull;
 
         public virtual void MachineUpdate()
@@ -111,21 +117,21 @@ namespace GMS.Code.Core.System.Machines
 
         public virtual ItemAndValuePair TakeCarraringValue(int maxValue)
         {
-            int value = Mathf.Clamp(_curCarryingValue,0,maxValue);
+            int value = Mathf.Clamp(_curCarryingValue, 0, maxValue);
             ItemAndValuePair pair = new ItemAndValuePair(_targetItemData, value);
             _curCarryingValue = 0;
             carryingValueChangeEvent?.Invoke(_curCarryingValue);
-            if(pair.value != 0)
-            //CreateInfoPanelUI(_targetItemData, $"-{pair.value}", 2);
-            if (_warrningMassage != null)
-                _warrningMassage.DisableUI();
+            if (pair.value != 0)
+                //CreateInfoPanelUI(_targetItemData, $"-{pair.value}", 2);
+                if (_warrningMassage != null)
+                    _warrningMassage.DisableUI();
             return pair;
         }
 
         public virtual bool IsCanTake(ItemSO item = null)
         {
             bool isValue = _curCarryingValue > 0;
-            bool isItemContains = item != null ?  _targetItemData.itemName.Contains(item.itemName) : true;
+            bool isItemContains = item != null ? _targetItemData.itemName.Contains(item.itemName) : true;
 
             return isValue && isItemContains;
         }

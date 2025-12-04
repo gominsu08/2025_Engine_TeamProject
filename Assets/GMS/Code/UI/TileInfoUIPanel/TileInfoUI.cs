@@ -50,8 +50,8 @@ namespace GMS.Code.UI.TileInfoUIPanel
 
         public void EnableForUI(TileInformation tileInfo)
         {
-            if (_isDisable)
-                MyRect.anchoredPosition = _startPoint;
+            //if (_isDisable)
+            //    MyRect.anchoredPosition = _startPoint;
             _isDisable = false;
 
             _tileInfo = tileInfo;

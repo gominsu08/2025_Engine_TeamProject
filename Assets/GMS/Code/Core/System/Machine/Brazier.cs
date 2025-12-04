@@ -58,6 +58,8 @@ namespace GMS.Code.Core.System.Machines
 
         private void OnDestroy()
         {
+            if (_warrningMassage != null)
+                _warrningMassage.DisableUI();
             Bus<ItemNotHaveEvent>.OnEvent -= HandleNotHaveEvent;
         }
 
@@ -197,6 +199,9 @@ namespace GMS.Code.Core.System.Machines
             }
             else
                 _items.RemoveAt(index);
+
+            if (_warrningMassage != null)
+                _warrningMassage.DisableUI();
 
             return pair;
         }

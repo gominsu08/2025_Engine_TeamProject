@@ -31,6 +31,11 @@ namespace GMS.Code.UI.MainPanel
             Bus<MachineBuildingFailEvent>.OnEvent -= HandleMachineBuildingFailEvent;
         }
 
+        private void OnDestroy()
+        {
+            Bus<MachineBuildingFailEvent>.OnEvent -= HandleMachineBuildingFailEvent;
+        }
+
         public void EnableForUI()
         {
             Bus<MachineBuildingFailEvent>.OnEvent += HandleMachineBuildingFailEvent;
